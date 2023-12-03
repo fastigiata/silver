@@ -18,6 +18,8 @@ tauri-plugin-window = "2.0.0-alpha"
 tauri-plugin-shell = "2.0.0-alpha"
 serde_json = "1.0"
 
+local-ip-address = "0.5.6"
+
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem
 # DO NOT REMOVE!!
