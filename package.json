@@ -1,11 +1,11 @@
 {
-    "name": "silver",
+    "name": "sticker",
     "private": true,
     "author": "lopo<lopo@zju.edu.cn>",
     "version": "0.1.0",
     "type": "module",
     "scripts": {
-        "dev:front": "vite --host",
+        "dev": "vite --host",
         "dev:tauri": "tauri dev",
         "build": "tsc && vite build",
         "preview": "vite preview"

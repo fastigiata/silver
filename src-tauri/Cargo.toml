@@ -1,8 +1,8 @@
 [package]
-name = "silver"
+name = "sticker"
 version = "0.0.0"
-description = "A Tauri App"
-authors = ["you"]
+description = "sticker for windows"
+authors = ["lopo<lopo@zju.edu.cn>"]
 license = ""
 repository = ""
 edition = "2021"

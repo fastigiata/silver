@@ -2725,32 +2725,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"silver@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "silver@workspace:."
-  dependencies:
-    "@tauri-apps/api": ^2.0.0-alpha.11
-    "@tauri-apps/cli": ^2.0.0-alpha.17
-    "@tauri-apps/plugin-shell": ^2.0.0-alpha.3
-    "@types/node": ^20.10.2
-    "@types/react": ^18.2.15
-    "@types/react-dom": ^18.2.7
-    "@typescript-eslint/eslint-plugin": ^6.13.1
-    "@typescript-eslint/parser": ^6.13.1
-    "@vitejs/plugin-react-swc": ^3.5.0
-    autoprefixer: ^10.4.16
-    eslint: ^8.55.0
-    eslint-plugin-react-hooks: ^4.6.0
-    eslint-plugin-react-refresh: ^0.4.4
-    postcss: ^8.4.32
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    tailwindcss: ^3.3.5
-    typescript: ^5.0.2
-    vite: ^4.4.4
-  languageName: unknown
-  linkType: soft
-
 "slash@npm:^3.0.0":
   version: 3.0.0
   resolution: "slash@npm:3.0.0"
@@ -2801,6 +2775,32 @@ __metadata:
   checksum: 0a31b65f21872dea1ed3f7c200d7bc1c1b91c15e419deca14f282508ba917cbb342c08a6814c7f68ca4ca4116dd1a85da2bbf39227480e50125a1ceffeecb750
   languageName: node
   linkType: hard
+
+"sticker@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "sticker@workspace:."
+  dependencies:
+    "@tauri-apps/api": ^2.0.0-alpha.11
+    "@tauri-apps/cli": ^2.0.0-alpha.17
+    "@tauri-apps/plugin-shell": ^2.0.0-alpha.3
+    "@types/node": ^20.10.2
+    "@types/react": ^18.2.15
+    "@types/react-dom": ^18.2.7
+    "@typescript-eslint/eslint-plugin": ^6.13.1
+    "@typescript-eslint/parser": ^6.13.1
+    "@vitejs/plugin-react-swc": ^3.5.0
+    autoprefixer: ^10.4.16
+    eslint: ^8.55.0
+    eslint-plugin-react-hooks: ^4.6.0
+    eslint-plugin-react-refresh: ^0.4.4
+    postcss: ^8.4.32
+    react: ^18.2.0
+    react-dom: ^18.2.0
+    tailwindcss: ^3.3.5
+    typescript: ^5.0.2
+    vite: ^4.4.4
+  languageName: unknown
+  linkType: soft
 
 "string-width-cjs@npm:string-width@^4.2.0, string-width@npm:^4.1.0":
   version: 4.2.3
