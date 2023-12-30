@@ -10,6 +10,7 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     plugins: ['react-refresh'],
     rules: {
+        "@typescript-eslint/consistent-type-imports": "warn",
         'react-refresh/only-export-components': [
             'warn',
             {allowConstantExport: true},
@@ -103,6 +104,6 @@ module.exports = {
         "spaced-comment": [
             "error",
             "always"
-        ]
+        ],
     },
 }
