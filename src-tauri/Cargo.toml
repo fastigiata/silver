@@ -1,7 +1,7 @@
 [package]
 name = "sticker"
 version = "0.0.0"
-description = "sticker for windows"
+description = "Sticky Notes"
 authors = ["lopo<lopo@zju.edu.cn>"]
 license = ""
 repository = ""

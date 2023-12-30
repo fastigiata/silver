@@ -1,16 +1,16 @@
 {
     "build": {
         // here we manually start the dev server for the frontend
-        // "beforeDevCommand": "yarn dev",
+        "beforeDevCommand": "yarn dev",
         "beforeBuildCommand": "yarn build",
         "devPath": "http://localhost:1420",
         "distDir": "../dist",
         // "withGlobalTauri": false,
     },
     "package": {
-        "productName": "sticker",
+        "productName": "Sticker",
         // the docs say 'If removed the version number from Cargo.toml is used.'
-        "version": "0.0.0"
+        // "version": "0.0.0"
     },
     "tauri": {
         "bundle": {
@@ -31,7 +31,8 @@
         },
         "windows": [
             {
-                "decorations": false,
+                // frameless window as sticker
+                // "decorations": false,
                 "fullscreen": false,
                 "resizable": false,
                 "label": "main",
