@@ -14,7 +14,7 @@ const StickerPage = () => {
 }
 
 /**
- * Loads the sticker from the database
+ * Loads the sticker from the storage
  */
 const stickerLoader: LoaderFunction = () => {
     return null
