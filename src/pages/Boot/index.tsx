@@ -1,4 +1,5 @@
 import type { LoaderFunction } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 /**
  * The first page displayed when the app starts,
@@ -10,12 +11,11 @@ const BootPage = () => {
     // }, [])
 
     return (
-        <div>
+        <div className={'w-full h-full flex flex-col items-center'}>
             <h1>BootPage</h1>
-            <button onClick={() => {
-                throw new Error('xxx')
-            }}>throw an error
-            </button>
+
+
+            <Link to={'/misc'}>TO /misc</Link>
         </div>
     )
 }

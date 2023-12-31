@@ -4,6 +4,7 @@ import BootPage from '../pages/Boot'
 import { ExceptionPage } from '../pages/Exception'
 import { DashboardPage } from '../pages/Dashboard'
 import StickerPage from '../pages/Sticker'
+import MiscPage from '../pages/Misc'
 
 const routes: RouteObject[] = [
     {
@@ -22,6 +23,10 @@ const routes: RouteObject[] = [
                 path: '/sticker/:stickerId?',
                 loader: StickerPage.loader,
                 element: <StickerPage/>
+            },
+            {
+                path: '/misc',
+                element: <MiscPage/>
             }
         ]
     }
