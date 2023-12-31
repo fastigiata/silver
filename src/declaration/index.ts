@@ -23,7 +23,7 @@ type PinConfig = {
 /**
  * A record is a single piece of sticky note
  */
-type Record = {
+type StickerRecord = {
     /**
      * The id of the record
      */
@@ -49,14 +49,16 @@ type Record = {
 /**
  * A collection is a group of records
  */
-type Collection = {
+type StickerCollection = {
     id: string
     name: string
     desc: string
-    records: Record[]
+    records: StickerRecord[]
 }
 
 export type {
-    Record,
-    Collection
+    AlarmConfig,
+    PinConfig,
+    StickerRecord,
+    StickerCollection
 }
