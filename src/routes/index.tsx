@@ -1,9 +1,9 @@
 import type { RouteObject } from 'react-router-dom'
 import { createHashRouter } from 'react-router-dom'
-import { bootLoader, BootPage } from '../pages/Boot'
+import BootPage from '../pages/Boot'
 import { ExceptionPage } from '../pages/Exception'
 import { DashboardPage } from '../pages/Dashboard'
-import { stickerLoader, StickerPage } from '../pages/Sticker'
+import StickerPage from '../pages/Sticker'
 
 const routes: RouteObject[] = [
     {
@@ -11,7 +11,7 @@ const routes: RouteObject[] = [
         children: [
             {
                 path: '/',
-                loader: bootLoader,
+                loader: BootPage.loader,
                 element: <BootPage/>,
             },
             {
@@ -20,7 +20,7 @@ const routes: RouteObject[] = [
             },
             {
                 path: '/sticker/:stickerId?',
-                loader: stickerLoader,
+                loader: StickerPage.loader,
                 element: <StickerPage/>
             }
         ]

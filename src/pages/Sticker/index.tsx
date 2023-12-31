@@ -20,7 +20,6 @@ const stickerLoader: LoaderFunction = () => {
     return null
 }
 
-export {
-    StickerPage,
-    stickerLoader
-}
+StickerPage.loader = stickerLoader
+
+export default StickerPage

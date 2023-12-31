@@ -27,7 +27,6 @@ const bootLoader: LoaderFunction = () => {
     return null
 }
 
-export {
-    BootPage,
-    bootLoader,
-}
+BootPage.loader = bootLoader
+
+export default BootPage
