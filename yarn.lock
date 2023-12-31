@@ -584,6 +584,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tauri-apps/api@npm:2.0.0-alpha.13":
+  version: 2.0.0-alpha.13
+  resolution: "@tauri-apps/api@npm:2.0.0-alpha.13"
+  checksum: d25737db9ebc68986ecd00cb69c2484c8f4357ff934a9eaf586ed3c2640900f13ad175876d9ff21960ff5b46f07c91dede09fbf79aed3f08f136177c060aad1a
+  languageName: node
+  linkType: hard
+
 "@tauri-apps/api@npm:^2.0.0-alpha.11":
   version: 2.0.0-alpha.12
   resolution: "@tauri-apps/api@npm:2.0.0-alpha.12"
@@ -702,12 +709,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tauri-apps/plugin-log@npm:^2.0.0-alpha.5":
+  version: 2.0.0-alpha.5
+  resolution: "@tauri-apps/plugin-log@npm:2.0.0-alpha.5"
+  dependencies:
+    "@tauri-apps/api": 2.0.0-alpha.13
+  checksum: 24884f9b2abaa275bdcc26150c856f44919e2f0deb1159612747c8ee674ee7d573cc3e5f5ed627a8f7cfe3f3813d13bb80ad143fe63cc9f3bc6a3d219a6be839
+  languageName: node
+  linkType: hard
+
 "@tauri-apps/plugin-shell@npm:^2.0.0-alpha.3":
   version: 2.0.0-alpha.3
   resolution: "@tauri-apps/plugin-shell@npm:2.0.0-alpha.3"
   dependencies:
     "@tauri-apps/api": 2.0.0-alpha.11
   checksum: 0c8fd02502f80548f9b1e235c8ff47d3cd4a4c72e8bee43ee41e821056b9aa8cc01646aad972a08c82ac175175cda1cc3d89acb49260175d291659b9462bd6f5
+  languageName: node
+  linkType: hard
+
+"@tauri-apps/plugin-store@npm:^2.0.0-alpha.5":
+  version: 2.0.0-alpha.5
+  resolution: "@tauri-apps/plugin-store@npm:2.0.0-alpha.5"
+  dependencies:
+    "@tauri-apps/api": 2.0.0-alpha.13
+  checksum: 7a6fea2f014cc7c6b55bcc25503486f07280bcb5e3d0945c2751d0f96e0508eb3df581ebcfada013a61b0c03c8d49dfa6e7b14b4d058414df320028a3c09fa16
   languageName: node
   linkType: hard
 
@@ -2953,7 +2978,9 @@ __metadata:
   dependencies:
     "@tauri-apps/api": ^2.0.0-alpha.11
     "@tauri-apps/cli": ^2.0.0-alpha.17
+    "@tauri-apps/plugin-log": ^2.0.0-alpha.5
     "@tauri-apps/plugin-shell": ^2.0.0-alpha.3
+    "@tauri-apps/plugin-store": ^2.0.0-alpha.5
     "@types/node": ^20.10.2
     "@types/react": ^18.2.15
     "@types/react-dom": ^18.2.7
