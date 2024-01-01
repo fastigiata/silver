@@ -1,13 +1,11 @@
 import { Window, getAll } from '@tauri-apps/api/window'
 import { useState } from 'react'
-import { attachConsole, info } from '@tauri-apps/plugin-log'
+import { info } from '@tauri-apps/plugin-log'
 
 const createWindow = (label: string) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const win = new Window(label || 'unknown', {})
 }
-
-// TODO: move to main.tsx
-attachConsole()
 
 const MiscPage = () => {
     const [ label, setLabel ] = useState('')
