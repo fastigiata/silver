@@ -1,5 +1,5 @@
 import type { StickerRecord } from '../declaration'
-import { createStickerWindow, resetToDefaultById } from '../utils/window.ts'
+import { createStickerWindow, resetToDefaultById } from './window.ts'
 
 /**
  * Sticker manager
