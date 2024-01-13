@@ -7,19 +7,19 @@ import {
 } from '@tauri-apps/plugin-log'
 import { Env } from './env.ts'
 
-abstract class Logger {
-    abstract initialize(): Promise<void>
+interface Logger {
+    initialize(): Promise<void>
 
-    abstract verbose(s: string): void
+    verbose(s: string): void
 
-    abstract info(s: string): void
+    info(s: string): void
 
-    abstract warn(s: string): void
+    warn(s: string): void
 
-    abstract error(s: string): void
+    error(s: string): void
 }
 
-class EmbedLogger extends Logger {
+class EmbedLogger implements Logger {
     public async initialize() {
         await attachConsole()
     }
@@ -41,7 +41,7 @@ class EmbedLogger extends Logger {
     }
 }
 
-class WebLogger extends Logger {
+class WebLogger implements Logger {
     public async initialize() {
     }
 
