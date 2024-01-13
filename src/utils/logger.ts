@@ -43,6 +43,7 @@ class EmbedLogger implements Logger {
 
 class WebLogger implements Logger {
     public async initialize() {
+        // no-op
     }
 
     verbose(s: string) {
