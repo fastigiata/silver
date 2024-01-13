@@ -18,6 +18,4 @@ const ExceptionPage = () => {
     )
 }
 
-export {
-    ExceptionPage
-}
+export default ExceptionPage
