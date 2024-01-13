@@ -1,4 +1,5 @@
 import { Link, Outlet } from 'react-router-dom'
+import { logger } from '../utils/logger.ts'
 
 const RootLayout = () => {
     return (
@@ -18,6 +19,29 @@ const RootLayout = () => {
             </div>
         </div>
     )
+}
+
+let initialized = false
+/**
+ * initialize all plugins and restore necessary data from storage,
+ * then redirect to the '/dashboard' route
+ */
+RootLayout.loader = async () => {
+    // Make sure this loader only runs once per app lifecycle
+    if (initialized) return null
+
+    // Initialize all plugins here
+    await logger.initialize()
+
+    // FIXME: simulate a long boot time, remove this later
+    console.log('bootLoader start')
+    await new Promise(r => setTimeout(r, 3000))
+    console.log('bootLoader done')
+
+    // Mark this loader as initialized
+    initialized = true
+
+    return null
 }
 
 export default RootLayout
