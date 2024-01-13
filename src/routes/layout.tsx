@@ -1,17 +1,14 @@
 import type { LoaderFunction } from 'react-router-dom'
-import { attachConsole } from '@tauri-apps/plugin-log'
-import { isEmbed } from '../env'
 import { Outlet } from 'react-router-dom'
+import { logger } from '../utils/logger.ts'
 
 const RootLayout = () => {
     return <Outlet/>
 }
 
 const RootLoader: LoaderFunction = async () => {
-    // Initialize plugins
-    if (isEmbed) {
-        await attachConsole()
-    }
+    // Initialize plugins here
+    await logger.initialize()
 
     return null
 }
