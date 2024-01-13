@@ -1,23 +1,22 @@
 import type { RouteObject } from 'react-router-dom'
 import { createHashRouter } from 'react-router-dom'
 
+import bootLoader from './boot.ts'
 import RootLayout from './layout.tsx'
-import BootPage from '../pages/Boot'
-import { ExceptionPage } from '../pages/Exception'
-import { DashboardPage } from '../pages/Dashboard'
+
+import DashboardPage from '../pages/Dashboard'
 import StickerPage from '../pages/Sticker'
+import ExceptionPage from '../pages/Exception'
 import MiscPage from '../pages/Misc'
 
 const routes: RouteObject[] = [
     {
         errorElement: <ExceptionPage/>,
-        loader: RootLayout.loader,
         element: <RootLayout/>,
         children: [
             {
                 path: '/',
-                loader: BootPage.loader,
-                element: <BootPage/>,
+                loader: bootLoader,
             },
             {
                 path: '/dashboard',
