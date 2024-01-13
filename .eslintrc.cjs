@@ -91,6 +91,7 @@ module.exports = {
         "no-var": "error",
         "no-unused-expressions": "error",
         "no-extra-boolean-cast": "off",
+        "no-extra-semi": "error",
         "complexity": [
             "warn",
             {
