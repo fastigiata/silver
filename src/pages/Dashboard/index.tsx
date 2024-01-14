@@ -3,8 +3,10 @@
  */
 const DashboardPage = () => {
     return (
-        <div>
-            <h1>DashboardPage</h1>
+        <div className={''}>
+            <h1 className={'text-primary'}>DashboardPage</h1>
+            <h1 className={'text-secondary'}>DashboardPage</h1>
+            <h1 className={'text-tertiary'}>DashboardPage</h1>
         </div>
     )
 }
