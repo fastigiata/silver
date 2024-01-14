@@ -5,16 +5,13 @@ const RootLayout = () => {
     return (
         <div className={'w-full h-full flex flex-col items-center'}>
             {/* header */}
-            <div className={'w-full h-10'}
-                style={{
-                    // backgroundImage: 'linear-gradient(to right,rgb(49,60,54),rgb(61,84,63),rgb(39,40,46))'
-                }}>
+            <div className={'w-full h-header bg-header text-header shadow-nav'}>
                 <Link className={'underline underline-offset-4'} to={'/dashboard'}>Home</Link>
                 <Link className={'underline underline-offset-4'} to={'/misc'}>Misc</Link>
             </div>
 
             {/* body */}
-            <div className={'w-full flex-1 shrink-0'}>
+            <div className={'w-full flex-1 bg-body shrink-0'}>
                 <Outlet/>
             </div>
         </div>
@@ -35,7 +32,7 @@ RootLayout.loader = async () => {
 
     // FIXME: simulate a long boot time, remove this later
     console.log('bootLoader start')
-    await new Promise(r => setTimeout(r, 3000))
+    await new Promise(r => setTimeout(r, 300))
     console.log('bootLoader done')
 
     // Mark this loader as initialized

@@ -5,6 +5,9 @@ export default <Config>{
         './src/**/*.tsx'
     ],
     theme: {
+        height: {
+            'header': 'var(--header-height)',
+        },
         backgroundColor: {
             'header': 'var(--header-bg)',
             'body': 'var(--body-bg)',
