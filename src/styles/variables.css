@@ -1,0 +1,12 @@
+:root {
+    --header-bg: #fff;
+    --header-font-size: 1.2rem;
+    --header-shadow-color: #f2f3f8;
+    --header-text-color: #515767;
+
+    --body-bg: #f2f3f5;
+
+    --primary-text-color: #252933;
+    --secondary-text-color: #515767;
+    --tertiary-text-color: #8a919f;
+}
