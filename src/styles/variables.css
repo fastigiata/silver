@@ -1,9 +1,11 @@
 :root {
+    /* region header */
     --header-height: 40px;
     --header-bg: #fff;
     --header-font-size: 1.2rem;
     --header-shadow-color: #f2f3f8;
     --header-text-color: #515767;
+    /* endregion */
 
     --body-bg: #f2f3f5;
 
