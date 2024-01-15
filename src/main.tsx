@@ -1,3 +1,4 @@
+import 'air-datepicker/air-datepicker.css'
 import './styles/variables.css'
 import './styles/index.css'
 
