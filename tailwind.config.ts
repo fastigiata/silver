@@ -5,9 +5,6 @@ export default <Config>{
         './src/**/*.tsx'
     ],
     theme: {
-        height: {
-            'header': 'var(--header-height)',
-        },
         backgroundColor: {
             'header': 'var(--header-bg)',
             'body': 'var(--body-bg)',
@@ -24,6 +21,11 @@ export default <Config>{
         fontFamily: {},
         fontSize: {
             'header': 'var(--header-font-size)',
+        },
+        extend: {
+            height: {
+                'header': 'var(--header-height)',
+            },
         },
     },
     plugins: [],
