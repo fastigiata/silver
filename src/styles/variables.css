@@ -10,4 +10,26 @@
     --primary-text-color: #252933;
     --secondary-text-color: #515767;
     --tertiary-text-color: #8a919f;
+
+    /* region air-datepicker 样式 */
+    /* 背景色 & hover */
+    --date-picker-bg: linear-gradient(to bottom, #fff, #ffedff);
+    --date-picker-bg-hover: #f0f0f0;
+    /* 选中项背景色 & hover */
+    --date-picker-bg-selected: #e95420;
+    --date-picker-bg-selected-hover: #c6471b;
+    /* '周*' 标题文本颜色 */
+    --date-picker-day-name-color: #e95420;
+    /* 本日/月/年 文本颜色 */
+    --date-picker-current-color: #c6471b;
+    /* endregion */
+}
+
+.air-datepicker {
+    --adp-background-color: var(--date-picker-bg);
+    --adp-background-color-hover: var(--date-picker-bg-hover);
+    --adp-day-name-color: var(--date-picker-day-name-color);
+    --adp-color-current-date: var(--date-picker-current-color);
+    --adp-cell-background-color-selected: var(--date-picker-bg-selected);
+    --adp-cell-background-color-selected-hover: var(--date-picker-bg-selected-hover);
 }
