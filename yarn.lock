@@ -977,6 +977,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"air-datepicker@npm:^3.4.0":
+  version: 3.4.0
+  resolution: "air-datepicker@npm:3.4.0"
+  checksum: a326fffe723cf545e5deb946f227dff0b3e3c8692c41dc5d0d37a7cf25d817b102fcb4940a3813a8884f27291e7ff10adddeb3941b0ad7ef102e768c732022cb
+  languageName: node
+  linkType: hard
+
 "ajv@npm:^6.12.4":
   version: 6.12.6
   resolution: "ajv@npm:6.12.6"
@@ -2987,6 +2994,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^6.13.1
     "@typescript-eslint/parser": ^6.13.1
     "@vitejs/plugin-react-swc": ^3.5.0
+    air-datepicker: ^3.4.0
     autoprefixer: ^10.4.16
     eslint: ^8.55.0
     eslint-plugin-react-hooks: ^4.6.0
