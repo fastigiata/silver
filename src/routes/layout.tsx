@@ -1,5 +1,5 @@
 import { Link, Outlet } from 'react-router-dom'
-import { logger } from '../utils/logger.ts'
+import { logger } from '@/utils/log.ts'
 
 const RootLayout = () => {
     return (
