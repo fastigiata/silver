@@ -5,6 +5,7 @@ interface Notifier {
 }
 
 class EmbedNotifier implements Notifier {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public async notify(_message: string, _onClick?: VoidFunction) {
         // no-op
     }
