@@ -1,22 +1,24 @@
 import { Env } from '@/utils/env.ts'
+import { isPermissionGranted, requestPermission, sendNotification } from '@tauri-apps/plugin-notification'
 
 interface Notifier {
-    notify(message: string, onClick?: VoidFunction): Promise<void>
+    notify(message: string): Promise<void>
 }
 
 class EmbedNotifier implements Notifier {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    public async notify(_message: string, _onClick?: VoidFunction) {
-        // no-op
+    public async notify(message: string) {
+        if (!(await isPermissionGranted())) {
+            const v = await requestPermission()
+            if (v !== 'granted') return
+        }
+
+        // TODO: with 'sendNotification'
+        // sendNotification()
     }
 }
 
-const DEFAULT_CLICK_ACTION = () => {
-    window.focus()
-}
-
 class WebNotifier implements Notifier {
-    public async notify(message: string, onClick: VoidFunction = DEFAULT_CLICK_ACTION) {
+    public async notify(message: string) {
         if (!('Notification' in window)) {
             alert('This browser does not support desktop notification')
             return
@@ -24,13 +26,10 @@ class WebNotifier implements Notifier {
 
         if (Notification.permission !== 'granted') {
             const v = await Notification.requestPermission()
-            if (v !== 'granted') {
-                return
-            }
+            if (v !== 'granted') return
         }
 
-        const notification = new Notification(message)
-        notification.onclick = onClick
+        new Notification(message)
     }
 }
 
