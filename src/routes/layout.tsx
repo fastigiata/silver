@@ -1,13 +1,31 @@
 import { Link, Outlet } from 'react-router-dom'
+import { getCurrent } from '@tauri-apps/api/window'
 import { logger } from '@/utils/log.ts'
 
 const RootLayout = () => {
+    // useEffect(() => {
+    //     const win = getCurrent()
+    //     win.show()
+    // }, [])
+
     return (
         <div className={'w-full h-full flex flex-col items-center'}>
             {/* header */}
-            <div className={'w-full h-header bg-header text-header shadow-nav'}>
+            <div className={'w-full h-header bg-header text-header'} data-tauri-drag-region>
                 <Link className={'underline underline-offset-4'} to={'/dashboard'}>Home</Link>
                 <Link className={'underline underline-offset-4'} to={'/misc'}>Misc</Link>
+
+                <button onClick={() => {
+                    const win = getCurrent()
+                    win.center()
+                }}>center
+                </button>
+                <button onClick={() => {
+                    // TODO: close the window using plugin 'process'
+                    const win = getCurrent()
+                    win.close()
+                }}>close
+                </button>
             </div>
 
             {/* body */}
