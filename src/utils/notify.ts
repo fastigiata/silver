@@ -2,23 +2,22 @@ import { Env } from '@/utils/env.ts'
 import { isPermissionGranted, requestPermission, sendNotification } from '@tauri-apps/plugin-notification'
 
 interface Notifier {
-    notify(message: string): Promise<void>
+    notify(title: string, body?: string): Promise<void>
 }
 
 class EmbedNotifier implements Notifier {
-    public async notify(message: string) {
+    public async notify(title: string, body?: string) {
         if (!(await isPermissionGranted())) {
             const v = await requestPermission()
             if (v !== 'granted') return
         }
 
-        // TODO: with 'sendNotification'
-        // sendNotification()
+        sendNotification({ title, body })
     }
 }
 
 class WebNotifier implements Notifier {
-    public async notify(message: string) {
+    public async notify(title: string, body?: string) {
         if (!('Notification' in window)) {
             alert('This browser does not support desktop notification')
             return
@@ -29,7 +28,7 @@ class WebNotifier implements Notifier {
             if (v !== 'granted') return
         }
 
-        new Notification(message)
+        new Notification(title, { body })
     }
 }
 
