@@ -1,4 +1,4 @@
-import type { StickerRecord } from '../declaration'
+import type { StickerRecord } from '@/declaration'
 import { LogicalSize, Window } from '@tauri-apps/api/window'
 
 /**

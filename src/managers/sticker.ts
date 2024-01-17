@@ -1,4 +1,4 @@
-import type { StickerRecord } from '../declaration'
+import type { StickerRecord } from '@/declaration'
 import { createStickerWindow, resetToDefaultById } from './window.ts'
 
 /**
