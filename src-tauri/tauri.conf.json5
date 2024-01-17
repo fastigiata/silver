@@ -31,10 +31,12 @@
         },
         "windows": [
             {
-                // frameless window as sticker
-                // "decorations": false,
+                "decorations": false,
+                "transparent": true,
+                // "skipTaskbar": true,
                 "fullscreen": false,
                 "resizable": false,
+                "fileDropEnabled": false,
                 "label": "main",
                 "title": "sticker",
                 "width": 800,
