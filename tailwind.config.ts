@@ -6,6 +6,7 @@ export default <Config>{
     ],
     theme: {
         backgroundColor: {
+            'transparent': 'transparent',
             'header': 'var(--header-bg)',
             'body': 'var(--body-bg)',
         },
