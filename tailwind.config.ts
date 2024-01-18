@@ -5,6 +5,9 @@ export default <Config>{
         './src/**/*.tsx'
     ],
     theme: {
+        borderRadius: {
+            'app': 'var(--app-border-radius)',
+        },
         backgroundColor: {
             'transparent': 'transparent',
             'header': 'var(--header-bg)',
@@ -24,6 +27,9 @@ export default <Config>{
             'header': 'var(--header-font-size)',
         },
         extend: {
+            zIndex: {
+                1: '1',
+            },
             height: {
                 'header': 'var(--header-height)',
             },

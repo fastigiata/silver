@@ -1,13 +1,21 @@
 :root {
+    /* region app */
+    /* app's border-radius, 0-16 */
+    --app-border-radius: 8px;
+    /* endregion */
+
     /* region header */
+    /* header's height, 32-64 */
     --header-height: 40px;
     --header-bg: #fff;
     --header-font-size: 1.2rem;
-    --header-shadow-color: #f2f3f8;
+    --header-shadow-color: #0000001a;
     --header-text-color: #515767;
     /* endregion */
 
+    /* region body */
     --body-bg: #f2f3f5;
+    /* endregion */
 
     --primary-text-color: #252933;
     --secondary-text-color: #515767;
