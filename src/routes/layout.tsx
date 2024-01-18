@@ -2,6 +2,8 @@ import { Link, Outlet } from 'react-router-dom'
 import { getCurrent } from '@tauri-apps/api/window'
 import { logger } from '@/utils/log.ts'
 import { exit } from '@tauri-apps/plugin-process'
+import { Spacer } from '@/components/Spacer.tsx'
+import { IconCross, IconSetting } from '@/components/Icons.tsx'
 
 const RootLayout = () => {
     // useEffect(() => {
@@ -10,13 +12,17 @@ const RootLayout = () => {
     // }, [])
 
     return (
-        <div className={'w-full h-full bg-transparent flex flex-col items-center'}>
+        <div className={
+            'w-full h-full rounded-app bg-transparent text-primary overflow-hidden flex flex-col items-center'
+        }>
             {/* header */}
-            <div className={'w-full h-header bg-header text-header'} data-tauri-drag-region="">
+            <div className={
+                'z-1 w-full h-header px-4 bg-header text-header shadow-nav flex items-center'
+            } data-tauri-drag-region="">
                 <Link className={'underline underline-offset-4'} to={'/dashboard'}>Home</Link>
                 <Link className={'underline underline-offset-4'} to={'/misc'}>Misc</Link>
 
-                <button onClick={() => {
+                <button className={'icon-btn'} onClick={() => {
                     const win = getCurrent()
                     win.center()
                 }}>center
@@ -27,10 +33,11 @@ const RootLayout = () => {
                     win.close()
                 }}>close current
                 </button>
-                <button onClick={() => {
-                    exit()
-                }}>exit
-                </button>
+
+                <Spacer/>
+
+                <IconSetting className={'icon-btn text-[24px]'}/>
+                <IconCross className={'icon-btn text-[24px]'} onClick={() => exit()}/>
             </div>
 
             {/* body */}
