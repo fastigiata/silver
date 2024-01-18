@@ -32,6 +32,8 @@
         "windows": [
             {
                 "decorations": false,
+                // required! see https://github.com/tauri-apps/tauri/issues/8308 for more info
+                "shadow": false,
                 "transparent": true,
                 // "skipTaskbar": true,
                 "fullscreen": false,
