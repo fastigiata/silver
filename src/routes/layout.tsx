@@ -10,7 +10,7 @@ const RootLayout = () => {
     // }, [])
 
     return (
-        <div className={'w-full h-full flex flex-col items-center'}>
+        <div className={'w-full h-full bg-transparent flex flex-col items-center'}>
             {/* header */}
             <div className={'w-full h-header bg-header text-header'} data-tauri-drag-region="">
                 <Link className={'underline underline-offset-4'} to={'/dashboard'}>Home</Link>
