@@ -19,6 +19,7 @@ tauri = { version = "2.0.0-alpha", features = ["config-json5"] }
 # plugins
 tauri-plugin-log = "2.0.0-alpha"
 tauri-plugin-notification = "2.0.0-alpha"
+tauri-plugin-process = "2.0.0-alpha"
 tauri-plugin-window = "2.0.0-alpha"
 tauri-plugin-shell = "2.0.0-alpha"
 tauri-plugin-store = "2.0.0-alpha"
