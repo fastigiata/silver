@@ -1,6 +1,7 @@
 import { DateTimePicker } from '@/components/DateTimePicker.tsx'
 import { useEffect } from 'react'
 import { notifier } from '@/utils/notify.ts'
+import { Link } from 'react-router-dom'
 
 /**
  * dashboard to manage all stickers
@@ -17,6 +18,8 @@ const DashboardPage = () => {
             <h1 className={'text-primary'}>DashboardPage</h1>
             <h1 className={'text-secondary'}>DashboardPage</h1>
             <h1 className={'text-tertiary'}>DashboardPage</h1>
+
+            <Link className={'underline underline-offset-4'} to={'/misc'}>Misc</Link>
 
             <button onClick={() => {
                 notifier.notify('xxx')
