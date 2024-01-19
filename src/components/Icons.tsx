@@ -1,15 +1,16 @@
-import type { CSSProperties, ReactNode } from 'react'
+import type { CSSProperties, FC, ForwardRefExoticComponent, ReactNode } from 'react'
 import { forwardRef } from 'react'
 
-export type IconProps = {
+type IconProps = {
     className?: string;
     style?: CSSProperties;
-    svg: ReactNode;
     onClick?: VoidFunction
-};
+}
+type IconButtonProps = IconProps & { icon?: Omit<IconProps, 'onClick'> }
+type ExtendedIcon = ForwardRefExoticComponent<IconProps> & { Button: FC<IconButtonProps> }
 
-const Icon = forwardRef<HTMLSpanElement, IconProps>(
-    ({ className = '', style = {}, svg, onClick }, ref) => {
+const buildIcon = (svg: ReactNode) => {
+    const icon = forwardRef<HTMLSpanElement, IconProps>(({ className, style, onClick }, ref) => {
         return (
             <span
                 ref={ref} className={className}
@@ -18,13 +19,29 @@ const Icon = forwardRef<HTMLSpanElement, IconProps>(
                 {svg}
             </span>
         )
-    }
-)
+    }) as ExtendedIcon
 
-const buildIcon = (svg: IconProps['svg']) => {
-    return forwardRef<HTMLSpanElement, Omit<IconProps, 'svg'>>((props, ref) => (
-        <Icon ref={ref} svg={svg} {...props}></Icon>
-    ))
+    icon.Button = ({ className, style, onClick, icon }) => {
+        return (
+            <button className={className} style={{
+                display: 'inline-flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                ...style
+            }} onClick={onClick}>
+                <span className={icon?.className} style={{
+                    display: 'inline-flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    ...icon?.style
+                }}>
+                    {svg}
+                </span>
+            </button>
+        )
+    }
+
+    return icon
 }
 
 const IconBell = buildIcon(
@@ -68,9 +85,32 @@ const IconSetting = buildIcon(
     </svg>
 )
 
+const IconStar = buildIcon(
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32" fill="none">
+        <path
+            d="M31.0187 11.8851C30.7153 11.5058 30.2602 11.2024 29.8051 11.1265L21.4613 9.9129L17.7446 2.32773C17.5171 2.0243 17.2136 1.7209 16.8344 1.49335C16.3793 1.26579 15.8483 1.26579 15.3932 1.41751C14.9381 1.56919 14.5588 1.94846 14.3313 2.40357L10.6145 9.98874L2.27084 11.2024C1.89157 11.2782 1.5123 11.43 1.2089 11.7333C0.450398 12.4919 0.526238 13.7055 1.2089 14.3882L7.27706 20.3046L5.83586 28.6483C5.76002 29.0276 5.83586 29.4827 6.06341 29.8619C6.51852 30.7722 7.73218 31.1514 8.6424 30.6205L16.1517 26.6762L23.6611 30.6205C23.9645 30.7722 24.2679 30.848 24.5713 30.848H24.8747C25.4056 30.7722 25.7849 30.4687 26.0883 30.0895C26.3917 29.7102 26.4676 29.1793 26.3917 28.6483L24.9505 20.3046L31.0187 14.3882C31.3221 14.0847 31.5496 13.7055 31.5496 13.3262C31.4738 12.7953 31.3221 12.3402 31.0187 11.8851ZM23.0542 18.7876C22.5991 19.2427 22.3716 19.8495 22.5233 20.4563L23.8886 28.1932L16 24.0972L8.11141 28.1932L9.47674 20.4563C9.55262 19.8495 9.4009 19.2427 8.94579 18.7876L3.33274 13.3262L11.1455 12.1885C11.7523 12.1126 12.2833 11.7333 12.5867 11.1265L16 4.0723L19.4892 11.1265C19.7926 11.6575 20.3236 12.1126 20.9304 12.1885L28.7431 13.3262L23.0542 18.7876Z"
+            fill="currentColor"/>
+    </svg>
+)
+
+const IconTriDot = buildIcon(
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32" fill="none">
+        <path
+            d="M25 16C25 17.6553 26.3418 19 28 19C29.6553 19 31 17.6582 31 16C31 14.3447 29.6582 13 28 13C26.3447 13 25 14.3418 25 16ZM13 16C13 17.6553 14.3418 19 16 19C17.6553 19 19 17.6582 19 16C19 14.3447 17.6582 13 16 13C14.3447 13 13 14.3418 13 16ZM1 16C1 17.6553 2.3418 19 4 19C5.6582 19 7 17.6582 7 16C7 14.3447 5.6582 13 4 13C2.34473 13 1 14.3418 1 16Z"
+            fill="currentColor"/>
+    </svg>
+)
+
+export type {
+    IconProps,
+    IconButtonProps,
+    ExtendedIcon,
+}
 export {
     IconBell,
     IconCross,
     IconFolder,
-    IconSetting
+    IconSetting,
+    IconStar,
+    IconTriDot,
 }
