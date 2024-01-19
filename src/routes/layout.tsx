@@ -1,9 +1,10 @@
 import { Link, Outlet } from 'react-router-dom'
-import { getCurrent } from '@tauri-apps/api/window'
 import { logger } from '@/utils/log.ts'
-import { exit } from '@tauri-apps/plugin-process'
 import { Spacer } from '@/components/Spacer.tsx'
-import { IconCross, IconSetting } from '@/components/Icons.tsx'
+import { IconBell, IconCross, IconTriDot } from '@/components/Icons.tsx'
+import { AppController } from '@/utils/app_controller.ts'
+
+import Sticker from '@/assets/Sticker.svg'
 
 const RootLayout = () => {
     // useEffect(() => {
@@ -19,25 +20,17 @@ const RootLayout = () => {
             <div className={
                 'z-1 w-full h-header px-4 bg-header text-header shadow-nav flex items-center'
             } data-tauri-drag-region="">
-                <Link className={'underline underline-offset-4'} to={'/dashboard'}>Home</Link>
-                <Link className={'underline underline-offset-4'} to={'/misc'}>Misc</Link>
-
-                <button className={'icon-btn'} onClick={() => {
-                    const win = getCurrent()
-                    win.center()
-                }}>center
-                </button>
-                <button onClick={() => {
-                    // TODO: close the window using plugin 'process'
-                    const win = getCurrent()
-                    win.close()
-                }}>close current
-                </button>
+                {/* logo */}
+                <Link className={'h-[80%]'} to={'/dashboard'}>
+                    <img className={'h-full'} src={Sticker} alt=""/>
+                </Link>
 
                 <Spacer/>
 
-                <IconSetting className={'icon-btn text-[24px]'}/>
-                <IconCross className={'icon-btn text-[24px]'} onClick={() => exit()}/>
+                {/* operators */}
+                <IconBell.Button className={'ml-4 icon-btn text-[18px]'}/>
+                <IconTriDot.Button className={'ml-4 icon-btn text-[18px]'}/>
+                <IconCross.Button className={'ml-4 icon-btn text-[18px]'} onClick={AppController.close}/>
             </div>
 
             {/* body */}
