@@ -2,10 +2,11 @@ import type { RouteObject } from 'react-router-dom'
 import { createHashRouter, redirect } from 'react-router-dom'
 
 import RootLayout from './layout'
+import ExceptionPage from '@/pages/Exception'
 import DashboardPage from '@/pages/Dashboard'
 import StickerPage from '@/pages/Sticker'
-import ExceptionPage from '@/pages/Exception'
 import MiscPage from '@/pages/Misc'
+
 import PalettePage from '@/pages/Palette'
 
 const routes: RouteObject[] = [
