@@ -1,16 +1,13 @@
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { logger } from '@/utils/log.ts'
 import { Spacer } from '@/components/Spacer.tsx'
-import { IconBell, IconCross, IconTriDot } from '@/components/Icons.tsx'
+import { IconCross, IconMin, IconPalette } from '@/components/Icons.tsx'
 import { AppController } from '@/utils/app_controller.ts'
 
 import Sticker from '@/assets/Sticker.svg'
 
 const RootLayout = () => {
-    // useEffect(() => {
-    //     const win = getCurrent()
-    //     win.show()
-    // }, [])
+    const navigate = useNavigate()
 
     return (
         <div className={
@@ -28,8 +25,8 @@ const RootLayout = () => {
                 <Spacer/>
 
                 {/* operators */}
-                <IconBell.Button className={'ml-4 icon-btn text-[18px]'}/>
-                <IconTriDot.Button className={'ml-4 icon-btn text-[18px]'}/>
+                <IconPalette.Button className={'ml-4 icon-btn text-[18px]'} onClick={() => navigate('/palette')}/>
+                <IconMin.Button className={'ml-4 icon-btn text-[18px]'} onClick={AppController.hideToTray}/>
                 <IconCross.Button className={'ml-4 icon-btn text-[18px]'} onClick={AppController.close}/>
             </div>
 
