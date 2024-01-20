@@ -1,11 +1,12 @@
 import type { RouteObject } from 'react-router-dom'
 import { createHashRouter, redirect } from 'react-router-dom'
 
-import RootLayout from './layout.tsx'
-import DashboardPage from '../pages/Dashboard'
-import StickerPage from '../pages/Sticker'
-import ExceptionPage from '../pages/Exception'
-import MiscPage from '../pages/Misc'
+import RootLayout from './layout'
+import DashboardPage from '@/pages/Dashboard'
+import StickerPage from '@/pages/Sticker'
+import ExceptionPage from '@/pages/Exception'
+import MiscPage from '@/pages/Misc'
+import PalettePage from '@/pages/Palette'
 
 const routes: RouteObject[] = [
     {
@@ -20,6 +21,10 @@ const routes: RouteObject[] = [
             {
                 path: '/dashboard',
                 element: <DashboardPage/>,
+            },
+            {
+                path: '/palette',
+                element: <PalettePage/>
             },
             {
                 path: '/sticker/:stickerId?',
