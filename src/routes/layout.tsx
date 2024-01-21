@@ -25,9 +25,9 @@ const RootLayout = () => {
                 <Spacer/>
 
                 {/* operators */}
-                <IconPalette.Button className={'ml-4 icon-btn text-[18px]'} onClick={() => navigate('/palette')}/>
-                <IconMin.Button className={'ml-4 icon-btn text-[18px]'} onClick={AppController.hideToTray}/>
-                <IconCross.Button className={'ml-4 icon-btn text-[18px]'} onClick={AppController.close}/>
+                <IconPalette.Button className={'ml-4 as-button text-[18px]'} onClick={() => navigate('/palette')}/>
+                <IconMin.Button className={'ml-4 as-button text-[18px]'} onClick={AppController.hideToTray}/>
+                <IconCross.Button className={'ml-4 as-button text-[18px]'} onClick={AppController.close}/>
             </div>
 
             {/* body */}
