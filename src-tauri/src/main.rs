@@ -25,3 +25,11 @@ fn main() {
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
+
+#[cfg(test)]
+mod misc {
+    #[test]
+    fn wv_version() {
+        println!("wv version: {}", tauri::webview_version().unwrap_or("unknown".to_string()));
+    }
+}
