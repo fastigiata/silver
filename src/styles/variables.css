@@ -7,31 +7,44 @@
     /* region header */
     /* header's height, 32-64 */
     --header-height: 40px;
-    --header-bg: #fff;
-    --header-font-size: 1rem;
-    --header-shadow-color: #0000001a;
+    --header-bg: #FFFFFF;
+    --header-font-size: 16px;
+    --header-shadow-color: #0000001A;
     --header-text-color: #515767;
     /* endregion */
 
     /* region body */
-    --body-bg: #f2f3f5;
+    --body-bg: #F2F3F5;
     /* endregion */
 
+    /* region text */
     --primary-text-color: #252933;
     --secondary-text-color: #515767;
-    --tertiary-text-color: #8a919f;
+    --tertiary-text-color: #8A919F;
+    --primary-font-weight: 700;
+    --secondary-font-weight: 400;
+    --tertiary-font-weight: 300;
+    /* endregion */
 
-    /* region air-datepicker 样式 */
+    /* region button */
+    --primary-button-bg: #0F172A;
+    /* endregion */
+
+    /* region card */
+    --card-shadow-color: #0000001A;
+    /* endregion */
+
+    /* region air-datepicker */
     /* 背景色 & hover */
-    --date-picker-bg: linear-gradient(to bottom, #fff, #ffedff);
-    --date-picker-bg-hover: #f0f0f0;
+    --date-picker-bg: linear-gradient(to bottom, #FFFFFF, #FFEDFF);
+    --date-picker-bg-hover: #F0F0F0;
     /* 选中项背景色 & hover */
-    --date-picker-bg-selected: #e95420;
-    --date-picker-bg-selected-hover: #c6471b;
+    --date-picker-bg-selected: #E95420;
+    --date-picker-bg-selected-hover: #C6471B;
     /* '周*' 标题文本颜色 */
-    --date-picker-day-name-color: #e95420;
+    --date-picker-day-name-color: #E95420;
     /* 本日/月/年 文本颜色 */
-    --date-picker-current-color: #c6471b;
+    --date-picker-current-color: #C6471B;
     /* endregion */
 }
 
