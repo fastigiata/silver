@@ -31,7 +31,7 @@ const RootLayout = () => {
             </div>
 
             {/* body */}
-            <div className={'w-full flex-1 bg-body shrink-0'}>
+            <div className={'w-full h-body bg-body shrink-0'}>
                 <Outlet/>
             </div>
         </div>
