@@ -2119,6 +2119,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jotai@npm:^2.6.2":
+  version: 2.6.2
+  resolution: "jotai@npm:2.6.2"
+  peerDependencies:
+    "@types/react": ">=17.0.0"
+    react: ">=17.0.0"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    react:
+      optional: true
+  checksum: c7c7a13a45598a727506947ff782780e51449f6bb5f95a1a5a611728032b3e4de87e66e113d08339d3ddcbae9a1cb1ff5a24dd113c212b4581a291ad8b860a60
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0 || ^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -3075,6 +3090,7 @@ __metadata:
     eslint: ^8.55.0
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-react-refresh: ^0.4.4
+    jotai: ^2.6.2
     postcss: ^8.4.32
     react: ^18.2.0
     react-colorful: ^5.6.1
