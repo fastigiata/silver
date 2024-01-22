@@ -2,6 +2,7 @@ import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { logger } from '@/utils/log.ts'
 import { Spacer } from '@/components/Spacer.tsx'
 import { IconCross, IconMin, IconPalette } from '@/components/Icons.tsx'
+import { Tooltips } from '@/tooltips'
 import { AppController } from '@/utils/app_controller.ts'
 
 import Sticker from '@/assets/Sticker.svg'
@@ -13,6 +14,9 @@ const RootLayout = () => {
         <div className={
             'w-full h-full rounded-app bg-transparent text-primary overflow-hidden flex flex-col items-center'
         }>
+            {/* tooltips */}
+            <Tooltips/>
+
             {/* header */}
             <div className={
                 'z-1 w-full h-header px-4 bg-header text-header shadow-nav flex items-center'
