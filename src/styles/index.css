@@ -19,3 +19,49 @@ html, body, #root {
         opacity: 0.9;
     }
 }
+
+/* third party */
+
+.react-colorful { /* react-colorful */
+    padding: 12px;
+    border-radius: 8px;
+    background: #33333A;
+    box-shadow: 0 6px 12px #999;
+
+    .react-colorful__pointer {
+        border: solid 1px #FFFFFF;
+        border-radius: 2px;
+    }
+
+    .react-colorful__saturation { /* saturation */
+        margin: 12px 0;
+        border-radius: 4px;
+        border-bottom: none;
+
+        .react-colorful__saturation-pointer {
+            width: 12px;
+            height: 12px;
+        }
+    }
+
+    .react-colorful__hue { /* hue */
+        order: -1;
+        height: 16px;
+        border-radius: 4px;
+
+        .react-colorful__hue-pointer {
+            width: 10px;
+            height: 18px;
+        }
+    }
+
+    .react-colorful__alpha { /* alpha */
+        height: 16px;
+        border-radius: 4px;
+
+        .react-colorful__alpha-pointer {
+            width: 10px;
+            height: 18px;
+        }
+    }
+}
