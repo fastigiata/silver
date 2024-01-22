@@ -126,7 +126,12 @@ const PaletteItemList = [
         bind: '--primary-button-bg',
         reset: '#0F172A'
     },
-    // TODO: the rest
+    { name: 'separator', title: 'Card' },
+    {
+        name: 'Shadow Color',
+        bind: '--card-shadow-color',
+        reset: '#0000001A'
+    },
 ] as const
 
 const PalettePage = () => {
