@@ -1,54 +1,7 @@
 import { useState } from 'react'
+import { Spacer } from '@/components/Spacer.tsx'
 
-// ========== Helper ==========
-
-const getBindValue = (bind: string) => {
-    return window.getComputedStyle(document.documentElement).getPropertyValue(bind)
-}
-const useBindValue = (bind: string) => {
-    const [ value, _setValue ] = useState<string>(getBindValue(bind))
-    const setValue = (value: string) => {
-        document.documentElement.style.setProperty(bind, value)
-        _setValue(value)
-    }
-    return [ value, setValue ] as const
-}
-
-// ========== Component ==========
-
-const PaletteTitle = ({ title }: { title: string }) => {
-    return (
-        <div className={'text-primary font-primary'}>{title}</div>
-    )
-}
-
-type PaletteItemProps = {
-    name: string
-    bind: string
-    reset: string
-}
-
-const PaletteItem = ({ name, bind, reset }: PaletteItemProps) => {
-    const [ value, setValue ] = useBindValue(bind)
-
-    return (
-        <div className={'shrink-0 w-full h-10 px-4 rounded-[4px] bg-white shadow-card flex items-center'}>
-            <span className={'w-60 text-secondary'}>{name}</span>
-            <span className={'w-24 text-tertiary'}>{value}</span>
-
-            {/* TODO: selector */}
-            <i className="flex-1"></i>
-
-            <button className={
-                'as-button h-7 px-2 rounded-[4px] bg-primary-button text-white'
-            } onClick={() => setValue(reset)}>
-                Reset
-            </button>
-        </div>
-    )
-}
-
-// ========== Page ==========
+// ========== Data ==========
 
 const PaletteItemList = [
     { name: 'separator', title: 'Application' },
@@ -133,6 +86,65 @@ const PaletteItemList = [
         reset: '#0000001A'
     },
 ] as const
+
+// ========== Helper ==========
+
+const getBindValue = (bind: string) => {
+    return window.getComputedStyle(document.documentElement).getPropertyValue(bind)
+}
+const useBindValue = (bind: string) => {
+    const [ value, _setValue ] = useState<string>(getBindValue(bind))
+    const setValue = (value: string) => {
+        document.documentElement.style.setProperty(bind, value)
+        _setValue(value)
+    }
+    return [ value, setValue ] as const
+}
+
+// ========== Component ==========
+
+const PaletteTitle = ({ title }: { title: string }) => {
+    return (
+        <div className={'text-primary font-primary'}>{title}</div>
+    )
+}
+
+type PaletteItemProps = {
+    name: string
+    bind: string
+    reset: string
+}
+
+const PaletteItem = ({ name, bind, reset }: PaletteItemProps) => {
+    const [ value, setValue ] = useBindValue(bind)
+
+    return (
+        <div className={'shrink-0 w-full h-10 px-4 rounded-[4px] bg-white shadow-card flex items-center'}>
+            <span className={'w-60 text-secondary'}>{name}</span>
+            <span className={'w-24 text-tertiary'}>{value}</span>
+
+            <Spacer/>
+
+            {/* TODO: use Imperative mode */}
+            <button
+                data-tooltip-id={'tooltip-color-picker'}
+                data-tooltip-content={JSON.stringify({ reset, alpha: reset.length === 9 })}
+                className={
+                    'as-button h-7 px-2 mr-2 rounded-[4px] border-[1px] border-primary bg-white text-primary'
+                }>
+                Edit
+            </button>
+
+            <button className={
+                'as-button h-7 px-2 rounded-[4px] bg-primary-button text-white'
+            } onClick={() => setValue(reset)}>
+                Reset
+            </button>
+        </div>
+    )
+}
+
+// ========== Page ==========
 
 const PalettePage = () => {
     return (
