@@ -1,4 +1,5 @@
-import React, { useRef, useMemo, useEffect } from 'react'
+import type { ReactNode, TouchEvent as TE, MouseEvent as ME, KeyboardEvent as KE, CSSProperties } from 'react'
+import { useRef, useMemo, useEffect, memo } from 'react'
 
 // Saves incoming handler to the ref in order to avoid "useCallback hell"
 function useEventCallback<T>(handler?: (value: T) => void): (value: T) => void {
@@ -81,9 +82,11 @@ const isInvalid = (event: MouseEvent | TouchEvent, hasTouch: boolean): boolean =
 }
 
 interface Props {
-    onMove: (pos: RelativePosition) => void;
-    onKey: (offset: IndicativeOffset) => void;
-    children: React.ReactNode;
+    className?: string;
+    style?: CSSProperties;
+    onMove?: (pos: RelativePosition) => void;
+    onKey?: (offset: IndicativeOffset) => void;
+    children?: ReactNode;
 }
 
 const InteractiveBase = ({ onMove, onKey, ...rest }: Props) => {
@@ -94,7 +97,7 @@ const InteractiveBase = ({ onMove, onKey, ...rest }: Props) => {
     const hasTouch = useRef(false)
 
     const [ handleMoveStart, handleKeyDown, toggleDocumentEvents ] = useMemo(() => {
-        const handleMoveStart = ({ nativeEvent }: React.MouseEvent | React.TouchEvent) => {
+        const handleMoveStart = ({ nativeEvent }: ME | TE) => {
             const el = container.current
             if (!el) return
 
@@ -134,7 +137,7 @@ const InteractiveBase = ({ onMove, onKey, ...rest }: Props) => {
 
         const handleMoveEnd = () => toggleDocumentEvents(false)
 
-        const handleKeyDown = (event: React.KeyboardEvent) => {
+        const handleKeyDown = (event: KE) => {
             const keyCode = event.which || event.keyCode
 
             // Ignore all keys except arrow ones
@@ -170,13 +173,13 @@ const InteractiveBase = ({ onMove, onKey, ...rest }: Props) => {
     return (
         <div
             {...rest}
+            ref={container}
             onTouchStart={handleMoveStart}
             onMouseDown={handleMoveStart}
-            ref={container}
             onKeyDown={handleKeyDown}
             tabIndex={0}
         />
     )
 }
 
-export const Interactive = React.memo(InteractiveBase)
+export const Interactive = memo(InteractiveBase)
