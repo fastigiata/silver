@@ -177,7 +177,7 @@ const InteractiveBase = ({ onMove, onKey, ...rest }: Props) => {
             onTouchStart={handleMoveStart}
             onMouseDown={handleMoveStart}
             onKeyDown={handleKeyDown}
-            tabIndex={0}
+            tabIndex={onKey ? 0 : undefined}
         />
     )
 }
