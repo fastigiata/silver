@@ -138,11 +138,16 @@ type PaletteItemProps = {
     name: string
     bind: string
     reset: string
-    config: EditConfig
+    editConfig: EditConfig
 }
 
-const PaletteItem = ({ name, bind, reset }: PaletteItemProps) => {
+const PaletteItem = ({ name, bind, reset, editConfig }: PaletteItemProps) => {
     const [ value, setValue ] = useBindValue(bind)
+
+    /* TODO: 使用 onClick 触发, 根据 config 打开对应的选择弹窗 */
+    const handleEdit = () => {
+        console.log('config', editConfig)
+    }
 
     return (
         <div className={'shrink-0 w-full h-10 px-4 rounded-[4px] bg-white shadow-card flex items-center'}>
@@ -151,13 +156,9 @@ const PaletteItem = ({ name, bind, reset }: PaletteItemProps) => {
 
             <Spacer/>
 
-            {/* TODO: use Imperative mode, with internal-managed branches */}
-            <button
-                data-tooltip-id={'tooltip-color-picker'}
-                data-tooltip-content={JSON.stringify({ reset, alpha: reset.length === 9 })}
-                className={
-                    'as-button h-7 px-2 mr-2 rounded-[4px] border-[1px] border-primary bg-white text-primary'
-                }>
+            <button className={
+                'as-button h-7 px-2 mr-2 rounded-[4px] border-[1px] border-primary bg-white text-primary'
+            } onClick={handleEdit}>
                 Edit
             </button>
 
