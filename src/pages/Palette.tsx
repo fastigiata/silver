@@ -3,14 +3,14 @@ import { Spacer } from '@/components/Spacer.tsx'
 
 // ========== Data ==========
 
-type EditConfig = { type: 'color' }
+type EditConfig = { type: 'color', withAlpha: boolean }
     | { type: 'enum', values: string[] }
     | { type: 'length', min: number, max: number, step?: number }
 type PaletteItem = {
     name: string
     bind: string
     reset: string
-    editConfig?: EditConfig
+    editConfig: EditConfig
 } | { separator: true, title: string }
 
 const PaletteItemList: PaletteItem[] = [
@@ -19,86 +19,96 @@ const PaletteItemList: PaletteItem[] = [
         name: 'Corner Radius',
         bind: '--app-border-radius',
         reset: '8px',
-        editConfig: {
-            type: 'length',
-            min: 0,
-            max: 100,
-        }
+        editConfig: { type: 'length', min: 0, max: 16 }
     },
     { separator: true, title: 'Header' },
     {
         name: 'Height',
         bind: '--header-height',
-        reset: '40px'
+        reset: '40px',
+        editConfig: { type: 'length', min: 32, max: 64 }
     },
     {
         name: 'Background Color',
         bind: '--header-bg',
-        reset: '#FFFFFF'
+        reset: '#FFFFFF',
+        editConfig: { type: 'color', withAlpha: false }
     },
     {
         name: 'Font Size',
         bind: '--header-font-size',
-        reset: '16px'
+        reset: '16px',
+        editConfig: { type: 'length', min: 12, max: 24 }
     },
     {
         name: 'Shadow Color',
         bind: '--header-shadow-color',
-        reset: '#0000001A'
+        reset: '#0000001A',
+        editConfig: { type: 'color', withAlpha: true }
     },
     {
         name: 'Text Color',
         bind: '--header-text-color',
-        reset: '#515767'
+        reset: '#515767',
+        editConfig: { type: 'color', withAlpha: false }
     },
     { separator: true, title: 'Body' },
     {
         name: 'Background Color',
         bind: '--body-bg',
-        reset: '#F2F3F5'
+        reset: '#F2F3F5',
+        editConfig: { type: 'color', withAlpha: false }
     },
     { separator: true, title: 'Text' },
     {
         name: 'Color (Primary)',
         bind: '--primary-text-color',
-        reset: '#252933'
+        reset: '#252933',
+        editConfig: { type: 'color', withAlpha: false }
     },
     {
         name: 'Color (Secondary)',
         bind: '--secondary-text-color',
-        reset: '#515767'
+        reset: '#515767',
+        editConfig: { type: 'color', withAlpha: false }
     },
     {
         name: 'Color (Tertiary)',
         bind: '--tertiary-text-color',
-        reset: '#8A919F'
+        reset: '#8A919F',
+        editConfig: { type: 'color', withAlpha: false }
     },
     {
         name: 'Font Weight (Primary)',
         bind: '--primary-font-weight',
-        reset: '700'
+        reset: '700',
+        editConfig: { type: 'enum', values: [ '100', '200', '300', '400', '500', '600', '700', '800', '900' ] }
     },
     {
         name: 'Font Weight (Secondary)',
         bind: '--secondary-font-weight',
-        reset: '400'
+        reset: '400',
+        editConfig: { type: 'enum', values: [ '100', '200', '300', '400', '500', '600', '700', '800', '900' ] }
     },
     {
         name: 'Font Weight (Tertiary)',
         bind: '--tertiary-font-weight',
-        reset: '300'
+        reset: '300',
+        editConfig: { type: 'enum', values: [ '100', '200', '300', '400', '500', '600', '700', '800', '900' ] }
     },
     { separator: true, title: 'Button' },
     {
         name: 'Background Color (Primary)',
         bind: '--primary-button-bg',
-        reset: '#0F172A'
+        reset: '#0F172A',
+        editConfig: { type: 'color', withAlpha: false }
     },
     { separator: true, title: 'Card' },
     {
         name: 'Shadow Color',
         bind: '--card-shadow-color',
-        reset: '#0000001A'
+        reset: '#0000001A',
+        editConfig: { type: 'color', withAlpha: true }
     },
 ]
 
@@ -128,6 +138,7 @@ type PaletteItemProps = {
     name: string
     bind: string
     reset: string
+    config: EditConfig
 }
 
 const PaletteItem = ({ name, bind, reset }: PaletteItemProps) => {
@@ -140,7 +151,7 @@ const PaletteItem = ({ name, bind, reset }: PaletteItemProps) => {
 
             <Spacer/>
 
-            {/* TODO: use Imperative mode */}
+            {/* TODO: use Imperative mode, with internal-managed branches */}
             <button
                 data-tooltip-id={'tooltip-color-picker'}
                 data-tooltip-content={JSON.stringify({ reset, alpha: reset.length === 9 })}
