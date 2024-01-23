@@ -3,14 +3,29 @@ import { Spacer } from '@/components/Spacer.tsx'
 
 // ========== Data ==========
 
-const PaletteItemList = [
-    { name: 'separator', title: 'Application' },
+type EditConfig = { type: 'color' }
+    | { type: 'enum', values: string[] }
+    | { type: 'length', min: number, max: number, step?: number }
+type PaletteItem = {
+    name: string
+    bind: string
+    reset: string
+    editConfig?: EditConfig
+} | { separator: true, title: string }
+
+const PaletteItemList: PaletteItem[] = [
+    { separator: true, title: 'Application' },
     {
         name: 'Corner Radius',
         bind: '--app-border-radius',
-        reset: '8px'
+        reset: '8px',
+        editConfig: {
+            type: 'length',
+            min: 0,
+            max: 100,
+        }
     },
-    { name: 'separator', title: 'Header' },
+    { separator: true, title: 'Header' },
     {
         name: 'Height',
         bind: '--header-height',
@@ -36,13 +51,13 @@ const PaletteItemList = [
         bind: '--header-text-color',
         reset: '#515767'
     },
-    { name: 'separator', title: 'Body' },
+    { separator: true, title: 'Body' },
     {
         name: 'Background Color',
         bind: '--body-bg',
         reset: '#F2F3F5'
     },
-    { name: 'separator', title: 'Text' },
+    { separator: true, title: 'Text' },
     {
         name: 'Color (Primary)',
         bind: '--primary-text-color',
@@ -73,19 +88,19 @@ const PaletteItemList = [
         bind: '--tertiary-font-weight',
         reset: '300'
     },
-    { name: 'separator', title: 'Button' },
+    { separator: true, title: 'Button' },
     {
         name: 'Background Color (Primary)',
         bind: '--primary-button-bg',
         reset: '#0F172A'
     },
-    { name: 'separator', title: 'Card' },
+    { separator: true, title: 'Card' },
     {
         name: 'Shadow Color',
         bind: '--card-shadow-color',
         reset: '#0000001A'
     },
-] as const
+]
 
 // ========== Helper ==========
 
@@ -154,7 +169,7 @@ const PalettePage = () => {
         }>
             {
                 PaletteItemList.map((item, index) => {
-                    if (item.name === 'separator') {
+                    if ('separator' in item) {
                         return <PaletteTitle key={index} title={item.title}/>
                     } else {
                         return <PaletteItem key={index} {...item}/>
