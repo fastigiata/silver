@@ -1,5 +1,7 @@
+import type { MouseEvent } from 'react'
 import { useState } from 'react'
 import { Spacer } from '@/components/Spacer.tsx'
+import { useColorPicker } from '@/tooltips/ColorPicker.tsx'
 
 // ========== Data ==========
 
@@ -142,11 +144,25 @@ type PaletteItemProps = {
 }
 
 const PaletteItem = ({ name, bind, reset, editConfig }: PaletteItemProps) => {
+    const { open: openColorPicker } = useColorPicker()
     const [ value, setValue ] = useBindValue(bind)
 
-    /* TODO: 使用 onClick 触发, 根据 config 打开对应的选择弹窗 */
-    const handleEdit = () => {
-        console.log('config', editConfig)
+    const handleEdit = (ev: MouseEvent<HTMLButtonElement>) => {
+        // 此处需要阻止冒泡, 否则会触发Tooltip的关闭 (如果Tooltip是打开状态)
+        // 在此情况下, 会先触发点击事件, 再触发关闭事件, 导致弹窗闪烁后关闭 (非预期)
+        ev.preventDefault()
+        ev.stopPropagation()
+
+        if (editConfig.type === 'color') {
+            openColorPicker(
+                `edit-${bind}`,
+                [ reset, editConfig.withAlpha ],
+                (newColor) => {
+                    console.log('newColor', newColor)
+                }
+            )
+        }
+        // TODO: 其他类型的编辑
     }
 
     return (
@@ -156,9 +172,11 @@ const PaletteItem = ({ name, bind, reset, editConfig }: PaletteItemProps) => {
 
             <Spacer/>
 
-            <button className={
-                'as-button h-7 px-2 mr-2 rounded-[4px] border-[1px] border-primary bg-white text-primary'
-            } onClick={handleEdit}>
+            <button
+                id={`edit-${bind}`}
+                className={
+                    'as-button h-7 px-2 mr-2 rounded-[4px] border-[1px] border-primary bg-white text-primary'
+                } onClick={handleEdit}>
                 Edit
             </button>
 
