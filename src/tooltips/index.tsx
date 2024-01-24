@@ -1,23 +1,29 @@
 import { useRef, useState } from 'react'
 import type { TooltipRefProps } from 'react-tooltip'
-import { useAtom } from 'jotai/index'
 import { ControlledTooltip } from '@/tooltips/ControlledTooltip.tsx'
 import { HexAlphaColorPicker, HexColorPicker } from 'react-colorful'
-import { ctx as colorPickerCtx } from '@/tooltips/ColorPicker.tsx'
+import { useColorPicker } from '@/tooltips/ColorPicker.tsx'
 
 const ColorPicker = () => {
     const ref = useRef<TooltipRefProps>(null)
-    const [ v, setV ] = useAtom(colorPickerCtx)
+    const { isOpen, open, close, details } = useColorPicker()
 
-    const close = (color: string | null) => {
-        setV(prev => ({ ...prev, isOpen: false }))
-        v.closeCallback?.(color)
-    }
-    const Picker = v.config[1] ? HexAlphaColorPicker : HexColorPicker
-    const [ color, setColor ] = useState<string>(v.config[0])
+    const Picker = details.config[1] ? HexAlphaColorPicker : HexColorPicker
+    const [ color, setColor ] = useState<string>(details.config[0])
 
     return (
-        <ControlledTooltip id={'color-picker'} ref={ref} isOpen={v.isOpen}>
+        <ControlledTooltip
+            id={'color-picker'} ref={ref}
+            anchorId={details.anchorId}
+            isOpen={isOpen}
+            setIsOpen={(to) => {
+                // TODO: 是否存在问题?
+                if (to) {
+                    open(details.anchorId!, details.config, details.closeCallback)
+                } else {
+                    close(null)
+                }
+            }}>
             <div className={
                 'p-4 rounded-[16px] shadow-card flex flex-col items-center'
             }>

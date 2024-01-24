@@ -5,6 +5,7 @@ import { forwardRef } from 'react'
 
 type ControlledTooltipProps = {
     id: string
+    anchorId?: string | null
     children: ReactNode
     isOpen: boolean
     setIsOpen?: (isOpen: boolean) => void
@@ -12,6 +13,7 @@ type ControlledTooltipProps = {
 
 const ControlledTooltip = forwardRef<TooltipRefProps, ControlledTooltipProps>(({
     id,
+    anchorId,
     children,
     isOpen,
     setIsOpen
@@ -19,9 +21,10 @@ const ControlledTooltip = forwardRef<TooltipRefProps, ControlledTooltipProps>(({
     return (
         <Tooltip
             id={id} ref={ref}
+            anchorSelect={anchorId ? `#${anchorId}` : undefined}
             isOpen={isOpen}
             setIsOpen={setIsOpen}
-            clickable
+            clickable openOnClick
             style={{ zIndex: 10, padding: 0, backgroundColor: '#FFFFFF', }}
             opacity={1}>
             {children}

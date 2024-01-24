@@ -7,11 +7,11 @@ type ColorPickerConfig = [ defaultColor: string, withAlpha: boolean ]
  * Internal use only.
  */
 const ctx = atom<{
-    isOpen: boolean,
+    anchorId: string | null
     config: ColorPickerConfig,
     closeCallback: CloseCallback<string | null> | null
 }>({
-    isOpen: false,
+    anchorId: null,
     config: [ '', false ],
     closeCallback: null
 })
@@ -19,13 +19,19 @@ const ctx = atom<{
 const useColorPicker = () => {
     const [ v, setV ] = useAtom(ctx)
 
-    const open = (config: ColorPickerConfig, closeCallback?: CloseCallback<string | null>) => {
-        setV({ isOpen: true, config, closeCallback: closeCallback ?? null })
+    const open = (anchorId: string, config: ColorPickerConfig, closeCallback?: CloseCallback<string | null> | null) => {
+        setV({ anchorId, config, closeCallback: closeCallback ?? null })
+    }
+    const close = (color: string | null) => {
+        setV(prev => ({ ...prev, anchorId: null }))
+        v.closeCallback?.(color)
     }
 
     return {
-        isOpen: v.isOpen,
+        isOpen: v.anchorId !== null,
         open,
+        close,
+        details: v
     }
 }
 
