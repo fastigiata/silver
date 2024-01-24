@@ -1,71 +1,36 @@
-import type { TooltipRefProps } from 'react-tooltip'
-import { Tooltip } from 'react-tooltip'
-import { useRef, useState } from 'react'
-import { HexAlphaColorPicker, HexColorPicker } from 'react-colorful'
+import { atom, useAtom } from 'jotai'
+import type { CloseCallback } from '@/tooltips/shared.ts'
 
-const Picker = ({ defaultColor, withAlpha, onCancel, onConfirm }: {
-    defaultColor: string
-    withAlpha: boolean
-    onCancel: VoidFunction
-    onConfirm: (color: string) => void
-}) => {
-    const ColorPicker = withAlpha ? HexAlphaColorPicker : HexColorPicker
-    const [ color, setColor ] = useState<string>(defaultColor)
+type ColorPickerConfig = [ defaultColor: string, withAlpha: boolean ]
 
-    return (
-        <div className={
-            'p-4 rounded-[16px] shadow-card flex flex-col items-center'
-        }>
-            <ColorPicker color={color} onChange={setColor}/>
+/**
+ * Internal use only.
+ */
+const ctx = atom<{
+    isOpen: boolean,
+    config: ColorPickerConfig,
+    closeCallback: CloseCallback<string | null> | null
+}>({
+    isOpen: false,
+    config: [ '', false ],
+    closeCallback: null
+})
 
-            <div>
-                <button className={
-                    'as-button h-7 px-2 mr-2 rounded-[4px] border-[1px] border-primary bg-white text-primary'
-                } onClick={() => onCancel()}>
-                    Cancel
-                </button>
+const useColorPicker = () => {
+    const [ v, setV ] = useAtom(ctx)
 
-                <button className={
-                    'as-button h-7 px-2 rounded-[4px] bg-primary-button text-white'
-                } onClick={() => onConfirm(color)}>
-                    Confirm
-                </button>
-            </div>
-        </div>
-    )
+    const open = (config: ColorPickerConfig, closeCallback?: CloseCallback<string | null>) => {
+        setV({ isOpen: true, config, closeCallback: closeCallback ?? null })
+    }
+
+    return {
+        isOpen: v.isOpen,
+        open,
+    }
 }
 
-const ColorPicker = () => {
-    const ref = useRef<TooltipRefProps>(null)
-
-    return (
-        <Tooltip
-            ref={ref}
-            id={'tooltip-color-picker'}
-            clickable openOnClick
-            style={{
-                zIndex: 10,
-                padding: 0,
-                backgroundColor: '#FFFFFF',
-            }}
-            opacity={1}
-            render={({ content }) => {
-                if (!content) return null
-
-                const { reset, alpha } = JSON.parse(content)
-                console.log(reset)
-                return (
-                    <Picker
-                        defaultColor={reset} withAlpha={alpha}
-                        onCancel={() => ref.current?.close}
-                        onConfirm={(color) => {
-                            console.log('color', color)
-                        }}/>
-                )
-            }}/>
-    )
-}
 
 export {
-    ColorPicker
+    ctx,
+    useColorPicker
 }
