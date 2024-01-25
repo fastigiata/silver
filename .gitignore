@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 .yarn
-__test__
+#__test__
