@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .awesome-scrollbar::-webkit-scrollbar {
+            width: .4em;
+            height: .4em;
+        }
+        .awesome-scrollbar::-webkit-scrollbar,
+        .awesome-scrollbar::-webkit-scrollbar-thumb {
+            overflow:visible;
+            border-radius: 4px;
+        }
+        .awesome-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,.2);
+        }
+    </style>
+    <style>
+        .awesome-scrollbar-y::-webkit-scrollbar {
+            width: .4em;
+            height: .4em;
+        }
+        .awesome-scrollbar-y::-webkit-scrollbar,
+        .awesome-scrollbar-y::-webkit-scrollbar-thumb {
+            overflow:visible;
+            border-radius: 4px;
+        }
+        .awesome-scrollbar-y::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,.2);
+        }
+        /* 여기에는 문제가있다 가로스크롤일때는 애니메이션이 의도적으로 동작하지 않는다. */
+        /* MAGIC HAPPENS HERE */
+        .awesome-scrollbar-y::after {
+            content: '';
+            position: absolute;
+            background: #fff;
+            height: 100%;
+            top: 0;
+            right: 0;
+            width: .4em;
+            -webkit-transition: all .5s;
+            transition: all .5s;
+            opacity: 1;
+        }
+        .awesome-scrollbar-y:hover::after {
+            opacity: 0;
+            -webkit-transition: all .5s;
+            transition: all .5s;
+        }
+    </style>
+    <style>
+        .awesome-scrollbar-x::-webkit-scrollbar {
+            width: .4em;
+            height: .4em;
+        }
+        .awesome-scrollbar-x::-webkit-scrollbar,
+        .awesome-scrollbar-x::-webkit-scrollbar-thumb {
+            overflow:visible;
+            border-radius: 4px;
+        }
+        .awesome-scrollbar-x::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,.2);
+        }
+        /* MAGIC HAPPENS HERE */
+        .awesome-scrollbar-x::after {
+            content: '';
+            position: absolute;
+            background: #fff;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+            height: .4em;
+            -webkit-transition: all .5s;
+            transition: all .5s;
+            opacity: 1;
+        }
+        .awesome-scrollbar-x:hover::after {
+            opacity: 0;
+            -webkit-transition: all .5s;
+            transition: all .5s;
+        }
+    </style>
+
+    <style>
+        .outer {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background: red;
+            overflow: hidden;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background: #eee;
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+<body>
+
+<div class="outer">
+    <div class="box awesome-scrollbar-y">
+        Lorem Ipsum
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+        laborum.
+    </div>
+</div>
+
+</body>
+</html>
