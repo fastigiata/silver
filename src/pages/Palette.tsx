@@ -2,6 +2,7 @@ import type { MouseEvent } from 'react'
 import { useState } from 'react'
 import { Spacer } from '@/components/Spacer.tsx'
 import { useColorPicker } from '@/tooltips/ColorPicker.tsx'
+import { AwesomeScrollbar } from '@/components/AwesomeScrollbar.tsx'
 
 // ========== Data ==========
 
@@ -193,7 +194,7 @@ const PaletteItem = ({ name, bind, reset, editConfig }: PaletteItemProps) => {
 
 const PalettePage = () => {
     return (
-        <div className={
+        <AwesomeScrollbar className={
             'w-full h-full px-8 py-4 space-y-4 ' +
             'flex flex-col items-center overflow-y-auto'
         }>
@@ -206,7 +207,7 @@ const PalettePage = () => {
                     }
                 })
             }
-        </div>
+        </AwesomeScrollbar>
     )
 }
 
