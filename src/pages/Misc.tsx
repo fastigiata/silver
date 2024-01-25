@@ -1,6 +1,9 @@
 import * as Icons from '@/components/Icons.tsx'
 import { Interactive } from '@/components/Interactive.tsx'
 import { useState } from 'react'
+import { MacScrollbar } from 'mac-scrollbar'
+
+const str = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 
 const MiscPage = () => {
     const [ pos, setPos ] = useState({ left: 0, top: 0 })
@@ -20,6 +23,16 @@ const MiscPage = () => {
                         top: `${100 * pos.top}%`,
                     }}/>
             </Interactive>
+
+            <div className={'w-full h-[1px] my-8 bg-primary-button'}/>
+
+            <MacScrollbar
+                className={'relative awesome-scrollbar-y overflow-y-scroll w-60 h-60'}
+                trackStyle={(horizontal) => ({ [horizontal ? 'height' : 'width']: 0 })}
+                thumbStyle={(horizontal) => ({ [horizontal ? 'height' : 'width']: 6 })}>
+                Lorem Ipsum
+                {str}
+            </MacScrollbar>
 
             <div className={'w-full h-[1px] my-8 bg-primary-button'}/>
             <ul className={'space-y-2'}>
