@@ -2256,6 +2256,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mac-scrollbar@npm:^0.13.6":
+  version: 0.13.6
+  resolution: "mac-scrollbar@npm:0.13.6"
+  checksum: d1fcf5020de18830726662c904ec0ecebb9f345bef979f64dba4b7bdacc6bb15fbe27930ed2f61b29ef3ca03b00c269637762b96dae53adf147e12f0c03fd94b
+  languageName: node
+  linkType: hard
+
 "make-fetch-happen@npm:^13.0.0":
   version: 13.0.0
   resolution: "make-fetch-happen@npm:13.0.0"
@@ -3091,6 +3098,7 @@ __metadata:
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-react-refresh: ^0.4.4
     jotai: ^2.6.2
+    mac-scrollbar: ^0.13.6
     postcss: ^8.4.32
     react: ^18.2.0
     react-colorful: ^5.6.1
