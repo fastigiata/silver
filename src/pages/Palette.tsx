@@ -113,6 +113,13 @@ const PaletteItemList: PaletteItem[] = [
         reset: '#0000001A',
         editConfig: { type: 'color', withAlpha: true }
     },
+    { separator: true, title: 'Tooltip' },
+    {
+        name: 'Shadow Color',
+        bind: '--tooltip-shadow-color',
+        reset: '#8F959E3D',
+        editConfig: { type: 'color', withAlpha: true }
+    },
 ]
 
 // ========== Helper ==========
@@ -159,7 +166,7 @@ const PaletteItem = ({ name, bind, reset, editConfig }: PaletteItemProps) => {
                 `edit-${bind}`,
                 [ reset, editConfig.withAlpha ],
                 (newColor) => {
-                    console.log('newColor', newColor)
+                    if (!!newColor) setValue(newColor)
                 }
             )
         }

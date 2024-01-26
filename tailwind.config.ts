@@ -17,7 +17,7 @@ export default <Config>{
         },
         boxShadow: {
             'nav': '0px 2px 8px var(--header-shadow-color)',
-            'tooltip': '4px 4px 4px var(--tooltip-shadow-color)',
+            'tooltip': '0px 4px 4px var(--tooltip-shadow-color)',
             'card': '1px 1px 4px var(--card-shadow-color)',
             'card_hover': '3px 3px 4px var(--card-shadow-color)',
         },
