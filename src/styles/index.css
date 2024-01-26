@@ -22,6 +22,10 @@ html, body, #root {
 
 /* third party */
 
+.ms-container > .ms-track-box { /* FIXME: see https://github.com/MinJieLiu/mac-scrollbar/pull/34 */
+    width: 100%;
+}
+
 .react-colorful { /* react-colorful */
     padding: 12px;
     border-radius: 8px;
