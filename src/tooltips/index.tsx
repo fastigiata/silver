@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { TooltipRefProps } from 'react-tooltip'
 import { ControlledTooltip } from '@/tooltips/ControlledTooltip.tsx'
 import { HexAlphaColorPicker, HexColorPicker } from 'react-colorful'
@@ -10,6 +10,11 @@ const ColorPicker = () => {
 
     const Picker = details.config[1] ? HexAlphaColorPicker : HexColorPicker
     const [ color, setColor ] = useState<string>(details.config[0])
+
+    useEffect(() => {
+        // update color when config changed
+        setColor(details.config[0])
+    }, [ details.config ])
 
     return (
         <ControlledTooltip
@@ -25,19 +30,19 @@ const ColorPicker = () => {
                 }
             }}>
             <div className={
-                'p-4 rounded-[16px] shadow-card flex flex-col items-center'
+                'w-[216px] h-64 p-2 rounded-[16px] bg-white shadow-tooltip flex flex-col items-center justify-between'
             }>
                 <Picker color={color} onChange={setColor}/>
 
-                <div>
+                <div className={'w-full flex items-center justify-between'}>
                     <button className={
-                        'as-button h-7 px-2 mr-2 rounded-[4px] border-[1px] border-primary bg-white text-primary'
+                        'as-button w-20 h-7 px-2 mr-2 rounded-[4px] border-[1px] border-primary bg-white text-primary'
                     } onClick={() => close(null)}>
                         Cancel
                     </button>
 
                     <button className={
-                        'as-button h-7 px-2 rounded-[4px] bg-primary-button text-white'
+                        'as-button w-20 h-7 px-2 rounded-[4px] bg-primary-button text-white'
                     } onClick={() => close(color)}>
                         Confirm
                     </button>
