@@ -16,6 +16,7 @@ type PaletteItem = {
     editConfig: EditConfig
 } | { separator: true, title: string }
 
+// TODO: wrap into class with modify method
 const PaletteItemList: PaletteItem[] = [
     { separator: true, title: 'Application' },
     {
@@ -188,6 +189,7 @@ const PaletteItem = ({ name, bind, reset, editConfig }: PaletteItemProps) => {
                 Edit
             </button>
 
+            {/* TODO: disable when eq default */}
             <button className={
                 'as-button h-7 px-2 rounded-[4px] bg-primary-button text-white'
             } onClick={() => setValue(reset)}>
