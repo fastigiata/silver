@@ -34,6 +34,10 @@
     --card-shadow-color: #0000001A;
     /* endregion */
 
+    /* region tooltip */
+    --tooltip-shadow-color: #CCCCCCCC;
+    /* endregion */
+
     /* region air-datepicker */
     /* 背景色 & hover */
     --date-picker-bg: linear-gradient(to bottom, #FFFFFF, #FFEDFF);
