@@ -25,7 +25,7 @@ const ControlledTooltip = forwardRef<TooltipRefProps, ControlledTooltipProps>(({
             isOpen={isOpen}
             setIsOpen={setIsOpen}
             clickable openOnClick
-            style={{ zIndex: 10, padding: 0, backgroundColor: '#FFFFFF', }}
+            style={{ zIndex: 10, padding: 0, backgroundColor: 'transparent', }}
             opacity={1}>
             {children}
         </Tooltip>
