@@ -5,8 +5,6 @@ import { IconCross, IconMin, IconPalette } from '@/components/Icons.tsx'
 import { Tooltips } from '@/tooltips'
 import { AppController } from '@/utils/app_controller.ts'
 
-import Sticker from '@/assets/Sticker.svg'
-
 const RootLayout = () => {
     const navigate = useNavigate()
 
@@ -22,9 +20,10 @@ const RootLayout = () => {
                 'z-20 w-full h-header px-4 bg-header text-header shadow-nav flex items-center'
             } data-tauri-drag-region="">
                 {/* logo */}
-                <Link className={'h-[80%]'} to={'/dashboard'}>
-                    <img className={'h-full'} src={Sticker} alt=""/>
-                </Link>
+                {/* <Link className={'h-[80%]'} to={'/dashboard'}> */}
+                {/*     <img className={'h-full'} src={Sticker} alt=""/> */}
+                {/* </Link> */}
+                <Link className={'text-primary'} to={'/dashboard'}>Home</Link>
 
                 <Spacer/>
 
