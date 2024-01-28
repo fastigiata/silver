@@ -29,6 +29,8 @@ export default <Config>{
         },
         colors: {
             'white': '#FFFFFF',
+            'red': '#F5222D',
+            'green': '#52C41A',
             'header': 'var(--header-text-color)',
             'primary': 'var(--primary-text-color)',
             'secondary': 'var(--secondary-text-color)',
