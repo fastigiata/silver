@@ -3,6 +3,7 @@ import type { TooltipRefProps } from 'react-tooltip'
 import { ControlledTooltip } from '@/tooltips/ControlledTooltip.tsx'
 import { HexAlphaColorPicker, HexColorPicker } from 'react-colorful'
 import { useColorPicker } from '@/tooltips/ColorPicker.tsx'
+import { IconCheck, IconCross } from '@/components/Icons.tsx'
 
 const ColorPicker = () => {
     const ref = useRef<TooltipRefProps>(null)
@@ -34,18 +35,13 @@ const ColorPicker = () => {
             }>
                 <Picker color={color} onChange={setColor}/>
 
-                <div className={'w-full flex items-center justify-between'}>
-                    <button className={
-                        'as-button w-20 h-7 px-2 mr-2 rounded-[4px] border-[1px] border-primary bg-white text-primary'
-                    } onClick={() => close(null)}>
-                        Cancel
-                    </button>
-
-                    <button className={
-                        'as-button w-20 h-7 px-2 rounded-[4px] bg-primary-button text-white'
-                    } onClick={() => close(color)}>
-                        Confirm
-                    </button>
+                <div className={'w-full h-7 flex items-center'}>
+                    <div
+                        className={'w-4 h-4 border-[1px] border-[#0000000F] rounded-[2px]'}
+                        style={{ backgroundColor: color }}/>
+                    <span className={'flex-1 mx-1 text-primary text-[12px]'}>{color}</span>
+                    <IconCross className={'as-button text-green text-[16px]'} onClick={() => close(null)}/>
+                    <IconCheck className={'as-button ml-2 text-red text-[18px]'} onClick={() => close(color)}/>
                 </div>
             </div>
         </ControlledTooltip>
