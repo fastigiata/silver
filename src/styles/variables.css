@@ -1,5 +1,7 @@
 :root {
     /* region app */
+    /* app's border-color */
+    --app-border-color: #E5E5E5;
     /* app's border-radius, 0-16 */
     --app-border-radius: 8px;
     /* endregion */

@@ -5,6 +5,12 @@ export default <Config>{
         './src/**/*.tsx'
     ],
     theme: {
+        borderWidth: {
+            'app': '1px',
+        },
+        borderColor: {
+            'app': 'var(--app-border-color)',
+        },
         borderRadius: {
             'app': 'var(--app-border-radius)',
         },

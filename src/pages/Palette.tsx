@@ -20,6 +20,12 @@ type PaletteItem = {
 const PaletteItemList: PaletteItem[] = [
     { separator: true, title: 'Application' },
     {
+        name: 'Border Color',
+        bind: '--app-border-color',
+        reset: '#E5E5E5',
+        editConfig: { type: 'color', withAlpha: false }
+    },
+    {
         name: 'Corner Radius',
         bind: '--app-border-radius',
         reset: '8px',

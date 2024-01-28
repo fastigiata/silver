@@ -12,7 +12,7 @@ const RootLayout = () => {
 
     return (
         <div className={
-            'w-full h-full rounded-app bg-transparent text-primary overflow-hidden flex flex-col items-center'
+            'w-full h-full rounded-app bg-transparent border-app text-primary overflow-hidden flex flex-col items-center'
         }>
             {/* tooltips */}
             <Tooltips/>
