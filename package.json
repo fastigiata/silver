@@ -8,6 +8,8 @@
         "dev": "vite --host",
         "dev:tauri": "tauri dev",
         "build": "tsc && vite build",
+        "build:web": "tsc && vite build --mode web",
+        "postbuild:web": "powershell -File postbuild.ps1 -outdir ./web_impl",
         "preview": "vite preview"
     },
     "dependencies": {

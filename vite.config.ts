@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react-swc'
 import { resolve } from 'node:path'
 
 // https://vitejs.dev/config/
-export default defineConfig(async () => ({
+export default defineConfig(async ({ mode }) => ({
     plugins: [ react() ],
 
     // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
@@ -19,5 +19,10 @@ export default defineConfig(async () => ({
         alias: {
             '@': resolve(__dirname, 'src')
         }
-    }
+    },
+    base: './',
+    build: {
+        // default to 'dist', but allow overriding via 'mode'
+        outDir: mode === 'web' ? 'web_impl' : 'dist',
+    },
 }))
