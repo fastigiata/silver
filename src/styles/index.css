@@ -28,9 +28,8 @@ html, body, #root {
 }
 
 .react-colorful { /* react-colorful */
-    padding: 12px;
     border-radius: 8px;
-    background: #33333A;
+    background: #FFFFFF;
     /*box-shadow: 0 6px 12px #999;*/
     flex-shrink: 0;
 
