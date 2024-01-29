@@ -22,9 +22,9 @@ const useValuePicker = () => {
     const open = (anchorId: string, config: ValuePickerConfig, closeCallback?: CloseCallback<string | null> | null) => {
         setV({ anchorId, config, closeCallback: closeCallback ?? null })
     }
-    const close = (color: string | null) => {
+    const close = (value: string | null) => {
         setV(prev => ({ ...prev, anchorId: null }))
-        v.closeCallback?.(color)
+        v.closeCallback?.(value)
     }
 
     return {
@@ -35,8 +35,6 @@ const useValuePicker = () => {
     }
 }
 
-
 export {
-    ctx,
     useValuePicker
 }

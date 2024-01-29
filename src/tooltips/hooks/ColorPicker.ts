@@ -35,8 +35,6 @@ const useColorPicker = () => {
     }
 }
 
-
 export {
-    ctx,
     useColorPicker
 }
