@@ -1,3 +1,5 @@
+type CloseCallback<Arg = unknown> = (arg: Arg) => void
+
 import type { ReactNode } from 'react'
 import type { TooltipRefProps } from 'react-tooltip'
 import { Tooltip } from 'react-tooltip'
@@ -31,6 +33,9 @@ const ControlledTooltip = forwardRef<TooltipRefProps, ControlledTooltipProps>(({
     )
 })
 
+export type {
+    CloseCallback
+}
 export {
     ControlledTooltip
 }
