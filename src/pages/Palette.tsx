@@ -1,8 +1,9 @@
 import type { MouseEvent } from 'react'
 import { useState } from 'react'
 import { Spacer } from '@/components/Spacer.tsx'
-import { useColorPicker } from '@/tooltips/ColorPicker.tsx'
+import { useColorPicker } from '@/tooltips/hooks/ColorPicker'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar.tsx'
+import { useValuePicker } from '@/tooltips/hooks/ValuePicker.tsx'
 
 // ========== Data ==========
 
@@ -160,6 +161,7 @@ type PaletteItemProps = {
 
 const PaletteItem = ({ name, bind, reset, editConfig }: PaletteItemProps) => {
     const { open: openColorPicker } = useColorPicker()
+    const { open: openValuePicker } = useValuePicker()
     const [ value, setValue ] = useBindValue(bind)
 
     const handleEdit = (ev: MouseEvent<HTMLButtonElement>) => {
@@ -174,6 +176,14 @@ const PaletteItem = ({ name, bind, reset, editConfig }: PaletteItemProps) => {
                 [ reset, editConfig.withAlpha ],
                 (newColor) => {
                     if (!!newColor) setValue(newColor)
+                }
+            )
+        } else if (editConfig.type === 'length') {
+            openValuePicker(
+                `edit-${bind}`,
+                [ parseInt(reset, 10), editConfig.min, editConfig.max, editConfig.step ],
+                (newValue) => {
+                    if (!!newValue) setValue(newValue)
                 }
             )
         }
