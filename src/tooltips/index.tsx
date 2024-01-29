@@ -81,19 +81,24 @@ const ValuePicker = () => {
                     close(null)
                 }
             }}>
-            <div className={'w-[200px] h-[16px] text-[12px] flex items-center justify-between'}>
-                <span>{min}</span>
+            <div
+                className={'w-[216px] h-8 p-2 rounded-[16px] bg-white shadow-tooltip text-[12px] flex items-center justify-between'}>
+                <span className={'w-4 text-primary text-center'}>{v.mapped}</span>
                 <Interactive
-                    className={'relative flex-1 h-full mx-1 rounded-[4px] bg-[#ccc]'}
-                    onMove={(pos) => setV(pos.left)}>
+                    className={
+                        'relative flex-1 h-full border-[1px] border-[#DDD] rounded-[8px] ' +
+                        'bg-transparent cursor-pointer overflow-hidden'
+                    } onMove={(pos) => setV(pos.left)}>
                     <div className={
-                        'absolute top-0 left-0 h-full rounded-l-[4px] bg-[green] ' +
-                        'leading-[16px] text-center'
+                        'absolute top-0 left-0 h-full bg-[#EEE] leading-[16px] text-center'
                     } style={{ width: `${100 * v.rate}%` }}>
-                        {v.mapped}
+                        {/* {v.mapped} */}
                     </div>
                 </Interactive>
-                <span>{max}</span>
+                <IconCross className={'as-button ml-1 text-green text-[14px]'} onClick={() => close(null)}/>
+                <IconCheck className={
+                    'as-button ml-1 text-red text-[16px]'
+                } onClick={() => close(`${v.mapped}px`)}/>
             </div>
         </ControlledTooltip>
     )
