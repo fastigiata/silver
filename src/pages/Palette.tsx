@@ -1,9 +1,10 @@
 import type { MouseEvent } from 'react'
 import { useState } from 'react'
 import { Spacer } from '@/components/Spacer.tsx'
+import { AwesomeScrollbar } from '@/components/AwesomeScrollbar'
 import { useColorPicker } from '@/tooltips/hooks/ColorPicker'
-import { AwesomeScrollbar } from '@/components/AwesomeScrollbar.tsx'
-import { useValuePicker } from '@/tooltips/hooks/ValuePicker.tsx'
+import { useValuePicker } from '@/tooltips/hooks/ValuePicker'
+import { useEnumPicker } from '@/tooltips/hooks/EnumPicker'
 
 // ========== Data ==========
 
@@ -162,6 +163,7 @@ type PaletteItemProps = {
 const PaletteItem = ({ name, bind, reset, editConfig }: PaletteItemProps) => {
     const { open: openColorPicker } = useColorPicker()
     const { open: openValuePicker } = useValuePicker()
+    const { open: openEnumPicker } = useEnumPicker()
     const [ value, setValue ] = useBindValue(bind)
 
     const handleEdit = (ev: MouseEvent<HTMLButtonElement>) => {
@@ -186,8 +188,15 @@ const PaletteItem = ({ name, bind, reset, editConfig }: PaletteItemProps) => {
                     if (!!newValue) setValue(newValue)
                 }
             )
+        } else if (editConfig.type === 'enum') {
+            openEnumPicker(
+                `edit-${bind}`,
+                [ reset, editConfig.values ],
+                (newValue) => {
+                    if (!!newValue) setValue(newValue)
+                }
+            )
         }
-        // TODO: 其他类型的编辑
     }
 
     return (
