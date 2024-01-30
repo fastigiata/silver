@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { ControlledTooltip } from '@/tooltips/shared.tsx'
 import { HexAlphaColorPicker, HexColorPicker } from 'react-colorful'
@@ -103,6 +104,23 @@ const ValuePicker = () => {
     )
 }
 
+// TODO
+const getVariants = (order: number, baseline: number): CSSProperties => {
+    if (order === baseline) {
+        return {
+            transform: `translateY(${(1 - order) * 100}%) scale(1.4)`
+        }
+    } else if (order - baseline === 1 || order - baseline === -1) {
+        return {
+            transform: `translateY(${(1 - order) * 100}%) scale(1.2)`,
+            opacity: 0.8,
+        }
+    } else {
+        return {
+            transform: `translateY(${(1 - order) * 100}%)`
+        }
+    }
+}
 const _EnumPickerInner = ({ initial, items, onPick, onCancel }: {
     initial: number,
     items: string[],
@@ -112,7 +130,6 @@ const _EnumPickerInner = ({ initial, items, onPick, onCancel }: {
     const ref = useRef<HTMLDivElement>(null)
     const [ pick, _setPick ] = useState(initial)
     const setPick = (offset: number) => {
-        console.log(items.length, 'cccc')
         if (offset > 1) {
             _setPick(v => Math.min(v + 1, items.length - 1))
         } else if (offset < -1) {
@@ -144,10 +161,26 @@ const _EnumPickerInner = ({ initial, items, onPick, onCancel }: {
     }, [])
 
     return (
-        <div ref={ref} className={
-            'w-[216px] h-64 p-2 rounded-[16px] bg-white shadow-tooltip flex flex-col items-center justify-between'
-        }>
-            <p className={'text-primary'}>pick: {pick}</p>
+        <div ref={ref} className={'w-[216px] h-[88px] p-2 rounded-[16px] bg-white shadow-tooltip'}>
+            <div className={'w-full h-full text-primary overflow-hidden '}>
+                {
+                    items.map((item, idx) => {
+                        // const scale
+                        return (
+                            <div
+                                key={idx}
+                                className={'w-full h-6 text-[12px] text-center leading-[24px]'}
+                                style={{
+                                    transition: 'transform .3s linear',
+                                    transform: `translateY(${(1 - pick) * 100}%)`
+                                    // ...getVariants(idx, pick)
+                                }}>
+                                {item}
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }

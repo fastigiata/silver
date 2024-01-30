@@ -1,6 +1,6 @@
 import * as Icons from '@/components/Icons.tsx'
 import { Interactive } from '@/components/Interactive.tsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MacScrollbar } from 'mac-scrollbar'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar.tsx'
 
@@ -9,8 +9,41 @@ const str = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiu
 const MiscPage = () => {
     const [ pos, setPos ] = useState({ left: 0, top: 0 })
 
+    const [ pick, setPick ] = useState(0)
+    useEffect(() => {
+        const cb = (ev: WheelEvent) => {
+            ev.preventDefault()
+
+            if (ev.deltaY > 0) {
+                setPick(v => Math.min(v + 1, 5))
+            } else if (ev.deltaY < 0) {
+                setPick(v => Math.max(v - 1, 0))
+            }
+        }
+
+        window.addEventListener('wheel', cb, { passive: false })
+        return () => window.removeEventListener('wheel', cb)
+    }, [])
+
     return (
         <AwesomeScrollbar className={'w-full h-full p-4'}>
+            <div className={'w-60 h-6 bg-[#CCC]'}>
+                {
+                    [ 0, 1, 2, 3, 4, 5 ].map(v => {
+                        return (
+                            <div key={v}
+                                style={{
+                                    transform: `translateY(-${pick * 100}%)`,
+                                }}>
+                                item {v}
+                            </div>
+                        )
+                    })
+                }
+            </div>
+
+            <div className="h-[200px]"></div>
+
             <p>Click and/or Drag</p>
             <Interactive
                 className={'relative h-24 bg-[#ccc]'}
