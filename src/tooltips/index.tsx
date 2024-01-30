@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
-import type { TooltipRefProps } from 'react-tooltip'
 import { ControlledTooltip } from '@/tooltips/shared.tsx'
 import { HexAlphaColorPicker, HexColorPicker } from 'react-colorful'
 import { useColorPicker } from '@/tooltips/hooks/ColorPicker'
 import { IconCheck, IconCross } from '@/components/Icons.tsx'
-import { useValuePicker } from '@/tooltips/hooks/ValuePicker.tsx'
+import { useValuePicker } from '@/tooltips/hooks/ValuePicker'
 import { Interactive } from '@/components/Interactive.tsx'
+import { logger } from '@/utils/log.ts'
+import { useEnumPicker } from '@/tooltips/hooks/EnumPicker.ts'
 
 const ColorPicker = () => {
-    const ref = useRef<TooltipRefProps>(null)
     const { isOpen, open, close, details } = useColorPicker()
 
     const Picker = details.config[1] ? HexAlphaColorPicker : HexColorPicker
@@ -21,7 +21,7 @@ const ColorPicker = () => {
 
     return (
         <ControlledTooltip
-            id={'color-picker'} ref={ref}
+            id={'color-picker'}
             anchorId={details.anchorId}
             isOpen={isOpen}
             setIsOpen={(to) => {
@@ -51,7 +51,6 @@ const ColorPicker = () => {
 }
 
 const ValuePicker = () => {
-    const ref = useRef<TooltipRefProps>(null)
     const { isOpen, open, close, details } = useValuePicker()
 
     const [ defaultValue, min, max, step = 1 ] = details.config
@@ -71,7 +70,7 @@ const ValuePicker = () => {
 
     return (
         <ControlledTooltip
-            id={'value-picker'} ref={ref}
+            id={'value-picker'}
             anchorId={details.anchorId}
             isOpen={isOpen}
             setIsOpen={(to) => {
@@ -104,6 +103,81 @@ const ValuePicker = () => {
     )
 }
 
+const _EnumPickerInner = ({ initial, items, onPick, onCancel }: {
+    initial: number,
+    items: string[],
+    onPick: (v: string) => void,
+    onCancel: VoidFunction
+}) => {
+    const ref = useRef<HTMLDivElement>(null)
+    const [ pick, _setPick ] = useState(initial)
+    const setPick = (offset: number) => {
+        console.log(items.length, 'cccc')
+        if (offset > 1) {
+            _setPick(v => Math.min(v + 1, items.length - 1))
+        } else if (offset < -1) {
+            _setPick(v => Math.max(v - 1, 0))
+        }
+        // silently ignore 'offset === 0'
+    }
+
+    // TODO: add keyboard interaction
+    useEffect(() => {
+        console.log('[_EnumPickerInner]')
+
+        const container = ref.current
+        if (!container) logger.warn('[EnumPicker] no target container')
+
+        const wheelHandler = (ev: WheelEvent) => {
+            // prevent scroll
+            ev.preventDefault()
+
+            // update pick
+            setPick(ev.deltaY)
+        }
+
+        container?.addEventListener('wheel', wheelHandler, { passive: false })
+
+        return () => {
+            container?.removeEventListener('wheel', wheelHandler)
+        }
+    }, [])
+
+    return (
+        <div ref={ref} className={
+            'w-[216px] h-64 p-2 rounded-[16px] bg-white shadow-tooltip flex flex-col items-center justify-between'
+        }>
+            <p className={'text-primary'}>pick: {pick}</p>
+        </div>
+    )
+}
+const EnumPicker = () => {
+    const { isOpen, open, close, details } = useEnumPicker()
+
+    const [ defaultPick, candidates ] = details.config
+
+    return (
+        <ControlledTooltip
+            id={'color-picker'}
+            anchorId={details.anchorId}
+            isOpen={isOpen}
+            setIsOpen={(to) => {
+                if (to) {
+                    open(details.anchorId!, details.config, details.closeCallback)
+                } else {
+                    close(null)
+                }
+            }}>
+            <_EnumPickerInner
+                initial={candidates.indexOf(defaultPick)}
+                items={candidates}
+                onPick={close}
+                onCancel={() => close(null)}
+            />
+        </ControlledTooltip>
+    )
+}
+
 /**
  * Contains all the tooltips used in the app.
  */
@@ -111,6 +185,7 @@ const Tooltips = () => {
     return <>
         <ColorPicker/>
         <ValuePicker/>
+        <EnumPicker/>
     </>
 }
 
