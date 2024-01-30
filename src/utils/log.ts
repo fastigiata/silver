@@ -10,13 +10,30 @@ import { Env } from './env.ts'
 interface Logger {
     initialize(): Promise<void>
 
+    /**
+     * Verbose logging, for debugging.
+     */
     verbose(s: string): void
 
+    /**
+     * General information.
+     */
     info(s: string): void
 
+    /**
+     * Something unexpected but not necessarily an error.
+     */
     warn(s: string): void
 
+    /**
+     * Something failed but the program can continue.
+     */
     error(s: string): void
+
+    /**
+     * Indicates some error that should not happen.
+     */
+    fatal(s: string): void
 }
 
 class EmbedLogger implements Logger {
@@ -39,6 +56,10 @@ class EmbedLogger implements Logger {
     error(s: string) {
         error(s)
     }
+
+    fatal(s: string) {
+        error(`[FATAL] ${s}`)
+    }
 }
 
 class WebLogger implements Logger {
@@ -60,6 +81,10 @@ class WebLogger implements Logger {
 
     error(s: string) {
         console.error(s)
+    }
+
+    fatal(s: string) {
+        console.error(`[FATAL] ${s}`)
     }
 }
 
