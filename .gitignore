@@ -23,5 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-.yarn
+.yarn/*
+!.yarn/releases
 #__test__
