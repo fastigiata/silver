@@ -43,8 +43,8 @@ const ColorPicker = () => {
                         className={'w-4 h-4 border-[1px] border-[#0000000F] rounded-[2px]'}
                         style={{ backgroundColor: color }}/>
                     <span className={'flex-1 mx-1 text-primary text-[12px]'}>{color}</span>
-                    <IconCross className={'as-button text-green text-[16px]'} onClick={() => close(null)}/>
-                    <IconCheck className={'as-button ml-2 text-red text-[18px]'} onClick={() => close(color)}/>
+                    <IconCross className={'as-button text-green text-[14px]'} onClick={() => close(null)}/>
+                    <IconCheck className={'as-button ml-2 text-red text-[16px]'} onClick={() => close(color)}/>
                 </div>
             </div>
         </ControlledTooltip>
@@ -96,28 +96,25 @@ const ValuePicker = () => {
                     </div>
                 </Interactive>
                 <IconCross className={'as-button ml-1 text-green text-[14px]'} onClick={() => close(null)}/>
-                <IconCheck className={
-                    'as-button ml-1 text-red text-[16px]'
-                } onClick={() => close(`${v.mapped}px`)}/>
+                <IconCheck className={'as-button ml-1 text-red text-[16px]'} onClick={() => close(`${v.mapped}px`)}/>
             </div>
         </ControlledTooltip>
     )
 }
 
-// TODO
-const getVariants = (order: number, baseline: number): CSSProperties => {
-    if (order === baseline) {
+const getVariants = (num: number, pick: number): CSSProperties => {
+    if (num === pick) {
         return {
-            transform: `translateY(${(1 - order) * 100}%) scale(1.4)`
+            transform: `translateY(${(1 - pick) * 100}%) scale(1.4)`
         }
-    } else if (order - baseline === 1 || order - baseline === -1) {
+    } else if (num - pick === 1 || num - pick === -1) {
         return {
-            transform: `translateY(${(1 - order) * 100}%) scale(1.2)`,
+            transform: `translateY(${(1 - pick) * 100}%) scale(1.2)`,
             opacity: 0.8,
         }
     } else {
         return {
-            transform: `translateY(${(1 - order) * 100}%)`
+            transform: `translateY(${(1 - pick) * 100}%)`
         }
     }
 }
@@ -140,8 +137,6 @@ const _EnumPickerInner = ({ initial, items, onPick, onCancel }: {
 
     // TODO: add keyboard interaction
     useEffect(() => {
-        console.log('[_EnumPickerInner]')
-
         const container = ref.current
         if (!container) logger.warn('[EnumPicker] no target container')
 
@@ -161,25 +156,25 @@ const _EnumPickerInner = ({ initial, items, onPick, onCancel }: {
     }, [])
 
     return (
-        <div ref={ref} className={'w-[216px] h-[88px] p-2 rounded-[16px] bg-white shadow-tooltip'}>
-            <div className={'w-full h-full text-primary overflow-hidden '}>
+        <div ref={ref} className={'w-[216px] h-[108px] p-2 rounded-[16px] bg-white shadow-tooltip'}>
+            <div className={'w-full h-[72px] text-primary overflow-hidden '}>
                 {
                     items.map((item, idx) => {
-                        // const scale
                         return (
                             <div
                                 key={idx}
-                                className={'w-full h-6 text-[12px] text-center leading-[24px]'}
-                                style={{
-                                    transition: 'transform .3s linear',
-                                    transform: `translateY(${(1 - pick) * 100}%)`
-                                    // ...getVariants(idx, pick)
-                                }}>
+                                className={'w-full h-6 text-[12px] text-center leading-[24px] cursor-pointer'}
+                                style={{ transition: 'transform .3s linear', ...getVariants(idx, pick) }}
+                                onClick={() => _setPick(idx)}>
                                 {item}
                             </div>
                         )
                     })
                 }
+            </div>
+            <div className={'w-full h-5 flex items-center justify-center'}>
+                <IconCross className={'as-button text-green text-[14px]'} onClick={onCancel}/>
+                <IconCheck className={'as-button ml-3 text-red text-[16px]'} onClick={() => onPick(items[pick])}/>
             </div>
         </div>
     )
