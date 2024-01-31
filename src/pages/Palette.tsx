@@ -201,22 +201,22 @@ const PaletteItem = ({ name, bind, reset, editConfig }: PaletteItemProps) => {
 
     return (
         <div className={'shrink-0 w-full h-10 px-4 rounded-[4px] bg-white shadow-card flex items-center'}>
-            <span className={'w-60 text-secondary'}>{name}</span>
-            <span className={'w-24 text-tertiary'}>{value}</span>
+            <span className={'w-60 text-secondary font-secondary'}>{name}</span>
+            <span className={'w-24 text-tertiary font-tertiary'}>{value}</span>
 
             <Spacer/>
 
             <button
                 id={`edit-${bind}`}
                 className={
-                    'as-button h-7 px-2 mr-2 rounded-[4px] border-[1px] border-primary bg-white text-primary'
+                    'as-button h-7 px-2 mr-2 rounded-[4px] border-[1px] border-primary bg-white text-primary font-primary'
                 } onClick={handleEdit}>
                 Edit
             </button>
 
             {/* TODO: disable when eq default */}
             <button className={
-                'as-button h-7 px-2 rounded-[4px] bg-primary-button text-white'
+                'as-button h-7 px-2 rounded-[4px] bg-primary-button text-primary font-primary text-white'
             } onClick={() => setValue(reset)}>
                 Reset
             </button>

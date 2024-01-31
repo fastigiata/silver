@@ -10,7 +10,7 @@ const RootLayout = () => {
 
     return (
         <div className={
-            'w-full h-full rounded-app bg-transparent border-app text-primary overflow-hidden flex flex-col items-center'
+            'w-full h-full rounded-app bg-transparent border-app overflow-hidden flex flex-col items-center'
         }>
             {/* tooltips */}
             <Tooltips/>
@@ -23,7 +23,7 @@ const RootLayout = () => {
                 {/* <Link className={'h-[80%]'} to={'/dashboard'}> */}
                 {/*     <img className={'h-full'} src={Sticker} alt=""/> */}
                 {/* </Link> */}
-                <Link className={'text-primary'} to={'/dashboard'}>Home</Link>
+                <Link className={''} to={'/dashboard'}>Home</Link>
 
                 <Spacer/>
 

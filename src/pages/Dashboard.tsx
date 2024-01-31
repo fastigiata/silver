@@ -15,9 +15,9 @@ const DashboardPage = () => {
         <div className={''}>
             <p>Since there is no dashboard yet, this is a draft page</p>
             <br/><br/>
-            <h1 className={'text-primary'}>text-primary: DashboardPage</h1>
-            <h1 className={'text-secondary'}>text-secondary: DashboardPage</h1>
-            <h1 className={'text-tertiary'}>text-tertiary: DashboardPage</h1>
+            <h1 className={'text-primary font-primary'}>text-primary: DashboardPage</h1>
+            <h1 className={'text-secondary font-secondary'}>text-secondary: DashboardPage</h1>
+            <h1 className={'text-tertiary font-tertiary'}>text-tertiary: DashboardPage</h1>
 
             <br/><br/>
 
