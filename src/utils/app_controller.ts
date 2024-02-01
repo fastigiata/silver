@@ -2,23 +2,37 @@ import { Env } from '@/utils/env.ts'
 import { exit } from '@tauri-apps/plugin-process'
 import { getCurrent } from '@tauri-apps/api/window'
 
-class AppController {
-    public async hideToTray() {
+interface AppController {
+    hideToTray(): Promise<void>
+
+    close(): Promise<void>
+
+}
+
+class WebController implements AppController {
+    async hideToTray(): Promise<void> {
+        alert('Not Supported on Web')
+    }
+
+    async close(): Promise<void> {
+        alert('Not Supported on Web')
+    }
+
+}
+
+class EmbedController {
+    hideToTray() {
         // TODO: Implement
         console.debug('TODO')
         return getCurrent().minimize()
     }
 
-    public async close() {
-        if (Env.isEmbed) {
-            await exit()
-        } else {
-            window.close()
-        }
+    close() {
+        return exit()
     }
 }
 
-const appController = new AppController()
+const appController = Env.isEmbed ? new EmbedController() : new WebController()
 
 export {
     appController
