@@ -3,7 +3,7 @@ import { logger } from '@/utils/log.ts'
 import { Spacer } from '@/components/Spacer.tsx'
 import { IconCross, IconMin, IconPalette } from '@/components/Icons.tsx'
 import { Tooltips } from '@/tooltips'
-import { AppController } from '@/utils/app_controller.ts'
+import { appController } from '@/utils/app_controller.ts'
 
 const RootLayout = () => {
     const navigate = useNavigate()
@@ -29,8 +29,8 @@ const RootLayout = () => {
 
                 {/* operators */}
                 <IconPalette.Button className={'ml-4 as-button text-[18px]'} onClick={() => navigate('/palette')}/>
-                <IconMin.Button className={'ml-4 as-button text-[18px]'} onClick={AppController.hideToTray}/>
-                <IconCross.Button className={'ml-4 as-button text-[18px]'} onClick={AppController.close}/>
+                <IconMin.Button className={'ml-4 as-button text-[18px]'} onClick={appController.hideToTray}/>
+                <IconCross.Button className={'ml-4 as-button text-[18px]'} onClick={appController.close}/>
             </div>
 
             {/* body */}
