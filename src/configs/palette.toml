@@ -1,0 +1,177 @@
+# Palette config
+#
+# 1. Separator
+# [[config]]
+# separator = true
+# title = "Title Text"
+#
+# 2. Config Item
+# [[config]]
+# name = "Name"
+# bind = "--bind-css-property"
+# reset = "default-value"
+# editConfig.[item] = [config]
+#
+# 2.1 Edit Config -- color
+# editConfig.type = "color"
+# editConfig.withAlpha = true
+#
+# 2.2 Edit Config -- length
+# editConfig.type = "length"
+# editConfig.min = 0
+# editConfig.max = 16
+# editConfig.step = 1 # default 1, optional
+#
+# 2.3 Edit Config -- enum
+# editConfig.type = "enum"
+# editConfig.values = ["value1", "value2", "value3"]
+
+[[config]]
+separator = true
+title = "Application"
+
+[[config]]
+name = "Border Color"
+bind = "--app-border-color"
+reset = "#E5E5E5"
+editConfig.type = "color"
+editConfig.withAlpha = false
+
+[[config]]
+name = "Corner Radius"
+bind = "--app-border-radius"
+reset = "8px"
+editConfig.type = "length"
+editConfig.min = 0
+editConfig.max = 16
+
+[[config]]
+separator = true
+title = "Header"
+
+[[config]]
+name = "Height"
+bind = "--header-height"
+reset = "40px"
+editConfig.type = "length"
+editConfig.min = 32
+editConfig.max = 64
+
+[[config]]
+name = "Background Color"
+bind = "--header-bg"
+reset = "#FFFFFF"
+editConfig.type = "color"
+editConfig.withAlpha = false
+
+[[config]]
+name = "Font Size"
+bind = "--header-font-size"
+reset = "16px"
+editConfig.type = "length"
+editConfig.min = 12
+editConfig.max = 24
+
+[[config]]
+name = "Shadow Color"
+bind = "--header-shadow-color"
+reset = "#0000001A"
+editConfig.type = "color"
+editConfig.withAlpha = true
+
+[[config]]
+name = "Text Color"
+bind = "--header-text-color"
+reset = "#515767"
+editConfig.type = "color"
+editConfig.withAlpha = false
+
+[[config]]
+separator = true
+title = "Body"
+
+[[config]]
+name = "Background Color"
+bind = "--body-bg"
+reset = "#F2F3F5"
+editConfig.type = "color"
+editConfig.withAlpha = false
+
+[[config]]
+separator = true
+title = "Text"
+
+[[config]]
+name = "Color (Primary)"
+bind = "--primary-text-color"
+reset = "#252933"
+editConfig.type = "color"
+editConfig.withAlpha = false
+
+[[config]]
+name = "Color (Secondary)"
+bind = "--secondary-text-color"
+reset = "#515767"
+editConfig.type = "color"
+editConfig.withAlpha = false
+
+[[config]]
+name = "Color (Tertiary)"
+bind = "--tertiary-text-color"
+reset = "#8A919F"
+editConfig.type = "color"
+editConfig.withAlpha = false
+
+[[config]]
+name = "Font Weight (Primary)"
+bind = "--primary-font-weight"
+reset = "700"
+editConfig.type = "enum"
+editConfig.values = ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
+
+[[config]]
+name = "Font Weight (Secondary)"
+bind = "--secondary-font-weight"
+reset = "400"
+editConfig.type = "enum"
+editConfig.values = ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
+
+[[config]]
+name = "Font Weight (Tertiary)"
+bind = "--tertiary-font-weight"
+reset = "300"
+editConfig.type = "enum"
+editConfig.values = ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
+
+[[config]]
+separator = true
+title = "Button"
+
+[[config]]
+name = "Background Color (Primary)"
+bind = "--primary-button-bg"
+reset = "#0F172A"
+editConfig.type = "color"
+editConfig.withAlpha = false
+
+[[config]]
+separator = true
+title = "Card"
+
+[[config]]
+name = "Shadow Color"
+bind = "--card-shadow-color"
+reset = "#0000001A"
+editConfig.type = "color"
+editConfig.withAlpha = true
+
+[[config]]
+separator = true
+title = "Tooltip"
+
+[[config]]
+name = "Shadow Color"
+bind = "--tooltip-shadow-color"
+reset = "#8F959E3D"
+editConfig.type = "color"
+editConfig.withAlpha = true
