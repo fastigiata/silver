@@ -42,7 +42,7 @@ const ColorPicker = () => {
                     <div
                         className={'w-4 h-4 border-[1px] border-[#0000000F] rounded-[2px]'}
                         style={{ backgroundColor: color }}/>
-                    <span className={'flex-1 mx-1 text-primary font-primary text-[12px]'}>{color}</span>
+                    <span className={'flex-1 mx-1 text-secondary font-secondary text-[12px]'}>{color}</span>
                     <IconCross className={'as-button text-green text-[14px]'} onClick={() => close(null)}/>
                     <IconCheck className={'as-button ml-2 text-red text-[16px]'} onClick={() => close(color)}/>
                 </div>
@@ -83,7 +83,7 @@ const ValuePicker = () => {
             }}>
             <div
                 className={'w-[216px] h-8 p-2 rounded-[16px] bg-white shadow-tooltip text-[12px] flex items-center justify-between'}>
-                <span className={'w-4 text-primary font-primary text-center'}>{v.mapped}</span>
+                <span className={'w-4 text-secondary font-secondary text-center'}>{v.mapped}</span>
                 <Interactive
                     className={
                         'relative flex-1 h-full border-[1px] border-[#DDD] rounded-[8px] ' +
@@ -157,7 +157,7 @@ const _EnumPickerInner = ({ initial, items, onPick, onCancel }: {
 
     return (
         <div ref={ref} className={'w-[56px] h-[108px] p-2 rounded-[16px] bg-white shadow-tooltip'}>
-            <div className={'w-full h-[72px] text-primary font-primary overflow-hidden '}>
+            <div className={'w-full h-[72px] text-secondary font-secondary overflow-hidden '}>
                 {
                     items.map((item, idx) => {
                         return (
