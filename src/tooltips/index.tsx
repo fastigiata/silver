@@ -156,7 +156,7 @@ const _EnumPickerInner = ({ initial, items, onPick, onCancel }: {
     }, [])
 
     return (
-        <div ref={ref} className={'w-[216px] h-[108px] p-2 rounded-[16px] bg-white shadow-tooltip'}>
+        <div ref={ref} className={'w-[56px] h-[108px] p-2 rounded-[16px] bg-white shadow-tooltip'}>
             <div className={'w-full h-[72px] text-primary font-primary overflow-hidden '}>
                 {
                     items.map((item, idx) => {
@@ -172,9 +172,9 @@ const _EnumPickerInner = ({ initial, items, onPick, onCancel }: {
                     })
                 }
             </div>
-            <div className={'w-full h-5 flex items-center justify-center'}>
+            <div className={'w-full h-5 flex items-center justify-between'}>
                 <IconCross className={'as-button text-green text-[14px]'} onClick={onCancel}/>
-                <IconCheck className={'as-button ml-3 text-red text-[16px]'} onClick={() => onPick(items[pick])}/>
+                <IconCheck className={'as-button text-red text-[16px]'} onClick={() => onPick(items[pick])}/>
             </div>
         </div>
     )
