@@ -226,7 +226,7 @@ const PaletteItem = ({ name, bind, reset, editConfig }: PaletteItemProps) => {
 
 // ========== Page ==========
 
-const PalettePage = () => {
+const AppearancePage = () => {
     return (
         <AwesomeScrollbar className={
             'w-full h-full px-8 py-4 space-y-4 ' +
@@ -245,4 +245,4 @@ const PalettePage = () => {
     )
 }
 
-export default PalettePage
+export default AppearancePage

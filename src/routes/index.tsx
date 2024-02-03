@@ -4,10 +4,10 @@ import { createHashRouter, redirect } from 'react-router-dom'
 import RootLayout from './layout'
 import ExceptionPage from '@/pages/Exception'
 import DashboardPage from '@/pages/Dashboard'
+import AppearancePage from '@/pages/Appearance'
 import StickerPage from '@/pages/Sticker'
 import MiscPage from '@/pages/Misc'
 
-import PalettePage from '@/pages/Palette'
 
 const routes: RouteObject[] = [
     {
@@ -24,8 +24,8 @@ const routes: RouteObject[] = [
                 element: <DashboardPage/>,
             },
             {
-                path: '/palette',
-                element: <PalettePage/>
+                path: '/appearance',
+                element: <AppearancePage/>
             },
             {
                 path: '/sticker/:stickerId?',
