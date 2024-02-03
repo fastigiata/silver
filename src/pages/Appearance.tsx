@@ -93,7 +93,7 @@ const ConfigItem = ({ name, bind, reset, editConfig }: ConfigItemProps) => {
 
             {/* TODO: disable when eq default */}
             <button className={
-                'as-button h-7 px-2 rounded-[4px] bg-primary-button text-primary font-primary text-white'
+                'as-button h-7 px-2 rounded-[4px] bg-primary-button text-white font-primary'
             } onClick={() => setValue(reset)}>
                 Reset
             </button>
@@ -125,6 +125,14 @@ const AppearancePage = () => {
                     }
                 })
             }
+
+            <div className={'w-full'}>
+                <button className={
+                    'as-button text-red text-[14px] underline underline-offset-2'
+                } onClick={() => appearance.reset()}>
+                    Reset All to Default
+                </button>
+            </div>
         </AwesomeScrollbar>
     )
 }

@@ -24,7 +24,7 @@ export type AppearanceConfigurable = {
     /**
      * current applied value
      */
-    value: string
+    value?: string
     /**
      * edit config for this item
      */
@@ -107,6 +107,11 @@ class Appearance {
 
     reset() {
         this.#config = DefaultConfig
+        this.#config.forEach(item => {
+            if ('bind' in item) {
+                document.documentElement.style.setProperty(item.bind, item.reset)
+            }
+        })
         this.afterChange()
     }
 }
