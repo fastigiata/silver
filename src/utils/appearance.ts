@@ -1,4 +1,5 @@
 import { config as c } from '@/configs/appearence.json'
+import { logger } from '@/utils/log.ts'
 
 const DefaultConfig = c as AppearanceItem[]
 
@@ -38,6 +39,18 @@ class Appearance {
     #config!: AppearanceItem[]
     #listeners = new Set<(config: AppearanceItem[]) => void>()
 
+    get config() {
+        return this.#config
+    }
+
+    /**
+     * sync the appearance config to storage
+     */
+    sync() {
+        localStorage.setItem('@appearance', JSON.stringify(this.#config))
+        logger.info('appearance config synced')
+    }
+
     /**
      * load the appearance config from storage
      */
@@ -46,6 +59,12 @@ class Appearance {
         const raw = localStorage.getItem('@appearance')
         if (raw) {
             this.#config = JSON.parse(raw)
+            this.#config.forEach(item => {
+                if ('bind' in item) {
+                    document.documentElement.style.setProperty(item.bind, item.value || item.reset)
+                }
+            })
+            logger.info('appearance config restored')
         } else {
             this.#config = DefaultConfig
         }
@@ -67,23 +86,28 @@ class Appearance {
         this.#listeners.delete(onChange)
     }
 
-    private notify() {
+    private afterChange() {
+        // notify all subscribers
         this.#listeners.forEach(listener => listener(this.#config))
+
+        // sync the appearance config to storage
+        this.sync()
     }
 
+    // TODO: use map instead forEach
     modify(bind: string, to: string) {
-        // TODO: use map instead forEach
         this.#config.forEach((item => {
             if ('bind' in item && item.bind === bind) {
                 item.value = to
+                document.documentElement.style.setProperty(bind, to)
             }
         }))
-        this.notify()
+        this.afterChange()
     }
 
     reset() {
         this.#config = DefaultConfig
-        this.notify()
+        this.afterChange()
     }
 }
 

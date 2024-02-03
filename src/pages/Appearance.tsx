@@ -1,135 +1,12 @@
 import type { MouseEvent } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Spacer } from '@/components/Spacer.tsx'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar'
 import { useColorPicker } from '@/tooltips/hooks/ColorPicker'
 import { useValuePicker } from '@/tooltips/hooks/ValuePicker'
 import { useEnumPicker } from '@/tooltips/hooks/EnumPicker'
-
-// ========== Data ==========
-
-type EditConfig = { type: 'color', withAlpha: boolean }
-    | { type: 'enum', values: string[] }
-    | { type: 'length', min: number, max: number, step?: number }
-type PaletteItem = {
-    name: string
-    bind: string
-    reset: string
-    editConfig: EditConfig
-} | { separator: true, title: string }
-
-// TODO: wrap into class with modify method
-const PaletteItemList: PaletteItem[] = [
-    { separator: true, title: 'Application' },
-    {
-        name: 'Border Color',
-        bind: '--app-border-color',
-        reset: '#E5E5E5',
-        editConfig: { type: 'color', withAlpha: false }
-    },
-    {
-        name: 'Corner Radius',
-        bind: '--app-border-radius',
-        reset: '8px',
-        editConfig: { type: 'length', min: 0, max: 16 }
-    },
-    { separator: true, title: 'Header' },
-    {
-        name: 'Height',
-        bind: '--header-height',
-        reset: '40px',
-        editConfig: { type: 'length', min: 32, max: 64 }
-    },
-    {
-        name: 'Background Color',
-        bind: '--header-bg',
-        reset: '#FFFFFF',
-        editConfig: { type: 'color', withAlpha: false }
-    },
-    {
-        name: 'Font Size',
-        bind: '--header-font-size',
-        reset: '16px',
-        editConfig: { type: 'length', min: 12, max: 24 }
-    },
-    {
-        name: 'Shadow Color',
-        bind: '--header-shadow-color',
-        reset: '#0000001A',
-        editConfig: { type: 'color', withAlpha: true }
-    },
-    {
-        name: 'Text Color',
-        bind: '--header-text-color',
-        reset: '#515767',
-        editConfig: { type: 'color', withAlpha: false }
-    },
-    { separator: true, title: 'Body' },
-    {
-        name: 'Background Color',
-        bind: '--body-bg',
-        reset: '#F2F3F5',
-        editConfig: { type: 'color', withAlpha: false }
-    },
-    { separator: true, title: 'Text' },
-    {
-        name: 'Color (Primary)',
-        bind: '--primary-text-color',
-        reset: '#252933',
-        editConfig: { type: 'color', withAlpha: false }
-    },
-    {
-        name: 'Color (Secondary)',
-        bind: '--secondary-text-color',
-        reset: '#515767',
-        editConfig: { type: 'color', withAlpha: false }
-    },
-    {
-        name: 'Color (Tertiary)',
-        bind: '--tertiary-text-color',
-        reset: '#8A919F',
-        editConfig: { type: 'color', withAlpha: false }
-    },
-    {
-        name: 'Font Weight (Primary)',
-        bind: '--primary-font-weight',
-        reset: '700',
-        editConfig: { type: 'enum', values: [ '100', '200', '300', '400', '500', '600', '700', '800', '900' ] }
-    },
-    {
-        name: 'Font Weight (Secondary)',
-        bind: '--secondary-font-weight',
-        reset: '400',
-        editConfig: { type: 'enum', values: [ '100', '200', '300', '400', '500', '600', '700', '800', '900' ] }
-    },
-    {
-        name: 'Font Weight (Tertiary)',
-        bind: '--tertiary-font-weight',
-        reset: '300',
-        editConfig: { type: 'enum', values: [ '100', '200', '300', '400', '500', '600', '700', '800', '900' ] }
-    },
-    { separator: true, title: 'Button' },
-    {
-        name: 'Background Color (Primary)',
-        bind: '--primary-button-bg',
-        reset: '#0F172A',
-        editConfig: { type: 'color', withAlpha: false }
-    },
-    { separator: true, title: 'Card' },
-    {
-        name: 'Shadow Color',
-        bind: '--card-shadow-color',
-        reset: '#0000001A',
-        editConfig: { type: 'color', withAlpha: true }
-    },
-    { separator: true, title: 'Tooltip' },
-    {
-        name: 'Shadow Color',
-        bind: '--tooltip-shadow-color',
-        reset: '#8F959E3D',
-        editConfig: { type: 'color', withAlpha: true }
-    },
-]
+import type { EditConfig } from '@/utils/appearance.ts'
+import { appearance } from '@/utils/appearance.ts'
 
 // ========== Helper ==========
 
@@ -139,7 +16,7 @@ const getBindValue = (bind: string) => {
 const useBindValue = (bind: string) => {
     const [ value, _setValue ] = useState<string>(getBindValue(bind))
     const setValue = (value: string) => {
-        document.documentElement.style.setProperty(bind, value)
+        appearance.modify(bind, value)
         _setValue(value)
     }
     return [ value, setValue ] as const
@@ -147,20 +24,20 @@ const useBindValue = (bind: string) => {
 
 // ========== Component ==========
 
-const PaletteTitle = ({ title }: { title: string }) => {
+const ConfigTitle = ({ title }: { title: string }) => {
     return (
         <div className={'text-primary font-primary'}>{title}</div>
     )
 }
 
-type PaletteItemProps = {
+type ConfigItemProps = {
     name: string
     bind: string
     reset: string
     editConfig: EditConfig
 }
 
-const PaletteItem = ({ name, bind, reset, editConfig }: PaletteItemProps) => {
+const ConfigItem = ({ name, bind, reset, editConfig }: ConfigItemProps) => {
     const { open: openColorPicker } = useColorPicker()
     const { open: openValuePicker } = useValuePicker()
     const { open: openEnumPicker } = useEnumPicker()
@@ -227,17 +104,24 @@ const PaletteItem = ({ name, bind, reset, editConfig }: PaletteItemProps) => {
 // ========== Page ==========
 
 const AppearancePage = () => {
+    const [ configItems, setConfigItems ] = useState(appearance.config)
+
+    useEffect(() => {
+        appearance.subscribe(setConfigItems)
+        return () => appearance.unSubscribe(setConfigItems)
+    }, [])
+
     return (
         <AwesomeScrollbar className={
             'w-full h-full px-8 py-4 space-y-4 ' +
             'flex flex-col items-center overflow-y-auto'
         }>
             {
-                PaletteItemList.map((item, index) => {
+                configItems.map((item, index) => {
                     if ('separator' in item) {
-                        return <PaletteTitle key={index} title={item.title}/>
+                        return <ConfigTitle key={index} title={item.title}/>
                     } else {
-                        return <PaletteItem key={index} {...item}/>
+                        return <ConfigItem key={index} {...item}/>
                     }
                 })
             }
