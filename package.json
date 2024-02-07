@@ -4,6 +4,7 @@
     "author": "lopo<lopo@zju.edu.cn>",
     "version": "0.1.0",
     "type": "module",
+    "packageManager": "yarn@3.6.4",
     "scripts": {
         "dev": "vite --host",
         "dev:tauri": "tauri dev",
@@ -22,11 +23,13 @@
         "air-datepicker": "^3.4.0",
         "jotai": "^2.6.2",
         "mac-scrollbar": "^0.13.6",
+        "nanoid": "^5.0.5",
         "react": "^18.2.0",
         "react-colorful": "^5.6.1",
         "react-dom": "^18.2.0",
         "react-router-dom": "^6.21.1",
-        "react-tooltip": "^5.25.2"
+        "react-tooltip": "^5.25.2",
+        "sortablejs": "^1.15.2"
     },
     "devDependencies": {
         "@tauri-apps/cli": "^2.0.0-alpha.17",
@@ -44,6 +47,5 @@
         "tailwindcss": "^3.3.5",
         "typescript": "^5.0.2",
         "vite": "^5.0.12"
-    },
-    "packageManager": "yarn@3.6.4"
+    }
 }
