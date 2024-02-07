@@ -2,11 +2,9 @@ import type { MouseEvent } from 'react'
 import { useEffect, useState } from 'react'
 import { Spacer } from '@/components/Spacer.tsx'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar'
-import { useColorPicker } from '@/tooltips/hooks/ColorPicker'
-import { useValuePicker } from '@/tooltips/hooks/ValuePicker'
-import { useEnumPicker } from '@/tooltips/hooks/EnumPicker'
-import type { EditConfig } from '@/utils/appearance.ts'
+import type { AppearanceConfigurable } from '@/utils/appearance.ts'
 import { appearance } from '@/utils/appearance.ts'
+import { usePicker } from '@/components/Picker/state.ts'
 
 // ========== Helper ==========
 
@@ -30,17 +28,10 @@ const ConfigTitle = ({ title }: { title: string }) => {
     )
 }
 
-type ConfigItemProps = {
-    name: string
-    bind: string
-    reset: string
-    editConfig: EditConfig
-}
-
-const ConfigItem = ({ name, bind, reset, editConfig }: ConfigItemProps) => {
-    const { open: openColorPicker } = useColorPicker()
-    const { open: openValuePicker } = useValuePicker()
-    const { open: openEnumPicker } = useEnumPicker()
+const ConfigItem = ({ name, bind, reset, editConfig }: AppearanceConfigurable) => {
+    const { open: openColorPicker } = usePicker('color')
+    const { open: openValuePicker } = usePicker('value')
+    const { open: openEnumPicker } = usePicker('enum')
     const [ value, setValue ] = useBindValue(bind)
 
     const handleEdit = (ev: MouseEvent<HTMLButtonElement>) => {
@@ -52,7 +43,7 @@ const ConfigItem = ({ name, bind, reset, editConfig }: ConfigItemProps) => {
         if (editConfig.type === 'color') {
             openColorPicker(
                 `edit-${bind}`,
-                [ reset, editConfig.withAlpha ],
+                [ value, editConfig.withAlpha ],
                 (newColor) => {
                     if (!!newColor) setValue(newColor)
                 }
@@ -60,7 +51,7 @@ const ConfigItem = ({ name, bind, reset, editConfig }: ConfigItemProps) => {
         } else if (editConfig.type === 'length') {
             openValuePicker(
                 `edit-${bind}`,
-                [ parseInt(reset, 10), editConfig.min, editConfig.max, editConfig.step ],
+                [ parseInt(value, 10), editConfig.min, editConfig.max, editConfig.step ],
                 (newValue) => {
                     if (!!newValue) setValue(newValue)
                 }
@@ -68,7 +59,7 @@ const ConfigItem = ({ name, bind, reset, editConfig }: ConfigItemProps) => {
         } else if (editConfig.type === 'enum') {
             openEnumPicker(
                 `edit-${bind}`,
-                [ reset, editConfig.values ],
+                [ value, editConfig.values ],
                 (newValue) => {
                     if (!!newValue) setValue(newValue)
                 }

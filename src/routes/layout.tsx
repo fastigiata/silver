@@ -2,8 +2,8 @@ import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { logger } from '@/utils/log.ts'
 import { Spacer } from '@/components/Spacer.tsx'
 import { IconCross, IconMin, IconPalette } from '@/components/Icons.tsx'
-import { Tooltips } from '@/tooltips'
 import { appController } from '@/utils/app_controller.ts'
+import { Picker } from '@/components/Picker/impl.tsx'
 
 const RootLayout = () => {
     const navigate = useNavigate()
@@ -13,7 +13,7 @@ const RootLayout = () => {
             'w-full h-full rounded-app bg-transparent border-app overflow-hidden flex flex-col items-center'
         }>
             {/* tooltips */}
-            <Tooltips/>
+            <Picker/>
 
             {/* header */}
             <div className={
