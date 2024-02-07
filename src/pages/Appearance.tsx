@@ -97,6 +97,11 @@ const ConfigItem = ({ name, bind, reset, editConfig }: AppearanceConfigurable) =
 const AppearancePage = () => {
     const [ configItems, setConfigItems ] = useState(appearance.config)
 
+    const reset = () => {
+        // TODO: ask for confirmation
+        appearance.reset()
+    }
+
     useEffect(() => {
         appearance.subscribe(setConfigItems)
         return () => appearance.unSubscribe(setConfigItems)
@@ -119,9 +124,9 @@ const AppearancePage = () => {
 
             <div className={'w-full'}>
                 <button className={
-                    'as-button text-red text-[14px] underline underline-offset-2'
-                } onClick={() => appearance.reset()}>
-                    Reset All to Default
+                    'as-button text-[#999] text-[14px] underline underline-offset-2'
+                } onClick={reset}>
+                    Use default appearance
                 </button>
             </div>
         </AwesomeScrollbar>
