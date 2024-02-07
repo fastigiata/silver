@@ -2,7 +2,7 @@ import { useRouteError } from 'react-router-dom'
 import { useEffect } from 'react'
 
 /**
- * Shown when a fatal error occurs
+ * shown when a fatal error occurs
  */
 const ExceptionPage = () => {
     const error = useRouteError()
