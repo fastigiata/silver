@@ -1,9 +1,7 @@
 import type { LoaderFunction } from 'react-router-dom'
 
 /**
- * Generally speaking,
- * this page should only be displayed when embedded and should not be seen on the web page.
- * When embedded, it occupies the entire window to simulate a sticky note.
+ * details of the sticker, display/manage a single sticker
  */
 const StickerPage = () => {
     return (
@@ -14,9 +12,10 @@ const StickerPage = () => {
 }
 
 /**
- * Loads the sticker from the storage
+ * get details of the sticker from the storage, return `null` if not found.
  */
 const stickerLoader: LoaderFunction = () => {
+    // TODO: get details of the sticker from the storage
     return null
 }
 
