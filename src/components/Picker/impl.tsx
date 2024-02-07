@@ -49,6 +49,11 @@ const _ColorPickerImpl = ({ details, confirm, cancel }: PickerProps<ColorPickerC
     const [ color, setColor ] = useState(details[0])
     const _ColorPicker = details[1] ? HexAlphaColorPicker : HexColorPicker
 
+    // 当某一Picker打开时点击另一个编辑按钮打开相同类型的Picker, 会导致 details 更新但 color 未更新
+    useEffect(() => {
+        setColor(details[0])
+    }, [ details ])
+
     return (
         <div className={
             'w-[216px] h-64 p-2 rounded-[16px] bg-white shadow-tooltip flex flex-col items-center justify-between'
@@ -75,6 +80,12 @@ const _ValuePickerImpl = ({ details, confirm, cancel }: PickerProps<ValuePickerC
         const mapped = Math.round(to * range / step) * step + min
         _setV({ rate: (mapped - min) / range, mapped })
     }
+
+    // 当某一Picker打开时点击另一个编辑按钮打开相同类型的Picker, 会导致 details 更新但 v 未更新
+    useEffect(() => {
+        const [ defaultValue, min, max ] = details
+        _setV({ rate: (defaultValue - min) / (max - min), mapped: defaultValue })
+    }, [ details ])
 
     return (
         <div
@@ -142,6 +153,12 @@ const _EnumPickerImpl = ({ details, confirm, cancel }: PickerProps<EnumPickerCon
             container?.removeEventListener('wheel', wheelHandler)
         }
     }, [])
+
+    // 当某一Picker打开时点击另一个编辑按钮打开相同类型的Picker, 会导致 details 更新但 color 未更新
+    useEffect(() => {
+        const [ defaultPick, candidates ] = details
+        _setPick(candidates.indexOf(defaultPick))
+    }, [ details ])
 
     return (
         <div ref={ref} className={'w-[56px] h-[108px] p-2 rounded-[16px] bg-white shadow-tooltip'}>
