@@ -837,6 +837,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/sortablejs@npm:^1.15.7":
+  version: 1.15.7
+  resolution: "@types/sortablejs@npm:1.15.7"
+  checksum: a62805c789f9ee258582f6f5c53c83a811a1927fe4dbe1639415f2139562b31e4ad6e2228c917708cd9a7e98c9577dc9590cd30e32ec083a9784f03652b6ad70
+  languageName: node
+  linkType: hard
+
 "@typescript-eslint/eslint-plugin@npm:^6.13.1":
   version: 6.13.1
   resolution: "@typescript-eslint/eslint-plugin@npm:6.13.1"
@@ -3105,6 +3112,7 @@ __metadata:
     "@types/node": ^20.10.2
     "@types/react": ^18.2.15
     "@types/react-dom": ^18.2.7
+    "@types/sortablejs": ^1.15.7
     "@typescript-eslint/eslint-plugin": ^6.13.1
     "@typescript-eslint/parser": ^6.13.1
     "@vitejs/plugin-react-swc": ^3.5.0
