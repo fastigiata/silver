@@ -85,7 +85,7 @@ const ConfigItem = ({ name, bind, reset, editConfig }: AppearanceConfigurable) =
             {/* TODO: disable when eq default */}
             <button className={
                 'as-button h-7 px-2 rounded-[4px] bg-primary-button text-white font-primary'
-            } onClick={() => setValue(reset)}>
+            } onClick={() => setValue(reset)} disabled={value === reset}>
                 Reset
             </button>
         </div>
