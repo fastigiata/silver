@@ -116,8 +116,8 @@ class Appearance {
     }
 }
 
-const appearance = new Appearance()
+const appearanceController = new Appearance()
 
 export {
-    appearance
+    appearanceController
 }

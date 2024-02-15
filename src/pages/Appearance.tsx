@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Spacer } from '@/components/Spacer.tsx'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar'
 import type { AppearanceConfigurable } from '@/utils/appearance.ts'
-import { appearance } from '@/utils/appearance.ts'
+import { appearanceController } from '@/utils/appearance.ts'
 import { usePicker } from '@/components/Picker/state.ts'
 
 // ========== Helper ==========
@@ -14,7 +14,7 @@ const getBindValue = (bind: string) => {
 const useBindValue = (bind: string) => {
     const [ value, _setValue ] = useState<string>(getBindValue(bind))
     const setValue = (value: string) => {
-        appearance.modify(bind, value)
+        appearanceController.modify(bind, value)
         _setValue(value)
     }
     return [ value, setValue ] as const
@@ -95,16 +95,16 @@ const ConfigItem = ({ name, bind, reset, editConfig }: AppearanceConfigurable) =
 // ========== Page ==========
 
 const AppearancePage = () => {
-    const [ configItems, setConfigItems ] = useState(appearance.config)
+    const [ configItems, setConfigItems ] = useState(appearanceController.config)
 
     const reset = () => {
         // TODO: ask for confirmation
-        appearance.reset()
+        appearanceController.reset()
     }
 
     useEffect(() => {
-        appearance.subscribe(setConfigItems)
-        return () => appearance.unSubscribe(setConfigItems)
+        appearanceController.subscribe(setConfigItems)
+        return () => appearanceController.unSubscribe(setConfigItems)
     }, [])
 
     return (
