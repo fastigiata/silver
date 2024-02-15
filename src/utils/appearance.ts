@@ -1,4 +1,4 @@
-import { config as c } from '@/configs/appearence.json'
+import { config as c } from '@/_configs/appearence.json'
 import { logImpl } from '@/platform_impl/log.ts'
 
 const DefaultConfig = c as AppearanceItem[]
