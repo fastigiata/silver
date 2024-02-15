@@ -5,6 +5,10 @@ import type { RecordMeta } from '@/_types/shared.ts'
  */
 interface ISticker extends RecordMeta {
     /**
+     * id of the collection that the sticker belongs to
+     */
+    cid: string
+    /**
      * title of the sticker
      */
     title: string
