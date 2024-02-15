@@ -7,7 +7,7 @@ import { useAtom } from 'jotai'
 import type { TooltipRefProps } from 'react-tooltip'
 import { Tooltip } from 'react-tooltip'
 import { Interactive } from '@/components/Interactive.tsx'
-import { logger } from '@/utils/log.ts'
+import { logImpl } from '@/platform_impl/log.ts'
 
 type ControlledTooltipProps = {
     id: string
@@ -137,7 +137,7 @@ const _EnumPickerImpl = ({ details, confirm, cancel }: PickerProps<EnumPickerCon
 
     useEffect(() => {
         const container = ref.current
-        if (!container) logger.warn('[EnumPicker] no target container')
+        if (!container) logImpl.warn('[EnumPicker] no target container')
 
         const wheelHandler = (ev: WheelEvent) => {
             // prevent scroll

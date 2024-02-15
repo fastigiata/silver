@@ -1,5 +1,5 @@
 import { config as c } from '@/configs/appearence.json'
-import { logger } from '@/utils/log.ts'
+import { logImpl } from '@/platform_impl/log.ts'
 
 const DefaultConfig = c as AppearanceItem[]
 
@@ -48,7 +48,7 @@ class Appearance {
      */
     sync() {
         localStorage.setItem('@appearance', JSON.stringify(this.#config))
-        logger.info('appearance config synced')
+        logImpl.info('appearance config synced')
     }
 
     /**
@@ -64,7 +64,7 @@ class Appearance {
                     document.documentElement.style.setProperty(item.bind, item.value || item.reset)
                 }
             })
-            logger.info('appearance config restored')
+            logImpl.info('appearance config restored')
         } else {
             this.#config = DefaultConfig
         }

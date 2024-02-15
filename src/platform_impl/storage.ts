@@ -1,12 +1,12 @@
 import { Store } from '@tauri-apps/plugin-store'
-import { Env } from './env.ts'
+import { isEmbed } from '@/utils/env.ts'
 
 /**
  * Marks a value as serializable.
  */
 type Serializable = unknown
 
-interface Box {
+interface StorageBox {
     clear(): Promise<void>
 
     contains(key: string): Promise<boolean>
@@ -20,7 +20,7 @@ interface Box {
     set(key: string, value: Serializable): Promise<void>
 }
 
-class WebBox implements Box {
+class WebBox implements StorageBox {
     async clear(): Promise<void> {
         window.localStorage.clear()
     }
@@ -47,7 +47,7 @@ class WebBox implements Box {
     }
 }
 
-class EmbedBox implements Box {
+class EmbedBox implements StorageBox {
     #store: Store
 
     constructor() {
@@ -79,8 +79,8 @@ class EmbedBox implements Box {
     }
 }
 
-const storage = Env.isEmbed ? new EmbedBox() : new WebBox()
+const storageImpl: StorageBox = isEmbed ? new EmbedBox() : new WebBox()
 
 export {
-    storage
+    storageImpl
 }

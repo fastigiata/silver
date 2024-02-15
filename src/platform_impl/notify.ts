@@ -1,4 +1,4 @@
-import { Env } from '@/utils/env.ts'
+import { isEmbed } from '@/utils/env.ts'
 import { isPermissionGranted, requestPermission, sendNotification } from '@tauri-apps/plugin-notification'
 
 interface Notifier {
@@ -32,8 +32,8 @@ class WebNotifier implements Notifier {
     }
 }
 
-const notifier = Env.isEmbed ? new EmbedNotifier() : new WebNotifier()
+const notifyImpl: Notifier = isEmbed ? new EmbedNotifier() : new WebNotifier()
 
 export {
-    notifier
+    notifyImpl
 }

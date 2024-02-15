@@ -1,6 +1,6 @@
 import { DateTimePicker } from '@/components/DateTimePicker.tsx'
 import { useEffect } from 'react'
-import { notifier } from '@/utils/notify.ts'
+import { notifyImpl } from '@/platform_impl/notify.ts'
 import { Link } from 'react-router-dom'
 
 /**
@@ -26,12 +26,12 @@ const DashboardPage = () => {
             <br/><br/>
 
             <button onClick={() => {
-                notifier.notify('xxx')
+                notifyImpl.notify('xxx')
             }}>notify 1
             </button>
             <br/>
             <button onClick={() => {
-                notifier.notify('标题5个字', '已过期')
+                notifyImpl.notify('标题5个字', '已过期')
             }}>notify 2
             </button>
 

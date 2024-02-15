@@ -1,8 +1,8 @@
 import { Link, Outlet, useNavigate } from 'react-router-dom'
-import { logger } from '@/utils/log.ts'
+import { logImpl } from '@/platform_impl/log.ts'
 import { Spacer } from '@/components/Spacer.tsx'
 import { IconCross, IconMin, IconPalette } from '@/components/Icons.tsx'
-import { appController } from '@/utils/app_controller.ts'
+import { manageImpl } from '@/platform_impl/manage.ts'
 import { Picker } from '@/components/Picker/impl.tsx'
 
 const RootLayout = () => {
@@ -29,8 +29,8 @@ const RootLayout = () => {
 
                 {/* operators */}
                 <IconPalette.Button className={'ml-4 as-button text-[18px]'} onClick={() => navigate('/appearance')}/>
-                <IconMin.Button className={'ml-4 as-button text-[18px]'} onClick={appController.hideToTray}/>
-                <IconCross.Button className={'ml-4 as-button text-[18px]'} onClick={appController.close}/>
+                <IconMin.Button className={'ml-4 as-button text-[18px]'} onClick={manageImpl.hideToTray}/>
+                <IconCross.Button className={'ml-4 as-button text-[18px]'} onClick={manageImpl.close}/>
             </div>
 
             {/* body */}
@@ -51,7 +51,7 @@ RootLayout.loader = async () => {
     if (initialized) return null
 
     // Initialize all plugins here
-    await logger.initialize()
+    await logImpl.initialize()
 
     // FIXME: simulate a long boot time, remove this later
     console.log('bootLoader start')
