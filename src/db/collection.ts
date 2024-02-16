@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid'
 import { dbImpl } from '@/db/base.ts'
+import type { ICollection } from '@/_types/collection.ts'
 
 abstract class CollectionDB {
     /**
@@ -21,6 +22,20 @@ abstract class CollectionDB {
     }
 
     /**
+     * remove the collection with the given id
+     */
+    static remove(id: string): Promise<void> {
+        return dbImpl.collections.delete(id)
+    }
+
+    /**
+     * list all collections in the database
+     */
+    static list(): Promise<ICollection[]> {
+        return dbImpl.collections.toArray()
+    }
+
+    /**
      * update the collection with the given id
      */
     static async update(id: string, name?: string | null, desc?: string | null): Promise<boolean> {
@@ -35,13 +50,6 @@ abstract class CollectionDB {
 
         const _re = await dbImpl.collections.update(id, _tobe)
         return _re === 1
-    }
-
-    /**
-     * remove the collection with the given id
-     */
-    static async remove(id: string): Promise<void> {
-        await dbImpl.collections.delete(id)
     }
 }
 

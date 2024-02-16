@@ -68,6 +68,11 @@ const MiscPage = () => {
                 await CollectionDB.remove('kfk82clL8BdPi-z_waWGd')
             }}>删除
             </button>
+            <button className={'as-button'} onClick={async () => {
+                const collections = await CollectionDB.list()
+                console.log(collections)
+            }}>查询
+            </button>
 
             <div className={'w-full h-[1px] my-8 bg-primary-button'}/>
             <p>Sortable</p>
