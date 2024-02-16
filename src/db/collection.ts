@@ -2,6 +2,11 @@ import { nanoid } from 'nanoid'
 import { dbImpl } from '@/db/base.ts'
 import type { ICollection } from '@/_types/collection.ts'
 
+type CollectionPatch = {
+    name?: string | null
+    desc?: string | null
+}
+
 abstract class CollectionDB {
     /**
      * create a new collection, return the id of the new collection
@@ -38,17 +43,13 @@ abstract class CollectionDB {
     /**
      * update the collection with the given id
      */
-    static async update(id: string, name?: string | null, desc?: string | null): Promise<boolean> {
-        // filter out null or undefined (which represent no change)
-        // use '!=' instead of '!==' to allow both null and undefined to pass
-
-        const _tobe: { name?: string, desc?: string, mtime: number } = { mtime: Date.now() }
+    static async update(id: string, tobe: CollectionPatch): Promise<boolean> {
         // eslint-disable-next-line eqeqeq
-        if (name != null) _tobe.name = name
+        if (tobe.name == null) delete tobe.name
         // eslint-disable-next-line eqeqeq
-        if (desc != null) _tobe.desc = desc
+        if (tobe.desc == null) delete tobe.desc
 
-        const _re = await dbImpl.collections.update(id, _tobe)
+        const _re = await dbImpl.collections.update(id, { ...tobe, mtime: Date.now() })
         return _re === 1
     }
 }

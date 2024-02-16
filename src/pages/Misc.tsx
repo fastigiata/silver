@@ -7,6 +7,7 @@ import type { ICollection } from '@/_types/collection.ts'
 import { Dexie } from 'dexie'
 import { dbImpl } from '@/db/base.ts'
 import { CollectionDB } from '@/db/collection.ts'
+import { StickerDB } from '@/db/sticker.ts'
 
 const mockCollection: ICollection[] = [
     {
@@ -53,14 +54,17 @@ const MiscPage = () => {
     return (
         <AwesomeScrollbar className={'w-full h-full p-4'}>
             <div className={'w-full h-[1px] my-8 bg-primary-button'}/>
-            <p>数据库</p>
+            <p>collection</p>
             <button className={'as-button'} onClick={async () => {
                 const cid = await CollectionDB.add('test', 'test collection')
                 console.log(cid)
             }}>新建
             </button>
             <button className={'as-button'} onClick={async () => {
-                const re = await CollectionDB.update('kfk82clL8BdPi-z_waWGd', null, undefined)
+                const re = await CollectionDB.update('FGK0Fw9VwX4uEhA6SCYhz', {
+                    name: 'test2',
+                    desc: 'test collection2'
+                })
                 console.log(re)
             }}>更新
             </button>
@@ -71,6 +75,29 @@ const MiscPage = () => {
             <button className={'as-button'} onClick={async () => {
                 const collections = await CollectionDB.list()
                 console.log(collections)
+            }}>查询
+            </button>
+
+            <p>sticker</p>
+            <button className={'as-button'} onClick={async () => {
+                // const sid = await StickerDB.add('FGK0Fw9VwX4uEhA6SCYhz', 'test', 'test sticker')
+                const sid = await StickerDB.add('wZDfdXAXMyd3cZoHvaoxM', 'test', 'test sticker')
+                console.log('sid', sid)
+            }}>新建
+            </button>
+            <button className={'as-button'} onClick={async () => {
+                StickerDB.update('PH0SRvkcLWoamMcOxXgwM', {
+                    cid: 'FGK0Fw9VwX4uEhA6SCYhz'
+                })
+            }}>更新
+            </button>
+            <button className={'as-button'} onClick={async () => {
+                await StickerDB.remove('NrpDt7zt5fsJ26UesVR93')
+            }}>删除
+            </button>
+            <button className={'as-button'} onClick={async () => {
+                const stickers = await StickerDB.list('FGK0Fw9VwX4uEhA6SCYhz')
+                console.log(stickers)
             }}>查询
             </button>
 
