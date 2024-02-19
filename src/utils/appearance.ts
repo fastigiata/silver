@@ -2,6 +2,7 @@ import { config as c } from '@/_configs/appearence.json'
 import { logImpl } from '@/platform_impl/log.ts'
 
 const DefaultConfig = c as AppearanceItem[]
+const getDefaultConfig = () => [ ...DefaultConfig ]
 
 export type EditConfig = { type: 'color', withAlpha: boolean }
     | { type: 'enum', values: string[] }
@@ -48,7 +49,7 @@ class Appearance {
      */
     sync() {
         localStorage.setItem('@appearance', JSON.stringify(this.#config))
-        logImpl.info('appearance config synced')
+        logImpl.info('appearance config synced to storage')
     }
 
     /**
@@ -66,7 +67,7 @@ class Appearance {
             })
             logImpl.info('appearance config restored')
         } else {
-            this.#config = DefaultConfig
+            this.#config = getDefaultConfig()
         }
     }
 
@@ -87,26 +88,31 @@ class Appearance {
     }
 
     private afterChange() {
-        // notify all subscribers
-        this.#listeners.forEach(listener => listener(this.#config))
-
         // sync the appearance config to storage
         this.sync()
+
+        // notify all subscribers
+        this.#listeners.forEach(listener => listener(this.#config))
     }
 
-    // TODO: use map instead forEach
+    /**
+     * modify the specified appearance config,
+     * sync to storage and notify all subscribers
+     */
     modify(bind: string, to: string) {
-        this.#config.forEach((item => {
+        this.#config = this.#config.map((item => {
             if ('bind' in item && item.bind === bind) {
                 item.value = to
                 document.documentElement.style.setProperty(bind, to)
             }
+
+            return item
         }))
         this.afterChange()
     }
 
     reset() {
-        this.#config = DefaultConfig
+        this.#config = getDefaultConfig()
         this.#config.forEach(item => {
             if ('bind' in item) {
                 document.documentElement.style.setProperty(item.bind, item.reset)
