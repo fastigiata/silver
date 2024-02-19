@@ -23,9 +23,7 @@ const useBindValue = (bind: string) => {
 // ========== Component ==========
 
 const ConfigTitle = ({ title }: { title: string }) => {
-    return (
-        <div className={'text-primary font-primary'}>{title}</div>
-    )
+    return <div className={'text-primary font-primary'}>{title}</div>
 }
 
 const ConfigItem = ({ name, bind, reset, editConfig }: AppearanceConfigurable) => {
@@ -82,7 +80,6 @@ const ConfigItem = ({ name, bind, reset, editConfig }: AppearanceConfigurable) =
                 Edit
             </button>
 
-            {/* TODO: disable when eq default */}
             <button className={
                 'as-button h-7 px-2 rounded-[4px] bg-primary-button text-white font-primary'
             } onClick={() => setValue(reset)} disabled={value === reset}>
@@ -98,7 +95,8 @@ const AppearancePage = () => {
     const [ configItems, setConfigItems ] = useState(appearanceController.config)
 
     const reset = () => {
-        // TODO: ask for confirmation
+        // TODO: ask for confirmation before reset
+
         appearanceController.reset()
     }
 
@@ -115,9 +113,11 @@ const AppearancePage = () => {
             {
                 configItems.map((item, index) => {
                     if ('separator' in item) {
-                        return <ConfigTitle key={index} title={item.title}/>
+                        // these should never rebuild since 'title' is constant
+                        return <ConfigTitle key={`${item.title}_${index}`} title={item.title}/>
                     } else {
-                        return <ConfigItem key={index} {...item}/>
+                        // these should rebuild when 'value' changes
+                        return <ConfigItem key={`${item.bind}_${item.value}`} {...item}/>
                     }
                 })
             }
