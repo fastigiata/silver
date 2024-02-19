@@ -8,6 +8,7 @@
             "name": "Border Color",
             "bind": "--app-border-color",
             "reset": "#E5E5E5",
+            "value": "#E5E5E5",
             "editConfig": {
                 "type": "color",
                 "withAlpha": false
@@ -17,6 +18,7 @@
             "name": "Corner Radius",
             "bind": "--app-border-radius",
             "reset": "8px",
+            "value": "8px",
             "editConfig": {
                 "type": "length",
                 "min": 0,
@@ -31,6 +33,7 @@
             "name": "Height",
             "bind": "--header-height",
             "reset": "40px",
+            "value": "40px",
             "editConfig": {
                 "type": "length",
                 "min": 32,
@@ -41,6 +44,7 @@
             "name": "Background Color",
             "bind": "--header-bg",
             "reset": "#FFFFFF",
+            "value": "#FFFFFF",
             "editConfig": {
                 "type": "color",
                 "withAlpha": false
@@ -50,6 +54,7 @@
             "name": "Font Size",
             "bind": "--header-font-size",
             "reset": "16px",
+            "value": "16px",
             "editConfig": {
                 "type": "length",
                 "min": 12,
@@ -60,6 +65,7 @@
             "name": "Shadow Color",
             "bind": "--header-shadow-color",
             "reset": "#0000001A",
+            "value": "#0000001A",
             "editConfig": {
                 "type": "color",
                 "withAlpha": true
@@ -69,6 +75,7 @@
             "name": "Text Color",
             "bind": "--header-text-color",
             "reset": "#515767",
+            "value": "#515767",
             "editConfig": {
                 "type": "color",
                 "withAlpha": false
@@ -82,6 +89,7 @@
             "name": "Background Color",
             "bind": "--body-bg",
             "reset": "#F2F3F5",
+            "value": "#F2F3F5",
             "editConfig": {
                 "type": "color",
                 "withAlpha": false
@@ -95,6 +103,7 @@
             "name": "Color (Primary)",
             "bind": "--primary-text-color",
             "reset": "#252933",
+            "value": "#252933",
             "editConfig": {
                 "type": "color",
                 "withAlpha": false
@@ -104,6 +113,7 @@
             "name": "Color (Secondary)",
             "bind": "--secondary-text-color",
             "reset": "#515767",
+            "value": "#515767",
             "editConfig": {
                 "type": "color",
                 "withAlpha": false
@@ -113,6 +123,7 @@
             "name": "Color (Tertiary)",
             "bind": "--tertiary-text-color",
             "reset": "#8A919F",
+            "value": "#8A919F",
             "editConfig": {
                 "type": "color",
                 "withAlpha": false
@@ -122,6 +133,7 @@
             "name": "Font Weight (Primary)",
             "bind": "--primary-font-weight",
             "reset": "700",
+            "value": "700",
             "editConfig": {
                 "type": "enum",
                 "values": [
@@ -141,6 +153,7 @@
             "name": "Font Weight (Secondary)",
             "bind": "--secondary-font-weight",
             "reset": "400",
+            "value": "400",
             "editConfig": {
                 "type": "enum",
                 "values": [
@@ -160,6 +173,7 @@
             "name": "Font Weight (Tertiary)",
             "bind": "--tertiary-font-weight",
             "reset": "300",
+            "value": "300",
             "editConfig": {
                 "type": "enum",
                 "values": [
@@ -183,6 +197,7 @@
             "name": "Background Color (Primary)",
             "bind": "--primary-button-bg",
             "reset": "#0F172A",
+            "value": "#0F172A",
             "editConfig": {
                 "type": "color",
                 "withAlpha": false
@@ -196,6 +211,7 @@
             "name": "Shadow Color",
             "bind": "--card-shadow-color",
             "reset": "#0000001A",
+            "value": "#0000001A",
             "editConfig": {
                 "type": "color",
                 "withAlpha": true
@@ -209,6 +225,7 @@
             "name": "Shadow Color",
             "bind": "--tooltip-shadow-color",
             "reset": "#8F959E3D",
+            "value": "#8F959E3D",
             "editConfig": {
                 "type": "color",
                 "withAlpha": true
