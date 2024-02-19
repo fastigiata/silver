@@ -23,9 +23,9 @@ export type AppearanceConfigurable = {
      */
     reset: string
     /**
-     * current applied value
+     * current applied value, default to {@link reset}
      */
-    value?: string
+    value: string
     /**
      * edit config for this item
      */
