@@ -1,11 +1,8 @@
 import * as Icons from '@/components/Icons.tsx'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar.tsx'
-import { useEffect, useRef } from 'react'
-import Sortable from 'sortablejs'
+import { useRef } from 'react'
 import { CollectionCard } from '@/components/Card/CollectionCard.tsx'
 import type { ICollection } from '@/_types/collection.ts'
-import { Dexie } from 'dexie'
-import { dbImpl } from '@/db/base.ts'
 import { CollectionDB } from '@/db/collection.ts'
 import { StickerDB } from '@/db/sticker.ts'
 
