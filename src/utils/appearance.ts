@@ -2,7 +2,11 @@ import { config as c } from '@/_configs/appearence.json'
 import { logImpl } from '@/platform_impl/log.ts'
 
 const DefaultConfig = c as AppearanceItem[]
-const getDefaultConfig = () => [ ...DefaultConfig ]
+
+/**
+ * get a copy of the default appearance config
+ */
+const getDefaultConfig = () => DefaultConfig.map(item => ({ ...item }))
 
 export type EditConfig = { type: 'color', withAlpha: boolean }
     | { type: 'enum', values: string[] }
