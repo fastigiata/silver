@@ -126,7 +126,7 @@ const AppearancePage = () => {
                 <button className={
                     'as-button text-[#999] text-[14px] underline underline-offset-2'
                 } onClick={reset}>
-                    Use default appearance
+                    Reset to Default
                 </button>
             </div>
         </AwesomeScrollbar>
