@@ -32,14 +32,14 @@ abstract class StickerDB {
     /**
      * remove the sticker with the given id
      */
-    static remove(id: string): Promise<void> {
+    static async remove(id: string): Promise<void> {
         return dbImpl.stickers.delete(id)
     }
 
     /**
      * list all stickers in the collection with the given id
      */
-    static list(cid: string): Promise<ISticker[]> {
+    static async list(cid: string): Promise<ISticker[]> {
         return dbImpl.stickers.where('cid').equals(cid).toArray()
     }
 

@@ -29,14 +29,14 @@ abstract class CollectionDB {
     /**
      * remove the collection with the given id
      */
-    static remove(id: string): Promise<void> {
+    static async remove(id: string): Promise<void> {
         return dbImpl.collections.delete(id)
     }
 
     /**
      * list all collections in the database
      */
-    static list(): Promise<ICollection[]> {
+    static async list(): Promise<ICollection[]> {
         return dbImpl.collections.toArray()
     }
 
