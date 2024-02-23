@@ -1,11 +1,11 @@
 import type { ICollection } from '@/_types/collection.ts'
 
-const CollectionCard = ({ id, ctime, mtime, name, desc }: ICollection) => {
+const CollectionCard = ({ id, ctime, mtime, name, desc, className = '' }: ICollection & { className?: string }) => {
     return (
         <div
             data-id={id}
             className={
-                'w-full h-20 px-4 rounded-[4px] bg-white ' +
+                `${className} w-full h-20 px-4 rounded-[4px] bg-white ` +
                 'shadow-card hover:shadow-card_hover select-none ' +
                 'flex flex-col items-start justify-center'
             }>
