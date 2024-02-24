@@ -2,6 +2,7 @@ import 'air-datepicker/air-datepicker.css'
 import 'mac-scrollbar/dist/mac-scrollbar.css'
 
 import './styles/variables.css'
+import './styles/fonts.css'
 import './styles/index.css'
 
 import { createRoot } from 'react-dom/client'

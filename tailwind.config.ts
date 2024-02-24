@@ -36,7 +36,6 @@ export default <Config>{
             'secondary': 'var(--secondary-text-color)',
             'tertiary': 'var(--tertiary-text-color)',
         },
-        fontFamily: {},
         fontSize: {
             'header': 'var(--header-font-size)',
         },
@@ -53,6 +52,9 @@ export default <Config>{
                 'header': 'var(--header-height)',
                 'body': 'calc(100% - var(--header-height))',
             },
+            fontFamily: {
+                'JBMono': 'JetBrains Mono'
+            }
         },
     },
     plugins: [],
