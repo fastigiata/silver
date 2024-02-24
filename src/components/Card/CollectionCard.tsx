@@ -15,7 +15,7 @@ const CollectionCard = ({ id, ctime, mtime, name, desc, className = '' }: IColle
                 {name}
             </div>
             <div className={
-                'w-full text-secondary text-[14px] font-secondary leading-[20px] overflow-hidden overflow-ellipsis'
+                'w-full text-secondary text-[16px] font-secondary leading-[20px] overflow-hidden line-clamp-1'
             }>
                 {desc}
             </div>
