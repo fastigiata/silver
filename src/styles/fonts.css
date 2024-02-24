@@ -45,3 +45,12 @@
     font-weight: 800;
     src: url("/fonts/JetBrainsMono-ExtraBold.ttf") format("truetype");
 }
+
+@font-face {
+    font-family: 'ShouShu';
+    src: url('/fonts/ShouShu.woff2') format('woff2'),
+    url('/fonts/ShouShu.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
