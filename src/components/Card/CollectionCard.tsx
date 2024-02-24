@@ -19,7 +19,7 @@ const CollectionCard = ({ id, ctime, mtime, name, desc, className = '' }: IColle
             }>
                 {desc}
             </div>
-            <div className={'w-full text-tertiary text-[10px] font-tertiary leading-[16px] space-x-2'}>
+            <div className={'w-full text-tertiary text-[10px] font-tertiary font-JBMono leading-[16px] space-x-2'}>
                 <span>Created: {new Date(ctime).toLocaleString()}</span>
                 <span>Modified: {new Date(mtime).toLocaleString()}</span>
             </div>
