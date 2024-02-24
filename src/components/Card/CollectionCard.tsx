@@ -5,7 +5,8 @@ const CollectionCard = ({ id, ctime, mtime, name, desc, className = '' }: IColle
         <div
             data-id={id}
             className={
-                `${className} w-full h-20 px-4 rounded-[4px] bg-white ` +
+                `${className} ` +
+                'group relative w-full h-20 px-4 rounded-[4px] bg-white ' +
                 'shadow-card hover:shadow-card_hover select-none ' +
                 'flex flex-col items-start justify-center'
             }>
@@ -22,6 +23,10 @@ const CollectionCard = ({ id, ctime, mtime, name, desc, className = '' }: IColle
             <div className={'w-full text-tertiary text-[10px] font-tertiary font-JBMono leading-[16px] space-x-2'}>
                 <span>Created: {new Date(ctime).toLocaleString()}</span>
                 <span>Modified: {new Date(mtime).toLocaleString()}</span>
+            </div>
+
+            <div className={'absolute z-1 right-4 hidden group-hover:flex items-center'}>
+                TODO: actions
             </div>
         </div>
     )
