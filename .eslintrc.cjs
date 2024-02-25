@@ -86,7 +86,10 @@ module.exports = {
         ],
         "indent": [
             "warn",
-            4
+            4,
+            {
+                "SwitchCase": 1
+            }
         ],
         "no-var": "error",
         "no-unused-expressions": "error",
