@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import type { ActionFunctionArgs } from 'react-router-dom'
-import { Await, defer, useAsyncValue, useFetcher, useLoaderData } from 'react-router-dom'
+import { Await, useAsyncValue, useFetcher, useLoaderData } from 'react-router-dom'
 import { Loading } from '@/components/Loading.tsx'
 import { CollectionDB } from '@/db/collection.ts'
 import type { ICollection } from '@/_types/collection.ts'
@@ -46,7 +46,11 @@ const DashboardPage = () => {
     const handleCreate = () => {
         // TODO: create new collection with name and desc
         fetcher.submit(
-            { op: 'add', name: 'new create item', desc: 'xxx xxx xxx' } satisfies ActionConfig,
+            {
+                op: 'add',
+                name: 'New Collection',
+                desc: 'new template collection with default name and desc'
+            } satisfies ActionConfig,
             { method: 'POST', encType: 'application/json' }
         )
     }
@@ -70,10 +74,9 @@ const DashboardPage = () => {
 }
 
 DashboardPage.loader = async () => {
-    return defer({
-        // collection: new Promise(resolve => setTimeout(() => resolve(CollectionDB.list()), 2000))
+    return {
         collection: CollectionDB.list()
-    } satisfies LoaderData)
+    } satisfies LoaderData
 }
 
 DashboardPage.action = async ({ request }: ActionFunctionArgs) => {
