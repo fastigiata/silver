@@ -106,7 +106,7 @@ const MiscPage = () => {
             }>
                 {
                     mockCollection
-                        .map((config, i) => <CollectionCard key={i} {...config}/>)
+                        .map((config, i) => <CollectionCard key={i} collection={config}/>)
                 }
             </div>
 

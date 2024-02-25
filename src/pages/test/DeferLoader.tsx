@@ -1,4 +1,4 @@
-import { Await, defer, useFetcher, useLoaderData, useRevalidator } from 'react-router-dom'
+import { Await, useFetcher, useLoaderData, useRevalidator } from 'react-router-dom'
 import { Suspense, useEffect } from 'react'
 
 const DeferLoader = () => {
