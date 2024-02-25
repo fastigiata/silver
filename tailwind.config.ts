@@ -11,9 +11,6 @@ export default <Config>{
         borderColor: {
             'app': 'var(--app-border-color)',
         },
-        borderRadius: {
-            'app': 'var(--app-border-radius)',
-        },
         backgroundColor: {
             'transparent': 'transparent',
             'white': '#FFFFFF',
@@ -51,6 +48,9 @@ export default <Config>{
             height: {
                 'header': 'var(--header-height)',
                 'body': 'calc(100% - var(--header-height))',
+            },
+            borderRadius: {
+                'app': 'var(--app-border-radius)',
             },
             fontFamily: {
                 'JBMono': 'JetBrains Mono'
