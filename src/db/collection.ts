@@ -37,6 +37,7 @@ abstract class CollectionDB {
      * list all collections in the database
      */
     static async list(): Promise<ICollection[]> {
+        // FIXME: 返回值默认按照主键(id)的字典序排序, 但需要按照创建时间(ctime)的倒序排序
         return dbImpl.collections.toArray()
     }
 
