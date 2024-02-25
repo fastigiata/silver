@@ -58,9 +58,10 @@ const MiscPage = () => {
             }}>新建
             </button>
             <button className={'as-button'} onClick={async () => {
-                const re = await CollectionDB.update('FGK0Fw9VwX4uEhA6SCYhz', {
+                const re = await CollectionDB.update('1Kgmnc0LmBc-E79bjhlZK', {
                     name: 'test2',
-                    desc: 'test collection2'
+                    desc: '这些都是古秦语传到南方之后演化的（ln不分，平翘和带有口音的懒音）。\n' +
+                        '日龙包：也弄攴（古汉语读卜声）。也（说文解字为女阴的象形字。）也声母由/s/又浊化为/z/,就变成日了，弄（做，搞。“昨晚弄到四更天”《红楼梦》原句。弄小：取妾），攴（“从手，卜声，形声字，义为小击，轻敲）。也弄攴：男对女的x行为敷衍了事，只用手。延伸为胡搞、糊弄事儿、老把事搞砸的人。'
                 })
                 console.log(re)
             }}>更新

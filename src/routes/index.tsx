@@ -22,6 +22,7 @@ const routes: RouteObject[] = [
             {
                 path: '/dashboard',
                 loader: DashboardPage.loader,
+                action: DashboardPage.action,
                 element: <DashboardPage/>,
             },
             {

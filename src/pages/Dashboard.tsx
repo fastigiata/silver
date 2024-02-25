@@ -1,20 +1,38 @@
 import { Suspense } from 'react'
-import { Await, defer, useAsyncValue, useLoaderData } from 'react-router-dom'
+import type { ActionFunctionArgs } from 'react-router-dom'
+import { Await, defer, useAsyncValue, useFetcher, useLoaderData } from 'react-router-dom'
 import { Loading } from '@/components/Loading.tsx'
 import { CollectionDB } from '@/db/collection.ts'
 import type { ICollection } from '@/_types/collection.ts'
 import { CollectionCard } from '@/components/Card/CollectionCard.tsx'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar.tsx'
+import { logImpl } from '@/platform_impl/log.ts'
 
-type Loader = {
+type LoaderData = {
     collection: Promise<ICollection[]>
 }
 
+type ActionConfig = {
+    op: 'add',
+    name: string,
+    desc?: string
+} | { op: 'remove', id: string }
+
 const CollectionList = () => {
     const collections = useAsyncValue() as ICollection[]
+    const fetcher = useFetcher()
 
     return collections.map(collection => {
-        return <CollectionCard key={collection.id} className={'my-4'} {...collection}/>
+        return <CollectionCard
+            key={collection.id}
+            className={'my-4'}
+            collection={collection}
+            onDelete={() => {
+                fetcher.submit(
+                    { op: 'remove', id: collection.id } satisfies ActionConfig,
+                    { method: 'POST', encType: 'application/json' }
+                )
+            }}/>
     })
 }
 
@@ -22,11 +40,15 @@ const CollectionList = () => {
  * dashboard to manage all stickers
  */
 const DashboardPage = () => {
-    const loader = useLoaderData() as Loader
+    const loader = useLoaderData() as LoaderData
+    const fetcher = useFetcher()
 
     const handleCreate = () => {
-        // TODO: create new collection
-        console.log('TODO')
+        // TODO: create new collection with name and desc
+        fetcher.submit(
+            { op: 'add', name: 'new create item', desc: 'xxx xxx xxx' } satisfies ActionConfig,
+            { method: 'POST', encType: 'application/json' }
+        )
     }
 
     return (
@@ -48,7 +70,28 @@ const DashboardPage = () => {
 }
 
 DashboardPage.loader = async () => {
-    return defer({ collection: CollectionDB.list() } satisfies Loader)
+    return defer({
+        // collection: new Promise(resolve => setTimeout(() => resolve(CollectionDB.list()), 2000))
+        collection: CollectionDB.list()
+    } satisfies LoaderData)
+}
+
+DashboardPage.action = async ({ request }: ActionFunctionArgs) => {
+    const config: ActionConfig = await request.json()
+
+    switch (config.op) {
+        case 'add':
+            await CollectionDB.add(config.name, config.desc)
+            break
+        case 'remove':
+            await CollectionDB.remove(config.id)
+            break
+        default:
+            logImpl.fatal(`DashboardPage.action invalid action: ${JSON.stringify(config)}`)
+            break
+    }
+
+    return null
 }
 
 export default DashboardPage
