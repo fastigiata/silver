@@ -40,7 +40,9 @@ abstract class StickerDB {
      * list all stickers in the collection with the given id
      */
     static async list(cid: string): Promise<ISticker[]> {
-        return dbImpl.stickers.where('cid').equals(cid).toArray()
+        return dbImpl.stickers
+            .where('cid').equals(cid)
+            .toArray(arr => arr.sort((a, b) => b.mtime - a.mtime))
     }
 
     /**
