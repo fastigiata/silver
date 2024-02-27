@@ -1,13 +1,22 @@
 import type { RouteObject } from 'react-router-dom'
 import { createHashRouter, redirect } from 'react-router-dom'
 
-import RootLayout from './layout'
+import RootLayout from '@/pages/_layouts/Root.tsx'
 import ExceptionPage from '@/pages/Exception'
+import CollectionSpecLayout from '@/pages/_layouts/CollectionSpec.tsx'
+import CollectionCreate from '@/pages/collection/Create.tsx'
+import CollectionModify from '@/pages/collection/Modify.tsx'
+import CollectionView from '@/pages/collection/View.tsx'
+import StickerSpecLayout from '@/pages/_layouts/StickerSpec.tsx'
+import StickerCreate from '@/pages/sticker/Create.tsx'
+import StickerView from '@/pages/sticker/View.tsx'
+import StickerModify from '@/pages/sticker/Modify.tsx'
+import AppearancePage from '@/pages/Appearance'
+import MiscPage from '@/pages/Misc'
+
 import DashboardPage from '@/pages/Dashboard'
 import CollectionPage from '@/pages/Collection'
 import StickerPage from '@/pages/Sticker.tsx'
-import AppearancePage from '@/pages/Appearance'
-import MiscPage from '@/pages/Misc'
 
 const routes: RouteObject[] = [
     {
@@ -17,24 +26,67 @@ const routes: RouteObject[] = [
         children: [
             {
                 path: '/',
-                loader: () => redirect('/dashboard'),
+                loader: () => redirect('/lists'),
             },
             {
-                path: '/dashboard',
-                loader: DashboardPage.loader,
-                action: DashboardPage.action,
-                element: <DashboardPage/>,
+                path: '/collection/create',
+                element: <CollectionCreate/>
             },
             {
-                path: '/collection/:collectionId?',
-                loader: CollectionPage.loader,
-                element: <CollectionPage/>,
+                path: '/collection/:collectionId',
+                element: <CollectionSpecLayout/>,
+                children: [
+                    {
+                        path: 'view',
+                        element: <CollectionView/>
+                    },
+                    {
+                        path: 'modify',
+                        element: <CollectionModify/>
+                    },
+                ],
             },
             {
-                path: '/sticker/:stickerId?',
-                loader: StickerPage.loader,
-                element: <StickerPage/>
+                path: '/sticker/create',
+                element: <StickerCreate/>
             },
+            {
+                path: '/sticker/:stickerId',
+                element: <StickerSpecLayout/>,
+                children: [
+                    {
+                        path: 'view',
+                        element: <StickerView/>
+                    },
+                    {
+                        path: 'modify',
+                        element: <StickerModify/>
+                    },
+                ]
+            },
+
+
+            // TODO: refactor below
+            // {
+            //     path: '/',
+            //     loader: () => redirect('/dashboard'),
+            // },
+            // {
+            //     path: '/dashboard',
+            //     loader: DashboardPage.loader,
+            //     action: DashboardPage.action,
+            //     element: <DashboardPage/>,
+            // },
+            // {
+            //     path: '/collection/:collectionId?',
+            //     loader: CollectionPage.loader,
+            //     element: <CollectionPage/>,
+            // },
+            // {
+            //     path: '/sticker/:stickerId?',
+            //     loader: StickerPage.loader,
+            //     element: <StickerPage/>
+            // },
             {
                 path: '/appearance',
                 element: <AppearancePage/>
