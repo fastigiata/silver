@@ -1,11 +1,12 @@
 ## About Routes
 
-| route                   | desc                     |  |
-|-------------------------|--------------------------|--|
-| `/lists`                | `list` 列表                |  |
-| `/list/create`          | 新建 `list`                |  |
-| `/list/{listId}/view`   | 查看 `list` (包含 `item` 列表) |  |
-| `/list/{listId}/modify` | 编辑 `list`                |  |
-| `/item/create`          | 新建 `item`                |  |
-| `/item/{item}/view`     | 查看 `item`                |  |
-| `/item/{item}/modify`   | 编辑 `item`                |  |
+| route                               | desc                              | 
+|-------------------------------------|-----------------------------------|
+| `/`                                 | redirect to `/collections`        |
+| `/collections`                      | `collection` 列表                   |
+| `/collection/create`                | 新建 `collection`                   |
+| `/collection/{collectionId}/view`   | 查看 `collection` (包含 `sticker` 列表) |
+| `/collection/{collectionId}/modify` | 编辑 `collection`                   |
+| `/sticker/create`                   | 新建 `sticker`                      |
+| `/sticker/{stickerId}/view`         | 查看 `sticker`                      |
+| `/sticker/{stickerId}/modify`       | 编辑 `sticker`                      |
