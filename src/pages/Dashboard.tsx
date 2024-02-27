@@ -1,7 +1,7 @@
-import { Suspense } from 'react'
 import type { ActionFunctionArgs } from 'react-router-dom'
-import { Await, useAsyncValue, useFetcher, useLoaderData } from 'react-router-dom'
-import { Loading } from '@/components/Loading.tsx'
+import { useNavigate } from 'react-router-dom'
+import { useAsyncValue, useFetcher, useLoaderData } from 'react-router-dom'
+import { DeferView } from '@/components/Loading.tsx'
 import { CollectionDB } from '@/db/collection.ts'
 import type { ICollection } from '@/_types/collection.ts'
 import { CollectionCard } from '@/components/Card/CollectionCard.tsx'
@@ -21,12 +21,14 @@ type ActionConfig = {
 const CollectionList = () => {
     const collections = useAsyncValue() as ICollection[]
     const fetcher = useFetcher()
+    const navigate = useNavigate()
 
     return collections.map(collection => {
         return <CollectionCard
             key={collection.id}
             className={'my-4'}
             collection={collection}
+            onSetting={() => navigate(`/collection/${collection.id}`)}
             onDelete={() => {
                 fetcher.submit(
                     { op: 'remove', id: collection.id } satisfies ActionConfig,
@@ -57,26 +59,24 @@ const DashboardPage = () => {
 
     return (
         <AwesomeScrollbar className={'w-full h-full p-4 overflow-y-auto'}>
-            <Suspense fallback={<Loading/>}>
-                <div className={'w-full h-6 flex items-center'}>
-                    <button className={
-                        'as-button text-secondary text-[14px] font-secondary underline underline-offset-4'
-                    } onClick={handleCreate}>
-                        New Collection
-                    </button>
-                </div>
-                <Await resolve={loader.collection}>
-                    <CollectionList/>
-                </Await>
-            </Suspense>
+            <DeferView
+                source={loader.collection}
+                builder={<CollectionList/>}
+                slotBefore={
+                    <div className={'w-full h-6 flex items-center'}>
+                        <button className={
+                            'as-button text-secondary text-[14px] font-secondary underline underline-offset-4'
+                        } onClick={handleCreate}>
+                            New Collection
+                        </button>
+                    </div>
+                }/>
         </AwesomeScrollbar>
     )
 }
 
 DashboardPage.loader = async () => {
-    return {
-        collection: CollectionDB.list()
-    } satisfies LoaderData
+    return { collection: CollectionDB.list() } satisfies LoaderData
 }
 
 DashboardPage.action = async ({ request }: ActionFunctionArgs) => {
