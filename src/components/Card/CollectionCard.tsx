@@ -1,5 +1,6 @@
 import type { ICollection } from '@/_types/collection.ts'
 import type { ExtendedIcon } from '@/components/Icons.tsx'
+import { IconSetting } from '@/components/Icons.tsx'
 import { IconDelete } from '@/components/Icons.tsx'
 
 const ActionButton = ({ className = '', Icon, onClick }: {
@@ -19,9 +20,10 @@ const ActionButton = ({ className = '', Icon, onClick }: {
     )
 }
 
-const CollectionCard = ({ collection, className = '', onDelete }: {
+const CollectionCard = ({ collection, className = '', onSetting, onDelete }: {
     collection: ICollection,
     className?: string,
+    onSetting?: VoidFunction
     onDelete?: VoidFunction
 }) => {
     const { id, name, desc, ctime, mtime } = collection
@@ -50,6 +52,7 @@ const CollectionCard = ({ collection, className = '', onDelete }: {
             </div>
 
             <div className={'absolute z-1 right-4 hidden group-hover:flex items-center space-x-2'}>
+                <ActionButton className={'text-primary'} Icon={IconSetting} onClick={onSetting}/>
                 <ActionButton className={'text-red'} Icon={IconDelete} onClick={onDelete}/>
             </div>
         </div>
