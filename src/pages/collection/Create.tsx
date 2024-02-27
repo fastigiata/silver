@@ -1,4 +1,4 @@
-const CollectionCreate = () => {
+const CollectionCreatePage = () => {
     return (
         <div>
             <h1>Collection Create</h1>
@@ -6,4 +6,4 @@ const CollectionCreate = () => {
     )
 }
 
-export default CollectionCreate
+export default CollectionCreatePage

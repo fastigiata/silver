@@ -1,4 +1,4 @@
-const StickerView = () => {
+const StickerViewPage = () => {
     return (
         <div>
             <h1>Sticker View</h1>
@@ -6,4 +6,4 @@ const StickerView = () => {
     )
 }
 
-export default StickerView
+export default StickerViewPage

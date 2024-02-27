@@ -1,29 +1,13 @@
 import type { ICollection } from '@/_types/collection.ts'
-import type { ExtendedIcon } from '@/components/Icons.tsx'
 import { IconSetting } from '@/components/Icons.tsx'
 import { IconDelete } from '@/components/Icons.tsx'
+import { ActionButton } from '@/components/Button.tsx'
 
-const ActionButton = ({ className = '', Icon, onClick }: {
-    className?: string,
-    Icon: ExtendedIcon,
-    onClick?: VoidFunction
-}) => {
-    return (
-        <div className={
-            `${className} ` +
-            'as-button w-8 h-8 rounded-full bg-white ' +
-            'shadow-card hover:shadow-card_hover ' +
-            'text-[18px] flex items-center justify-center'
-        } onClick={onClick}>
-            <Icon/>
-        </div>
-    )
-}
-
-const CollectionCard = ({ collection, className = '', onSetting, onDelete }: {
+const CollectionCard = ({ collection, className = '', onClick, onConfig, onDelete }: {
     collection: ICollection,
     className?: string,
-    onSetting?: VoidFunction
+    onClick?: VoidFunction
+    onConfig?: VoidFunction
     onDelete?: VoidFunction
 }) => {
     const { id, name, desc, ctime, mtime } = collection
@@ -35,7 +19,8 @@ const CollectionCard = ({ collection, className = '', onSetting, onDelete }: {
                 'group relative w-full h-20 px-4 rounded-[4px] bg-white ' +
                 'shadow-card hover:shadow-card_hover select-none ' +
                 'flex flex-col items-start justify-center'
-            }>
+            }
+            onClick={onClick}>
             <div className={
                 'w-full text-primary text-[18px] font-primary leading-[24px] overflow-hidden overflow-ellipsis'
             }>
@@ -52,7 +37,7 @@ const CollectionCard = ({ collection, className = '', onSetting, onDelete }: {
             </div>
 
             <div className={'absolute z-1 right-4 hidden group-hover:flex items-center space-x-2'}>
-                <ActionButton className={'text-primary'} Icon={IconSetting} onClick={onSetting}/>
+                <ActionButton className={'text-primary'} Icon={IconSetting} onClick={onConfig}/>
                 <ActionButton className={'text-red'} Icon={IconDelete} onClick={onDelete}/>
             </div>
         </div>

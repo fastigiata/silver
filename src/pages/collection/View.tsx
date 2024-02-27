@@ -1,4 +1,4 @@
-const CollectionView = () => {
+const CollectionViewPage = () => {
     return (
         <div>
             <h1>Collection View</h1>
@@ -6,4 +6,4 @@ const CollectionView = () => {
     )
 }
 
-export default CollectionView
+export default CollectionViewPage

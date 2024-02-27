@@ -6,33 +6,31 @@ import { CollectionDB } from '@/db/collection.ts'
 import type { ICollection } from '@/_types/collection.ts'
 import { CollectionCard } from '@/components/Card/CollectionCard.tsx'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar.tsx'
-import { logImpl } from '@/platform_impl/log.ts'
 
-type LoaderData = {
+type DashboardLoaderData = {
     collection: Promise<ICollection[]>
 }
 
-type ActionConfig = {
-    op: 'add',
-    name: string,
-    desc?: string
-} | { op: 'remove', id: string }
+type DashboardActionConfig = {
+    id: string
+}
 
 const CollectionList = () => {
     const collections = useAsyncValue() as ICollection[]
-    const fetcher = useFetcher()
     const navigate = useNavigate()
+    const fetcher = useFetcher()
 
     return collections.map(collection => {
         return <CollectionCard
             key={collection.id}
             className={'my-4'}
             collection={collection}
-            onSetting={() => navigate(`/collection/${collection.id}`)}
+            onClick={() => navigate(`/collection/${collection.id}/view`)}
+            onConfig={() => navigate(`/collection/${collection.id}/modify`)}
             onDelete={() => {
                 fetcher.submit(
-                    { op: 'remove', id: collection.id } satisfies ActionConfig,
-                    { method: 'POST', encType: 'application/json' }
+                    { id: collection.id } satisfies DashboardActionConfig,
+                    { method: 'DELETE', encType: 'application/json' }
                 )
             }}/>
     })
@@ -42,20 +40,8 @@ const CollectionList = () => {
  * dashboard to manage all stickers
  */
 const DashboardPage = () => {
-    const loader = useLoaderData() as LoaderData
-    const fetcher = useFetcher()
-
-    const handleCreate = () => {
-        // TODO: create new collection with name and desc
-        fetcher.submit(
-            {
-                op: 'add',
-                name: 'New Collection',
-                desc: 'new template collection with default name and desc'
-            } satisfies ActionConfig,
-            { method: 'POST', encType: 'application/json' }
-        )
-    }
+    const loader = useLoaderData() as DashboardLoaderData
+    const navigate = useNavigate()
 
     return (
         <AwesomeScrollbar className={'w-full h-full p-4 overflow-y-auto'}>
@@ -66,7 +52,7 @@ const DashboardPage = () => {
                     <div className={'w-full h-6 flex items-center'}>
                         <button className={
                             'as-button text-secondary text-[14px] font-secondary underline underline-offset-4'
-                        } onClick={handleCreate}>
+                        } onClick={() => navigate('/collection/create')}>
                             New Collection
                         </button>
                     </div>
@@ -76,23 +62,15 @@ const DashboardPage = () => {
 }
 
 DashboardPage.loader = async () => {
-    return { collection: CollectionDB.list() } satisfies LoaderData
+    return { collection: CollectionDB.list() } satisfies DashboardLoaderData
 }
 
 DashboardPage.action = async ({ request }: ActionFunctionArgs) => {
-    const config: ActionConfig = await request.json()
+    // currently only support DELETE, that is, remove collection by id
+    if (request.method !== 'DELETE') return null
 
-    switch (config.op) {
-        case 'add':
-            await CollectionDB.add(config.name, config.desc)
-            break
-        case 'remove':
-            await CollectionDB.remove(config.id)
-            break
-        default:
-            logImpl.fatal(`DashboardPage.action invalid action: ${JSON.stringify(config)}`)
-            break
-    }
+    const config: DashboardActionConfig = await request.json()
+    await CollectionDB.remove(config.id)
 
     return null
 }

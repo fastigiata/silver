@@ -1,4 +1,4 @@
-const CollectionModify = () => {
+const CollectionModifyPage = () => {
     return (
         <div>
             <h1>Collection Modify</h1>
@@ -6,4 +6,4 @@ const CollectionModify = () => {
     )
 }
 
-export default CollectionModify
+export default CollectionModifyPage

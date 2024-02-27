@@ -1,9 +1,9 @@
 import { Outlet, useLoaderData } from 'react-router-dom'
 
-const StickerSpecLayout = () => {
+const CollectionLayout = () => {
     const loader = useLoaderData()
 
     return <Outlet context={loader}/>
 }
 
-export default StickerSpecLayout
+export default CollectionLayout

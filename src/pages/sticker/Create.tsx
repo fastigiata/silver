@@ -1,4 +1,4 @@
-const StickerCreate = () => {
+const StickerCreatePage = () => {
     return (
         <div>
             <h1>Sticker Create</h1>
@@ -6,4 +6,4 @@ const StickerCreate = () => {
     )
 }
 
-export default StickerCreate
+export default StickerCreatePage
