@@ -8,7 +8,6 @@ import CollectionPage from '@/pages/Collection'
 import StickerPage from '@/pages/Sticker.tsx'
 import AppearancePage from '@/pages/Appearance'
 import MiscPage from '@/pages/Misc'
-import { DeferLoader } from '@/pages/test/DeferLoader.tsx'
 
 const routes: RouteObject[] = [
     {
@@ -44,12 +43,6 @@ const routes: RouteObject[] = [
                 path: '/misc',
                 element: <MiscPage/>
             },
-            {
-                path: '/test/defer-loader',
-                loader: DeferLoader.loader,
-                action: DeferLoader.action,
-                element: <DeferLoader/>
-            }
         ]
     }
 ]
