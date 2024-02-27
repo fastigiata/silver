@@ -33,6 +33,7 @@ const routes: RouteObject[] = [
             },
             {
                 path: '/collection/create',
+                action: CollectionCreatePage.action,
                 element: <CollectionCreatePage/>
             },
             {
