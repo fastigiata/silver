@@ -28,9 +28,17 @@ abstract class CollectionDB {
 
     /**
      * remove the collection with the given id
+     * @return {number} the number of stickers removed
      */
-    static async remove(id: string): Promise<void> {
-        return dbImpl.collections.delete(id)
+    static async remove(id: string): Promise<number> {
+        return dbImpl.transaction(
+            'rw',
+            [ dbImpl.stickers, dbImpl.collections ],
+            async () => {
+                await dbImpl.collections.delete(id)
+                return dbImpl.stickers.where('cid').equals(id).delete()
+            }
+        )
     }
 
     /**
@@ -43,6 +51,7 @@ abstract class CollectionDB {
 
     /**
      * update the collection with the given id
+     * @return {boolean} true if the collection is updated, false otherwise
      */
     static async update(id: string, tobe: CollectionPatch): Promise<boolean> {
         // eslint-disable-next-line eqeqeq
@@ -52,6 +61,21 @@ abstract class CollectionDB {
 
         const _re = await dbImpl.collections.update(id, { ...tobe, mtime: Date.now() })
         return _re === 1
+    }
+
+    /**
+     * get the collection with the given id
+     */
+    static async get(id: string): Promise<ICollection | null> {
+        const collection = await dbImpl.collections.get(id)
+        return collection ?? null
+    }
+
+    /**
+     * count the number of stickers in the collection
+     */
+    static async count(id: string): Promise<number> {
+        return dbImpl.stickers.where('cid').equals(id).count()
     }
 }
 
