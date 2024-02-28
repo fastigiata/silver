@@ -21,6 +21,36 @@ const ActionButton = ({ className = '', Icon, onClick }: {
     )
 }
 
+const PrimaryButton = ({ className = '', text, onClick }: {
+    className?: string,
+    text: string,
+    onClick: VoidFunction
+}) => {
+    return (
+        <button className={
+            `${className} as-button h-full rounded-[4px] bg-primary-button text-white text-[14px]`
+        } onClick={onClick}>
+            {text}
+        </button>
+    )
+}
+
+const SecondaryButton = ({ className = '', text, onClick }: {
+    className?: string,
+    text: string,
+    onClick: VoidFunction
+}) => {
+    return (
+        <button className={
+            `${className} as-button h-full border-[1px] border-[#DDD] rounded-[4px] bg-secondary-button text-black text-[14px]`
+        } onClick={onClick}>
+            {text}
+        </button>
+    )
+}
+
 export {
-    ActionButton
+    ActionButton,
+    PrimaryButton,
+    SecondaryButton,
 }
