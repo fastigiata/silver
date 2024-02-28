@@ -48,11 +48,11 @@ const routes: RouteObject[] = [
                         path: 'modify',
                         element: <CollectionModifyPage/>
                     },
+                    {
+                        path: 'create',
+                        element: <StickerCreatePage/>
+                    },
                 ],
-            },
-            {
-                path: '/sticker/create',
-                element: <StickerCreatePage/>
             },
             {
                 path: '/sticker/:stickerId',
