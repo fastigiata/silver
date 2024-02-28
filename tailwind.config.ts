@@ -17,6 +17,7 @@ export default <Config>{
             'header': 'var(--header-bg)',
             'body': 'var(--body-bg)',
             'primary-button': 'var(--primary-button-bg)',
+            'secondary-button': 'var(--secondary-button-bg)',
         },
         boxShadow: {
             'nav': '0px 2px 8px var(--header-shadow-color)',
@@ -26,6 +27,7 @@ export default <Config>{
         },
         colors: {
             'white': '#FFFFFF',
+            'black': '#000000',
             'red': '#F5222D',
             'green': '#52C41A',
             'header': 'var(--header-text-color)',

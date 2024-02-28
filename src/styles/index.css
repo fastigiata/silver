@@ -15,6 +15,14 @@ img {
     -webkit-user-drag: none;
 }
 
+input, textarea {
+    outline: none;
+}
+
+textarea {
+    resize: none;
+}
+
 .as-button {
     cursor: pointer;
 

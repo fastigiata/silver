@@ -204,6 +204,16 @@
             }
         },
         {
+            "name": "Background Color (Secondary)",
+            "bind": "--secondary-button-bg",
+            "reset": "#F2F3F5",
+            "value": "#F2F3F5",
+            "editConfig": {
+                "type": "color",
+                "withAlpha": false
+            }
+        },
+        {
             "separator": true,
             "title": "Card"
         },
