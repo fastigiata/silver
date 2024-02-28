@@ -29,7 +29,7 @@ const CollectionCreatePage = () => {
                 'w-[400px] h-[400px] p-5 bg-white rounded-[4px] shadow-card ' +
                 'flex flex-col items-center space-y-4'
             }>
-                <p className={'h-[24px] text-primary text-[18px] font-primary'}>
+                <p className={'h-6 text-primary text-[18px] font-primary'}>
                     New collection
                 </p>
 

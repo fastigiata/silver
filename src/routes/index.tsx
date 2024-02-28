@@ -42,10 +42,13 @@ const routes: RouteObject[] = [
                 children: [
                     {
                         path: 'view',
+                        loader: CollectionViewPage.loader,
                         element: <CollectionViewPage/>
                     },
                     {
                         path: 'modify',
+                        loader: CollectionModifyPage.loader,
+                        action: CollectionModifyPage.action,
                         element: <CollectionModifyPage/>
                     },
                     {
