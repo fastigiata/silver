@@ -50,6 +50,7 @@ const routes: RouteObject[] = [
                     },
                     {
                         path: 'create',
+                        action: StickerCreatePage.action,
                         element: <StickerCreatePage/>
                     },
                 ],

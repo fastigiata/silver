@@ -62,8 +62,8 @@ CollectionCreatePage.action = async ({ request }: ActionFunctionArgs) => {
 
     await CollectionDB.add(form.name, form.desc)
 
-    // since we can't use `navigate(-1)` here, we have to use `history.go(-1)` to go back
-    history.go(-1)
+    // since we can't use `navigate(-1)` here, we have to use `history.back()` to go back
+    history.back()
 
     // anyway, we have to return something even it makes no sense
     return null
