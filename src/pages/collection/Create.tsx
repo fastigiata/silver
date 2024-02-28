@@ -1,9 +1,9 @@
 import type { ActionFunctionArgs } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
-import { useFetcher } from 'react-router-dom'
+import { useNavigate, useSubmit } from 'react-router-dom'
 import { InputMultiLine, InputSingleLine } from '@/components/Input.tsx'
 import { useState } from 'react'
 import { PrimaryButton, SecondaryButton } from '@/components/Button.tsx'
+import { CollectionDB } from '@/db/collection.ts'
 
 type CollectionCreateActionConfig = {
     name: string
@@ -11,13 +11,13 @@ type CollectionCreateActionConfig = {
 }
 
 const CollectionCreatePage = () => {
+    const submit = useSubmit()
     const navigate = useNavigate()
-    const fetcher = useFetcher()
     const [ name, setName ] = useState('')
     const [ desc, setDesc ] = useState('')
 
     const handleSubmit = () => {
-        fetcher.submit(
+        submit(
             { name, desc } satisfies CollectionCreateActionConfig,
             { method: 'POST', encType: 'application/json' }
         )
@@ -30,22 +30,27 @@ const CollectionCreatePage = () => {
                 'flex flex-col items-center space-y-4'
             }>
                 <p className={'h-[24px] text-primary text-[18px] font-primary'}>
-                    Create Collection
+                    New collection
                 </p>
 
                 <InputSingleLine
-                    className={'w-full h-12 px-3 bg-[#f7f7f7] rounded-[4px] focus:bg-[#f0f0f0]'}
+                    className={'w-full h-12 px-3 bg-[#f7f7f7] rounded-[4px] focus:bg-[#f0f0f0] text-[14px]'}
                     placeholder={'Collection Name'}
                     value={name} onChange={setName}/>
 
                 <InputMultiLine
-                    className={'w-full flex-1 p-3 bg-[#f7f7f7] rounded-[4px] focus:bg-[#f0f0f0]'}
-                    placeholder={'Description'}
+                    className={'w-full flex-1 p-3 bg-[#f7f7f7] rounded-[4px] focus:bg-[#f0f0f0] text-[14px]'}
+                    placeholder={'Description (optional)'}
                     value={desc} onChange={setDesc}/>
 
                 <div className={'w-full h-9 flex items-center justify-between space-x-2'}>
-                    <SecondaryButton className={'flex-1'} text={'Cancel'} onClick={() => navigate(-1)}/>
-                    <PrimaryButton className={'flex-1'} text={'Confirm'} onClick={handleSubmit}/>
+                    <SecondaryButton
+                        className={'flex-1'} text={'Cancel'}
+                        onClick={() => navigate('..', { replace: true })}/>
+                    <PrimaryButton
+                        className={'flex-1'} text={'Confirm'}
+                        disabled={name.length === 0}
+                        onClick={handleSubmit}/>
                 </div>
             </div>
         </div>
@@ -55,8 +60,12 @@ const CollectionCreatePage = () => {
 CollectionCreatePage.action = async ({ request }: ActionFunctionArgs) => {
     const form: CollectionCreateActionConfig = await request.json()
 
-    // TODO: to be implemented
-    console.log('CollectionCreatePage.action', form)
+    await CollectionDB.add(form.name, form.desc)
+
+    // since we can't use `navigate(-1)` here, we have to use `history.go(-1)` to go back
+    history.go(-1)
+
+    // anyway, we have to return something even it makes no sense
     return null
 }
 
