@@ -21,29 +21,31 @@ const ActionButton = ({ className = '', Icon, onClick }: {
     )
 }
 
-const PrimaryButton = ({ className = '', text, onClick }: {
+type ButtonProps = {
+    /**
+     * @default false
+     */
+    disabled?: boolean
     className?: string,
     text: string,
     onClick: VoidFunction
-}) => {
+}
+
+const PrimaryButton = ({ disabled = false, className = '', text, onClick }: ButtonProps) => {
     return (
         <button className={
             `${className} as-button h-full rounded-[4px] bg-primary-button text-white text-[14px]`
-        } onClick={onClick}>
+        } onClick={onClick} disabled={disabled}>
             {text}
         </button>
     )
 }
 
-const SecondaryButton = ({ className = '', text, onClick }: {
-    className?: string,
-    text: string,
-    onClick: VoidFunction
-}) => {
+const SecondaryButton = ({ disabled, className = '', text, onClick }: ButtonProps) => {
     return (
         <button className={
             `${className} as-button h-full border-[1px] border-[#DDD] rounded-[4px] bg-secondary-button text-black text-[14px]`
-        } onClick={onClick}>
+        } onClick={onClick} disabled={disabled}>
             {text}
         </button>
     )
