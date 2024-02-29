@@ -1,12 +1,19 @@
-import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { logImpl } from '@/platform_impl/log.ts'
 import { Spacer } from '@/components/Spacer.tsx'
 import { IconCross, IconMin, IconPalette } from '@/components/Icons.tsx'
 import { manageImpl } from '@/platform_impl/manage.ts'
 import { Picker } from '@/components/Picker/impl.tsx'
+import { useEffect } from 'react'
 
 const RootLayout = () => {
     const navigate = useNavigate()
+    const location = useLocation()
+
+    // FIXME: remove
+    useEffect(() => {
+        console.log('==>', location)
+    }, [ location ])
 
     return (
         <div className={
