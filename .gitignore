@@ -25,4 +25,4 @@ dist-ssr
 
 .yarn/*
 !.yarn/releases
-#__test__
+__test__
