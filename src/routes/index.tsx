@@ -12,7 +12,7 @@ import StickerLayout from '@/pages/_layouts/Sticker.tsx'
 import StickerCreatePage from '@/pages/sticker/Create.tsx'
 import StickerViewPage from '@/pages/sticker/View.tsx'
 import StickerModifyPage from '@/pages/sticker/Modify.tsx'
-import AppearancePage from '@/pages/Appearance'
+import AppearancePage from '@/pages/Appearance/Appearance.tsx'
 import MiscPage from '@/pages/Misc'
 
 const routes: RouteObject[] = [

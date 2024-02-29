@@ -2,9 +2,9 @@ import type { MouseEvent } from 'react'
 import { useEffect, useState } from 'react'
 import { Spacer } from '@/components/Spacer.tsx'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar'
-import type { AppearanceConfigurable } from '@/utils/appearance.ts'
-import { appearanceController } from '@/utils/appearance.ts'
 import { usePicker } from '@/components/Picker/state.ts'
+import type { AppearanceConfigurable } from './controller.ts'
+import { appearanceController } from './controller.ts'
 
 // ========== Helper ==========
 
