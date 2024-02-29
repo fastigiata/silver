@@ -20,6 +20,7 @@ abstract class CollectionDB {
             id: _id,
             name: name,
             desc: desc ?? '',
+            count: 0,
             ctime: _now,
             mtime: _now
         })
@@ -73,9 +74,18 @@ abstract class CollectionDB {
 
     /**
      * count the number of stickers in the collection
+     * @return {number} the number of stickers in the collection
      */
-    static async count(id: string): Promise<number> {
-        return dbImpl.stickers.where('cid').equals(id).count()
+    static async recount(id: string): Promise<number> {
+        return dbImpl.transaction(
+            'rw',
+            [ dbImpl.stickers, dbImpl.collections ],
+            async () => {
+                const _count = await dbImpl.stickers.where('cid').equals(id).count()
+                await dbImpl.collections.update(id, { count: _count, mtime: Date.now() })
+                return _count
+            }
+        )
     }
 }
 

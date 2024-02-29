@@ -12,6 +12,10 @@ interface ICollection extends RecordMeta {
      * description of the collection
      */
     desc: string
+    /**
+     * number of stickers in the collection
+     */
+    count: number
 }
 
 export type {
