@@ -40,6 +40,34 @@ textarea {
     }
 }
 
+.collection-card-badge {
+    --badge-width: 32px;
+    --badge-background: #EDEDED;
+
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 10px;
+    width: var(--badge-width);
+    height: 24px;
+    background: var(--badge-background);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    &::before {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        top: 100%;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-left: var(--badge-width) solid var(--badge-background);
+        border-bottom: 10px solid transparent;
+    }
+}
+
 /* third party */
 
 .ms-container > .ms-track-box { /* FIXME: see https://github.com/MinJieLiu/mac-scrollbar/pull/34 */

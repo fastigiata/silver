@@ -46,6 +46,8 @@ export default <Config>{
         extend: {
             zIndex: {
                 1: '1',
+                2: '2',
+                3: '3',
             },
             height: {
                 'header': 'var(--header-height)',
