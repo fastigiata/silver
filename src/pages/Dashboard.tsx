@@ -23,7 +23,6 @@ const CollectionList = () => {
     return collections.map(collection => {
         return <CollectionCard
             key={collection.id}
-            className={'my-4'}
             collection={collection}
             onClick={() => navigate(`/collection/${collection.id}/view`)}
             onConfig={() => navigate(`/collection/${collection.id}/modify`)}
@@ -44,7 +43,7 @@ const DashboardPage = () => {
     const navigate = useNavigate()
 
     return (
-        <AwesomeScrollbar className={'w-full h-full p-4 overflow-y-auto'}>
+        <AwesomeScrollbar className={'w-full h-full p-4 overflow-y-auto space-y-4 space-y-reverse'}>
             <DeferView
                 source={loader.collection}
                 builder={<CollectionList/>}
