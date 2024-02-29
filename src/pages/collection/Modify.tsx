@@ -17,9 +17,7 @@ type CollectionModifyActionConfig = {
     desc: string
 }
 
-const ModifyView = ({ collection }: {
-    collection: ICollection
-}) => {
+const ModifyView = ({ collection }: { collection: ICollection }) => {
     const fetcher = useFetcher()
     const navigate = useNavigate()
 
