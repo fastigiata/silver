@@ -12,35 +12,40 @@ const mockCollection: ICollection[] = [
         ctime: 1707494924442,
         mtime: 1707494924442,
         name: 'name a',
-        desc: '@/components/Card/CollectionCard.tsx@/components/Card/CollectionCard.tsx@/components/Card/CollectionCard.tsx@/components/Card/CollectionCard.tsx'
+        desc: '@/components/Card/CollectionCard.tsx@/components/Card/CollectionCard.tsx@/components/Card/CollectionCard.tsx@/components/Card/CollectionCard.tsx',
+        count: 0,
     },
     {
         id: 'b',
         ctime: 1707494924442,
         mtime: 1707494924442,
         name: 'name b',
-        desc: 'desc b'
+        desc: 'desc b',
+        count: 10,
     },
     {
         id: 'c',
         ctime: 1707494924442,
         mtime: 1707494924442,
         name: 'name c',
-        desc: 'desc c'
+        desc: 'desc c',
+        count: 123,
     },
     {
         id: 'd',
         ctime: 1707494924442,
         mtime: 1707494924442,
         name: 'name d',
-        desc: 'desc d'
+        desc: 'desc d',
+        count: 24,
     },
     {
         id: 'e',
         ctime: 1707494924442,
         mtime: 1707494924442,
         name: 'name e',
-        desc: 'desc e'
+        desc: 'desc e',
+        count: 31,
     }
 ]
 
