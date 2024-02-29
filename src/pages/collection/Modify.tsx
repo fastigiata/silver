@@ -1,11 +1,12 @@
 import type { LoaderFunctionArgs } from 'react-router-dom'
-import { useFetcher, useLoaderData, useNavigate, useRevalidator } from 'react-router-dom'
+import { useFetcher, useLoaderData, useNavigate } from 'react-router-dom'
 import { CollectionDB } from '@/db/collection.ts'
 import type { ICollection } from '@/_types/collection.ts'
 import { InputMultiLine, InputSingleLine } from '@/components/Input.tsx'
 import { PrimaryButton, SecondaryButton } from '@/components/Button.tsx'
 import { DeferView } from '@/components/Loading.tsx'
 import { useState } from 'react'
+import { ExceptionView } from '@/components/ExceptionView.tsx'
 
 type CollectionModifyLoaderData = {
     collection: Promise<ICollection | null>
@@ -14,33 +15,6 @@ type CollectionModifyLoaderData = {
 type CollectionModifyActionConfig = {
     name: string
     desc: string
-}
-
-// TODO: 封装成 ExceptionView 组件
-const EmptyView = () => {
-    const navigate = useNavigate()
-    const { revalidate } = useRevalidator()
-
-    return (
-        <div className={'w-[400px] p-5 bg-white rounded-[4px] shadow-card space-y-4'}>
-            <p className={'h-6 text-primary text-[18px] leading-[24px] font-primary'}>
-                Exception occurred!
-            </p>
-
-            <p className={'h-12 text-secondary text-[16px] leading-[24px] font-secondary'}>
-                Failed to load collection data, or it does not exist.
-            </p>
-
-            <div className={'w-full h-9 flex items-center justify-between space-x-2'}>
-                <SecondaryButton
-                    className={'flex-1'} text={'Back'}
-                    onClick={() => navigate(-1)}/>
-                <PrimaryButton
-                    className={'flex-1'} text={'Retry'}
-                    onClick={revalidate}/>
-            </div>
-        </div>
-    )
 }
 
 const ModifyView = ({ collection }: {
@@ -99,7 +73,11 @@ const CollectionModifyPage = () => {
             <DeferView
                 source={loader.collection}
                 builder={collection => {
-                    if (!collection) return <EmptyView/>
+                    if (!collection) {
+                        return <ExceptionView text={
+                            'Failed to load collection data, or it does not exist.'
+                        }/>
+                    }
                     return <ModifyView collection={collection}/>
                 }}/>
         </div>
