@@ -34,7 +34,7 @@ const EmptyView = () => {
             <div className={'w-full h-9 flex items-center justify-between space-x-2'}>
                 <SecondaryButton
                     className={'flex-1'} text={'Back'}
-                    onClick={() => navigate('..', { replace: true })}/>
+                    onClick={() => navigate(-1)}/>
                 <PrimaryButton
                     className={'flex-1'} text={'Retry'}
                     onClick={revalidate}/>
@@ -81,7 +81,7 @@ const ModifyView = ({ collection }: {
             <div className={'w-full h-9 flex items-center justify-between space-x-2'}>
                 <SecondaryButton
                     className={'flex-1'} text={'Cancel'}
-                    onClick={() => navigate('..', { replace: true })}/>
+                    onClick={() => navigate(-1)}/>
                 <PrimaryButton
                     className={'flex-1'} text={'Confirm'}
                     disabled={name.length === 0 || fetcher.state !== 'idle'}
