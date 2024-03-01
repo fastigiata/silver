@@ -50,6 +50,7 @@ textarea {
     right: 10px;
     width: var(--badge-width);
     height: 24px;
+    border-top: solid 2px #D9D9D9;
     background: var(--badge-background);
     display: flex;
     align-items: flex-end;
