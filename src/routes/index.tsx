@@ -1,5 +1,6 @@
 import type { RouteObject } from 'react-router-dom'
 import { createHashRouter, redirect } from 'react-router-dom'
+import type { RouteHandle } from '@/_types/route.ts'
 
 import RootLayout from '@/pages/_layouts/Root.tsx'
 import ExceptionPage from '@/pages/Exception'
@@ -26,6 +27,7 @@ const routes: RouteObject[] = [
                 loader: () => redirect('/dashboard'),
             },
             {
+                id: 'dashboard',
                 path: '/dashboard',
                 loader: DashboardPage.loader,
                 action: DashboardPage.action,
@@ -33,6 +35,7 @@ const routes: RouteObject[] = [
             },
             {
                 path: '/collection/create',
+                handle: { showBack: true } satisfies RouteHandle,
                 action: CollectionCreatePage.action,
                 element: <CollectionCreatePage/>
             },
@@ -42,17 +45,20 @@ const routes: RouteObject[] = [
                 children: [
                     {
                         path: 'view',
+                        handle: { showBack: true } satisfies RouteHandle,
                         loader: CollectionViewPage.loader,
                         element: <CollectionViewPage/>
                     },
                     {
                         path: 'modify',
+                        handle: { showBack: true } satisfies RouteHandle,
                         loader: CollectionModifyPage.loader,
                         action: CollectionModifyPage.action,
                         element: <CollectionModifyPage/>
                     },
                     {
                         path: 'create',
+                        handle: { showBack: true } satisfies RouteHandle,
                         action: StickerCreatePage.action,
                         element: <StickerCreatePage/>
                     },
@@ -64,10 +70,12 @@ const routes: RouteObject[] = [
                 children: [
                     {
                         path: 'view',
+                        handle: { showBack: true } satisfies RouteHandle,
                         element: <StickerViewPage/>
                     },
                     {
                         path: 'modify',
+                        handle: { showBack: true } satisfies RouteHandle,
                         element: <StickerModifyPage/>
                     },
                 ]
