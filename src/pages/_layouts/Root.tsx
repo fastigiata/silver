@@ -1,13 +1,12 @@
-import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 import { logImpl } from '@/platform_impl/log.ts'
 import { Spacer } from '@/components/Spacer.tsx'
-import { IconCross, IconMin, IconPalette } from '@/components/Icons.tsx'
+import { IconCross, IconMin } from '@/components/Icons.tsx'
 import { manageImpl } from '@/platform_impl/manage.ts'
 import { Picker } from '@/components/Picker/impl.tsx'
 import { useEffect } from 'react'
 
 const RootLayout = () => {
-    const navigate = useNavigate()
     const location = useLocation()
 
     // FIXME: remove
@@ -32,7 +31,6 @@ const RootLayout = () => {
                 <Spacer/>
 
                 {/* operators */}
-                <IconPalette.Button className={'ml-4 as-button text-[18px]'} onClick={() => navigate('/appearance')}/>
                 <IconMin.Button className={'ml-4 as-button text-[18px]'} onClick={manageImpl.hideToTray}/>
                 <IconCross.Button className={'ml-4 as-button text-[18px]'} onClick={manageImpl.close}/>
             </div>
