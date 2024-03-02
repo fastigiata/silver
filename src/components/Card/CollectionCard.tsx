@@ -20,12 +20,12 @@ const CollectionCard = ({ collection, onClick, onConfig, onDelete }: {
             }
             onClick={onClick}>
             <div className={
-                'w-full text-primary text-[18px] font-primary leading-[24px] overflow-hidden overflow-ellipsis'
+                'w-full pr-8 text-primary text-[18px] font-primary leading-[24px] line-clamp-1'
             }>
                 {name}
             </div>
             <div className={
-                'w-full text-secondary text-[16px] font-secondary leading-[20px] overflow-hidden line-clamp-1'
+                'w-full text-secondary text-[16px] font-secondary leading-[20px] line-clamp-1'
             }>
                 {desc}
             </div>
