@@ -1,5 +1,5 @@
 import type { ICollection } from '@/_types/collection.ts'
-import { IconSetting } from '@/components/Icons.tsx'
+import { IconTriDot } from '@/components/Icons.tsx'
 import { IconDelete } from '@/components/Icons.tsx'
 import { ActionButton } from '@/components/Button.tsx'
 
@@ -39,7 +39,7 @@ const CollectionCard = ({ collection, onClick, onConfig, onDelete }: {
                 {count ?? 0}
             </div>
             <div className={'absolute z-2 right-4 hidden group-hover:flex items-center space-x-2'}>
-                <ActionButton className={'text-primary'} Icon={IconSetting} onClick={onConfig}/>
+                <ActionButton className={'text-primary'} Icon={IconTriDot} onClick={onConfig}/>
                 <ActionButton className={'text-red'} Icon={IconDelete} onClick={onDelete}/>
             </div>
         </div>
