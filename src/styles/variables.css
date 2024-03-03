@@ -56,10 +56,24 @@
 }
 
 .air-datepicker {
-    --adp-background-color: var(--date-picker-bg);
-    --adp-background-color-hover: var(--date-picker-bg-hover);
-    --adp-day-name-color: var(--date-picker-day-name-color);
+    font-family: "JetBrains Mono", YouShe, monospace;
+    /*--adp-background-color: var(--date-picker-bg);*/
+    /*--adp-background-color-hover: var(--date-picker-bg-hover);*/
+    /*--adp-day-name-color: var(--date-picker-day-name-color);*/
     --adp-color-current-date: var(--date-picker-current-color);
-    --adp-cell-background-color-selected: var(--date-picker-bg-selected);
-    --adp-cell-background-color-selected-hover: var(--date-picker-bg-selected-hover);
+    --adp-cell-background-color-selected: var(--primary-button-bg);
+    --adp-cell-background-color-selected-hover: var(--primary-button-bg);
+
+    .air-datepicker-buttons {
+        .air-datepicker-button {
+            color: var(--primary-text-color);
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: -1px;
+
+            &:not(:last-child) {
+                margin-right: 4px;
+            }
+        }
+    }
 }
