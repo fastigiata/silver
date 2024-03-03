@@ -8,7 +8,7 @@ import { AwesomeScrollbar } from '@/components/AwesomeScrollbar'
 import type { ICollection } from '@/_types/collection.ts'
 import { ExceptionView } from '@/components/ExceptionView.tsx'
 import { ActionButton } from '@/components/Button.tsx'
-import { IconSetting } from '@/components/Icons.tsx'
+import { IconCreate, IconTriDot } from '@/components/Icons.tsx'
 
 type CollectionViewLoaderData = {
     task: Promise<[ ICollection | null, ISticker[] ]>
@@ -21,8 +21,8 @@ const ViewView = ({ collection, stickers }: {
     const params = useParams()
     const navigate = useNavigate()
 
-    const handleSetting = () => {
-        navigate(`/collection/${params.collectionId}/modify`)
+    const handleNav = (to: 'create' | 'modify') => {
+        navigate(`/collection/${params.collectionId}/${to}`)
     }
 
     return (
@@ -38,10 +38,20 @@ const ViewView = ({ collection, stickers }: {
                         {collection.desc}
                     </div>
                 </div>
-                <ActionButton className={'ml-2 text-primary'} Icon={IconSetting} onClick={handleSetting}/>
+                <ActionButton className={'ml-2 text-primary'} Icon={IconCreate} onClick={() => handleNav('create')}/>
+                <ActionButton className={'ml-2 text-primary'} Icon={IconTriDot} onClick={() => handleNav('modify')}/>
             </div>
             <AwesomeScrollbar className={'w-full flex-1 bg-[#CCC]'}>
-                // TODO: sticker list
+                {
+                    // TODO: StickerView
+                    stickers.map(sticker => {
+                        return (
+                            <div key={sticker.id} className={'w-full h-[100px] bg-white mb-2'}>
+                                {sticker.title}
+                            </div>
+                        )
+                    })
+                }
             </AwesomeScrollbar>
         </div>
     )
