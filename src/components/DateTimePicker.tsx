@@ -1,29 +1,65 @@
-import ZhCN from 'air-datepicker/locale/zh'
+import enUS from 'air-datepicker/locale/en'
 import { useEffect, useRef } from 'react'
 import AirDatepicker from 'air-datepicker'
 
-const DateTimePicker = ({ className, onSelected }: { className?: string, onSelected: (date: Date) => void }) => {
+type DateTimePickerProps = {
+    className?: string
+    placeholder?: string
+    onSelected: (date: Date) => void
+}
+const DateTimePicker = ({ className, placeholder, onSelected }: DateTimePickerProps) => {
     const ref = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
         const dp = new AirDatepicker(ref.current!, {
-            locale: ZhCN,
-            autoClose: true,
-            // isMobile: true,
+            locale: enUS,
+            // autoClose: true,
+            isMobile: true,
             toggleSelected: false,
             timepicker: true,
-            minutesStep: 5,
+            dateFormat: 'yyyy-MM-dd',
+            timeFormat: 'HH:mm',
             onSelect({ date }) {
                 onSelected(date as Date)
-            }
+            },
+            buttons: [
+                // {
+                //     content: '+1 Hour',
+                //     className: 'underline underline-offset-4',
+                //     onClick(_dp) {
+                //         _dp.selectDate(Date.now() + 60 * 60 * 1000, { updateTime: true })
+                //     }
+                // },
+                {
+                    content: 'Today',
+                    className: 'underline underline-offset-4',
+                    onClick(_dp) {
+                        _dp.selectDate(new Date(), { updateTime: true })
+                    }
+                },
+                {
+                    content: 'Clear',
+                    className: '!text-red',
+                    onClick(_dp) {
+                        _dp.clear()
+                        _dp.hide()
+                    }
+                },
+                {
+                    content: 'Done',
+                    className: '!bg-primary-button !text-white',
+                    onClick(_dp) {
+                        _dp.hide()
+                    }
+                },
+            ]
         })
 
         return () => dp.destroy()
     }, [])
 
-    return <input ref={ref} className={className} type="text" readOnly/>
+    return <input ref={ref} className={className} placeholder={placeholder} type="text" readOnly/>
 }
 
-export {
-    DateTimePicker,
-}
+export type { DateTimePickerProps }
+export { DateTimePicker }
