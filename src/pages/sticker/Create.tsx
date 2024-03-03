@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { InputMultiLine, InputSingleLine } from '@/components/Input.tsx'
 import { PrimaryButton, SecondaryButton } from '@/components/Button.tsx'
 import { StickerDB } from '@/db/sticker.ts'
+import { DateTimePicker } from '@/components/DateTimePicker.tsx'
 
 type StickerCreateActionConfig = {
     title: string
@@ -15,12 +16,15 @@ const StickerCreatePage = () => {
     const navigate = useNavigate()
     const [ title, setTitle ] = useState('')
     const [ content, setContent ] = useState('')
+    const [ alarm, setAlarm ] = useState<Date | null>(null)
 
     const handleSubmit = () => {
-        submit(
-            { title, content } as StickerCreateActionConfig,
-            { method: 'POST', encType: 'application/json' }
-        )
+        // TODO: add 'alarm' to the form
+        console.log('submit', title, content, alarm)
+        // submit(
+        //     { title, content } as StickerCreateActionConfig,
+        //     { method: 'POST', encType: 'application/json' }
+        // )
     }
 
     return (
@@ -38,6 +42,11 @@ const StickerCreatePage = () => {
                     className={'w-full h-12 px-3 bg-[#f7f7f7] rounded-[4px] focus:bg-[#f0f0f0] text-[14px]'}
                     placeholder={'Sticker Title'}
                     value={title} onChange={setTitle}/>
+
+                <DateTimePicker
+                    className={'w-full h-12 px-3 bg-[#f7f7f7] rounded-[4px] text-[14px]'}
+                    placeholder={'Alarm (optional)'}
+                    onSelected={setAlarm}/>
 
                 <InputMultiLine
                     className={'w-full flex-1 p-3 bg-[#f7f7f7] rounded-[4px] focus:bg-[#f0f0f0] text-[14px]'}
