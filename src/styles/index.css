@@ -6,7 +6,7 @@ html, body, #root {
     width: 100%;
     height: 100%;
     background: transparent;
-    font-family: "JetBrains Mono", ShouShu, monospace;
+    font-family: "JetBrains Mono", YouShe, monospace;
     /*user-select: none;*/
     overflow: hidden;
 }
