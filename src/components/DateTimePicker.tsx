@@ -5,7 +5,7 @@ import AirDatepicker from 'air-datepicker'
 type DateTimePickerProps = {
     className?: string
     placeholder?: string
-    onSelected: (date: Date) => void
+    onSelected: (date: Date | null) => void
 }
 const DateTimePicker = ({ className, placeholder, onSelected }: DateTimePickerProps) => {
     const ref = useRef<HTMLInputElement>(null)
@@ -20,7 +20,7 @@ const DateTimePicker = ({ className, placeholder, onSelected }: DateTimePickerPr
             dateFormat: 'yyyy-MM-dd',
             timeFormat: 'HH:mm',
             onSelect({ date }) {
-                onSelected(date as Date)
+                onSelected(date as Date ?? null)
             },
             buttons: [
                 // {
