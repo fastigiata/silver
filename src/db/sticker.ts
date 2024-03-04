@@ -13,19 +13,32 @@ abstract class StickerDB {
     /**
      * create a new sticker, return the id of the new sticker
      */
-    static async add(cid: string, title: string, content?: string, alarm?: number): Promise<string> {
-        const _id = nanoid()
-        const _now = Date.now()
-        await dbImpl.stickers.add({
-            id: _id,
-            cid: cid,
-            title: title,
-            content: content ?? '',
-            alarm: alarm,
-            ctime: _now,
-            mtime: _now
-        })
-        return _id
+    static async add(cid: string, title: string, content?: string, alarm?: number | null): Promise<string> {
+        return dbImpl.transaction(
+            'rw',
+            [ dbImpl.collections, dbImpl.stickers ],
+            async () => {
+                const _id = nanoid()
+                const _now = Date.now()
+
+                // 1. create the sticker
+                await dbImpl.stickers.add({
+                    id: _id,
+                    cid: cid,
+                    title: title,
+                    content: content ?? '',
+                    alarm: alarm,
+                    ctime: _now,
+                    mtime: _now
+                })
+
+                // 2. update the count of the collection
+                const _count = await dbImpl.stickers.where('cid').equals(cid).count()
+                await dbImpl.collections.update(cid, { count: _count })
+
+                return _id
+            }
+        )
     }
 
     /**
@@ -40,7 +53,7 @@ abstract class StickerDB {
                 await dbImpl.stickers.delete(id)
                 // 2. update the collection's count
                 const _count = await dbImpl.stickers.where('cid').equals(cid).count()
-                dbImpl.collections.update(cid, { count: _count })
+                await dbImpl.collections.update(cid, { count: _count })
             }
         )
     }
