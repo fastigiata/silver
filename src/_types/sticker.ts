@@ -19,7 +19,7 @@ interface ISticker extends RecordMeta {
     /**
      * alarm time of the sticker, timestamp in milliseconds
      */
-    alarm?: number
+    alarm?: number | null
 }
 
 export type {

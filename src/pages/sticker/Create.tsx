@@ -9,6 +9,7 @@ import { DateTimePicker } from '@/components/DateTimePicker.tsx'
 type StickerCreateActionConfig = {
     title: string
     content?: string
+    alarm?: number | null
 }
 
 const StickerCreatePage = () => {
@@ -19,12 +20,10 @@ const StickerCreatePage = () => {
     const [ alarm, setAlarm ] = useState<Date | null>(null)
 
     const handleSubmit = () => {
-        // TODO: add 'alarm' to the form
-        console.log('submit', title, content, alarm)
-        // submit(
-        //     { title, content } as StickerCreateActionConfig,
-        //     { method: 'POST', encType: 'application/json' }
-        // )
+        submit(
+            { title, content, alarm: alarm?.getTime() } as StickerCreateActionConfig,
+            { method: 'POST', encType: 'application/json' }
+        )
     }
 
     return (
@@ -71,7 +70,7 @@ StickerCreatePage.action = async ({ request, params }: ActionFunctionArgs) => {
     const collectionId = params.collectionId as string
     const form: StickerCreateActionConfig = await request.json()
 
-    await StickerDB.add(collectionId, form.title, form.content)
+    await StickerDB.add(collectionId, form.title, form.content, form.alarm)
 
     // since we can't use `navigate(-1)` here, we have to use `history.back()` to go back
     history.back()
