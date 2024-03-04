@@ -16,6 +16,10 @@ interface ISticker extends RecordMeta {
      * content of the sticker
      */
     content: string
+    /**
+     * alarm time of the sticker, timestamp in milliseconds
+     */
+    alarm?: number
 }
 
 export type {
