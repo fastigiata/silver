@@ -43,15 +43,15 @@ const StickerCreatePage = () => {
                     placeholder={'Sticker Title'}
                     value={title} onChange={setTitle}/>
 
-                <DateTimePicker
-                    className={'w-full h-12 px-3 bg-[#f7f7f7] rounded-[4px] text-[14px]'}
-                    placeholder={'Alarm (optional)'}
-                    onSelected={setAlarm}/>
-
                 <InputMultiLine
                     className={'w-full flex-1 p-3 bg-[#f7f7f7] rounded-[4px] focus:bg-[#f0f0f0] text-[14px]'}
                     placeholder={'Content (optional)'}
                     value={content} onChange={setContent}/>
+
+                <DateTimePicker
+                    className={'w-full h-12 px-3 bg-[#f7f7f7] rounded-[4px] text-[14px]'}
+                    placeholder={'Alarm (optional)'}
+                    onSelected={setAlarm}/>
 
                 <div className={'w-full h-9 flex items-center justify-between space-x-2'}>
                     <SecondaryButton
