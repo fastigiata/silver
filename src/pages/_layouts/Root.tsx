@@ -38,7 +38,7 @@ const RootLayout = () => {
                 <Spacer/>
 
                 {/* operators */}
-                <IconMin.Button className={'ml-4 as-button text-[18px]'} onClick={manageImpl.hideToTray}/>
+                <IconMin.Button className={'ml-4 as-button text-[18px]'} onClick={manageImpl.min}/>
                 <IconCross.Button className={'ml-4 as-button text-[18px]'} onClick={manageImpl.close}/>
             </div>
 
