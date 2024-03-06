@@ -4,7 +4,6 @@ import { CollectionDB } from '@/db/collection.ts'
 import { StickerDB } from '@/db/sticker.ts'
 import type { ISticker } from '@/_types/sticker.ts'
 import { DeferView } from '@/components/Loading.tsx'
-import { AwesomeScrollbar } from '@/components/AwesomeScrollbar'
 import type { ICollection } from '@/_types/collection.ts'
 import { ExceptionView } from '@/components/ExceptionView.tsx'
 import { ActionButton } from '@/components/Button.tsx'
@@ -42,14 +41,13 @@ const ViewView = ({ collection, stickers }: {
                 <ActionButton className={'ml-2 text-primary'} Icon={IconCreate} onClick={() => handleNav('create')}/>
                 <ActionButton className={'ml-2 text-primary'} Icon={IconEdit} onClick={() => handleNav('modify')}/>
             </div>
-            <AwesomeScrollbar className={'w-full flex-1 bg-[#CCC]'}>
+            <div className={'w-full flex-1 grid grid-cols-[repeat(auto-fill,176px)] gap-4'}>
                 {
-                    // TODO: StickerView
                     stickers.map(sticker => {
                         return <StickerCard key={sticker.id} sticker={sticker}/>
                     })
                 }
-            </AwesomeScrollbar>
+            </div>
         </div>
     )
 }
