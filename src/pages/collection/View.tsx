@@ -9,6 +9,7 @@ import type { ICollection } from '@/_types/collection.ts'
 import { ExceptionView } from '@/components/ExceptionView.tsx'
 import { ActionButton } from '@/components/Button.tsx'
 import { IconCreate, IconEdit } from '@/components/Icons.tsx'
+import { StickerCard } from '@/components/Card/StickerCard.tsx'
 
 type CollectionViewLoaderData = {
     task: Promise<[ ICollection | null, ISticker[] ]>
@@ -45,11 +46,7 @@ const ViewView = ({ collection, stickers }: {
                 {
                     // TODO: StickerView
                     stickers.map(sticker => {
-                        return (
-                            <div key={sticker.id} className={'w-full h-[100px] bg-white mb-2'}>
-                                {sticker.title}
-                            </div>
-                        )
+                        return <StickerCard key={sticker.id} sticker={sticker}/>
                     })
                 }
             </AwesomeScrollbar>
