@@ -3,12 +3,14 @@ import { IconEdit } from '@/components/Icons.tsx'
 import { IconDelete } from '@/components/Icons.tsx'
 import { ActionButton } from '@/components/Button.tsx'
 
-const CollectionCard = ({ collection, onClick, onConfig, onDelete }: {
+type CollectionCardProps = {
     collection: ICollection,
     onClick?: VoidFunction
-    onConfig?: VoidFunction
+    onModify?: VoidFunction
     onDelete?: VoidFunction
-}) => {
+}
+
+const CollectionCard = ({ collection, onClick, onModify, onDelete }: CollectionCardProps) => {
     const { id, name, desc, count, ctime, mtime } = collection
     return (
         <div
@@ -39,7 +41,7 @@ const CollectionCard = ({ collection, onClick, onConfig, onDelete }: {
                 {count ?? 0}
             </div>
             <div className={'absolute z-2 right-4 hidden group-hover:flex items-center space-x-2'}>
-                <ActionButton className={'text-primary'} Icon={IconEdit} onClick={onConfig}/>
+                <ActionButton className={'text-primary'} Icon={IconEdit} onClick={onModify}/>
                 <ActionButton className={'text-red'} Icon={IconDelete} onClick={onDelete}/>
             </div>
         </div>

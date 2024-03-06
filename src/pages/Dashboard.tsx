@@ -25,7 +25,7 @@ const CollectionList = () => {
             key={collection.id}
             collection={collection}
             onClick={() => navigate(`/collection/${collection.id}/view`)}
-            onConfig={() => navigate(`/collection/${collection.id}/modify`)}
+            onModify={() => navigate(`/collection/${collection.id}/modify`)}
             onDelete={() => {
                 fetcher.submit(
                     { id: collection.id } satisfies DashboardActionConfig,
