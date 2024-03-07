@@ -7,13 +7,20 @@ type StickerPatch = {
     title?: string | null
     content?: string | null
     alarm?: number | null
+    theme?: number | null
 }
 
 abstract class StickerDB {
     /**
      * create a new sticker, return the id of the new sticker
      */
-    static async add(cid: string, title: string, content?: string, alarm?: number | null): Promise<string> {
+    static async add(sticker: {
+        cid: string,
+        title: string,
+        content?: string,
+        alarm?: number | null,
+        theme: number
+    }): Promise<string> {
         return dbImpl.transaction(
             'rw',
             [ dbImpl.collections, dbImpl.stickers ],
@@ -24,17 +31,18 @@ abstract class StickerDB {
                 // 1. create the sticker
                 await dbImpl.stickers.add({
                     id: _id,
-                    cid: cid,
-                    title: title,
-                    content: content ?? '',
-                    alarm: alarm,
+                    cid: sticker.cid,
+                    title: sticker.title,
+                    content: sticker.content ?? '',
+                    alarm: sticker.alarm,
+                    theme: sticker.theme,
                     ctime: _now,
                     mtime: _now
                 })
 
                 // 2. update the count of the collection
-                const _count = await dbImpl.stickers.where('cid').equals(cid).count()
-                await dbImpl.collections.update(cid, { count: _count })
+                const _count = await dbImpl.stickers.where('cid').equals(sticker.cid).count()
+                await dbImpl.collections.update(sticker.cid, { count: _count })
 
                 return _id
             }
@@ -79,6 +87,8 @@ abstract class StickerDB {
         if (tobe.cid == null) delete tobe.cid
         // eslint-disable-next-line eqeqeq
         if (tobe.alarm == null) delete tobe.alarm
+        // eslint-disable-next-line eqeqeq
+        if (tobe.theme == null) delete tobe.theme
 
         // if the 'cid' field is updated,
         // we need to update the 'count' field of the collection as well

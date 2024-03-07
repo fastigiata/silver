@@ -20,6 +20,10 @@ interface ISticker extends RecordMeta {
      * alarm time of the sticker, timestamp in milliseconds
      */
     alarm?: number | null
+    /**
+     * theme of the sticker, (0-6)
+     */
+    theme: number
 }
 
 export type {
