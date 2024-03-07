@@ -8,9 +8,16 @@ type StickerCardProps = {
 }
 
 const StickerCard = ({ sticker, onClick, onModify, onDelete }: StickerCardProps) => {
+    const themeId = sticker.theme ?? 0
+
     return (
-        <div className={'relative w-44 h-56 bg-white shadow-card hover:shadow-card_hover'}>
-            <div className={'w-full h-8 px-2 bg-[#F7F8FA] text-primary font-primary leading-[32px] line-clamp-1'}>
+        <div className={
+            'group relative w-44 h-56 rounded-[4px] bg-white shadow-card hover:shadow-card_hover overflow-hidden '
+        }>
+            <div className={
+                `bg-ps${themeId} ` +
+                'w-full h-8 px-2 text-white font-primary leading-[32px] line-clamp-1'
+            }>
                 {sticker.title}
             </div>
 
@@ -22,6 +29,13 @@ const StickerCard = ({ sticker, onClick, onModify, onDelete }: StickerCardProps)
             </div>
 
             {/* TODO: hover时弹出操作按钮 */}
+            <div
+                className={
+                    `bg-ps${themeId}-light ` +
+                    'absolute z-1 w-full -bottom-full group-hover:bottom-0 h-8 border-t-2 transition-[bottom]'
+                }>
+                hello
+            </div>
         </div>
     )
 }
