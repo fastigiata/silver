@@ -1,0 +1,44 @@
+:root {
+    --ps-color0: rgb(40, 11, 39);
+    --ps-bg0: rgba(200, 54, 195, 0.2);
+    --ps-color1: rgb(41, 0, 138);
+    --ps-bg1: rgba(137, 86, 255, 0.2);
+    --ps-color2: rgb(0, 97, 32);
+    --ps-bg2: rgba(0, 198, 66, 0.2);
+    --ps-color3: rgb(20, 106, 144);
+    --ps-bg3: rgba(41, 171, 226, 0.2);
+    --ps-color4: rgb(126, 32, 32);
+    --ps-bg4: rgba(203, 56, 55, 0.2);
+    --ps-color5: rgb(107, 80, 0);
+    --ps-bg5: rgba(255, 205, 58, 0.2);
+}
+
+.ps0 {
+    border-color: var(--ps-color0);
+    background-color: var(--ps-bg0);
+}
+
+.ps1 {
+    border-color: var(--ps-color1);
+    background-color: var(--ps-bg1);
+}
+
+.ps2 {
+    border-color: var(--ps-color2);
+    background-color: var(--ps-bg2);
+}
+
+.ps3 {
+    border-color: var(--ps-color3);
+    background-color: var(--ps-bg3);
+}
+
+.ps4 {
+    border-color: var(--ps-color4);
+    background-color: var(--ps-bg4);
+}
+
+.ps5 {
+    border-color: var(--ps-color5);
+    background-color: var(--ps-bg5);
+}
