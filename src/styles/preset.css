@@ -1,44 +1,110 @@
 :root {
     --ps-color0: rgb(40, 11, 39);
-    --ps-bg0: rgba(200, 54, 195, 0.2);
+    --ps-color0-light: rgba(200, 54, 195, 0.2);
     --ps-color1: rgb(41, 0, 138);
-    --ps-bg1: rgba(137, 86, 255, 0.2);
+    --ps-color1-light: rgba(137, 86, 255, 0.2);
     --ps-color2: rgb(0, 97, 32);
-    --ps-bg2: rgba(0, 198, 66, 0.2);
+    --ps-color2-light: rgba(0, 198, 66, 0.2);
     --ps-color3: rgb(20, 106, 144);
-    --ps-bg3: rgba(41, 171, 226, 0.2);
+    --ps-color3-light: rgba(41, 171, 226, 0.2);
     --ps-color4: rgb(126, 32, 32);
-    --ps-bg4: rgba(203, 56, 55, 0.2);
+    --ps-color4-light: rgba(203, 56, 55, 0.2);
     --ps-color5: rgb(107, 80, 0);
-    --ps-bg5: rgba(255, 205, 58, 0.2);
+    --ps-color5-light: rgba(255, 205, 58, 0.2);
 }
 
-.ps0 {
-    border-color: var(--ps-color0);
-    background-color: var(--ps-bg0);
+.bg-ps0 {
+    background-color: var(--ps-color0);
 }
 
-.ps1 {
-    border-color: var(--ps-color1);
-    background-color: var(--ps-bg1);
+.bg-ps0-light {
+    background-color: var(--ps-color0-light);
 }
 
-.ps2 {
-    border-color: var(--ps-color2);
-    background-color: var(--ps-bg2);
+.bg-ps1 {
+    background-color: var(--ps-color1);
 }
 
-.ps3 {
-    border-color: var(--ps-color3);
-    background-color: var(--ps-bg3);
+.bg-ps1-light {
+    background-color: var(--ps-color1-light);
 }
 
-.ps4 {
-    border-color: var(--ps-color4);
-    background-color: var(--ps-bg4);
+.bg-ps2 {
+    background-color: var(--ps-color2);
 }
 
-.ps5 {
-    border-color: var(--ps-color5);
-    background-color: var(--ps-bg5);
+.bg-ps2-light {
+    background-color: var(--ps-color2-light);
+}
+
+.bg-ps3 {
+    background-color: var(--ps-color3);
+}
+
+.bg-ps3-light {
+    background-color: var(--ps-color3-light);
+}
+
+.bg-ps4 {
+    background-color: var(--ps-color4);
+}
+
+.bg-ps4-light {
+    background-color: var(--ps-color4-light);
+}
+
+.bg-ps5 {
+    background-color: var(--ps-color5);
+}
+
+.bg-ps5-light {
+    background-color: var(--ps-color5-light);
+}
+
+.text-ps0 {
+    color: var(--ps-color0);
+}
+
+.text-ps0-light {
+    color: var(--ps-color0-light);
+}
+
+.text-ps1 {
+    color: var(--ps-color1);
+}
+
+.text-ps1-light {
+    color: var(--ps-color1-light);
+}
+
+.text-ps2 {
+    color: var(--ps-color2);
+}
+
+.text-ps2-light {
+    color: var(--ps-color2-light);
+}
+
+.text-ps3 {
+    color: var(--ps-color3);
+}
+
+.text-ps3-light {
+    color: var(--ps-color3-light);
+}
+
+.text-ps4 {
+    color: var(--ps-color4);
+}
+
+.text-ps4-light {
+    color: var(--ps-color4-light);
+}
+
+.text-ps5 {
+    color: var(--ps-color5);
+}
+
+.text-ps5-light {
+    color: var(--ps-color5-light);
 }
