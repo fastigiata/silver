@@ -60,9 +60,9 @@ const StickerCreatePage = () => {
                     {
                         [ 0, 1, 2, 3, 4, 5 ].map(i => {
                             return <button key={`theme-${i}`} className={
-                                `bg-ps${i}-light w-6 h-6 rounded-full flex items-center justify-center`
+                                `bg-ps${i} w-6 h-6 rounded-full flex items-center justify-center`
                             } onClick={() => setTheme(i)}>
-                                {theme === i ? <IconCheck className={`text-ps${i} text-[14px]`}/> : null}
+                                {theme === i ? <IconCheck className={'text-white text-[14px]'}/> : null}
                             </button>
                         })
                     }
