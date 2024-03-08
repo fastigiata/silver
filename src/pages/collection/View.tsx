@@ -1,4 +1,4 @@
-import type { LoaderFunctionArgs } from 'react-router-dom'
+import type { ActionFunctionArgs, LoaderFunctionArgs } from 'react-router-dom'
 import { useLoaderData, useNavigate, useParams } from 'react-router-dom'
 import { CollectionDB } from '@/db/collection.ts'
 import { StickerDB } from '@/db/sticker.ts'
@@ -22,8 +22,12 @@ const ViewView = ({ collection, stickers }: {
     const params = useParams()
     const navigate = useNavigate()
 
-    const handleNav = (to: 'create' | 'modify') => {
+    const handleCollectionNav = (to: 'create' | 'modify') => {
         navigate(`/collection/${params.collectionId}/${to}`)
+    }
+
+    const handleDelete = (sticker: ISticker) => {
+        console.log('delete', sticker)
     }
 
     return (
@@ -39,14 +43,22 @@ const ViewView = ({ collection, stickers }: {
                         {collection.desc}
                     </div>
                 </div>
-                <ActionButton className={'ml-2 text-primary'} Icon={IconCreate} onClick={() => handleNav('create')}/>
-                <ActionButton className={'ml-2 text-primary'} Icon={IconEdit} onClick={() => handleNav('modify')}/>
+                <ActionButton
+                    className={'ml-2 text-primary'} Icon={IconCreate}
+                    onClick={() => handleCollectionNav('create')}/>
+                <ActionButton
+                    className={'ml-2 text-primary'} Icon={IconEdit}
+                    onClick={() => handleCollectionNav('modify')}/>
             </div>
             <AwesomeScrollbar className={'w-full flex-1 pb-4'}>
                 <div className={'sticker-card-wrapper w-full'}>
                     {
                         stickers.map(sticker => {
-                            return <StickerCard key={sticker.id} sticker={sticker}/>
+                            return <StickerCard
+                                key={sticker.id}
+                                sticker={sticker}
+                                onModify={() => navigate(`/sticker/${sticker.id}/modify`)}
+                                onDelete={() => handleDelete(sticker)}/>
                         })
                     }
                 </div>
@@ -83,6 +95,12 @@ CollectionViewPage.loader = async ({ params }: LoaderFunctionArgs) => {
     ])
 
     return { task } satisfies CollectionViewLoaderData
+}
+
+CollectionViewPage.action = async ({ params }: ActionFunctionArgs) => {
+    // TODO: handle sticker delete
+    console.log(params)
+    return null
 }
 
 export default CollectionViewPage
