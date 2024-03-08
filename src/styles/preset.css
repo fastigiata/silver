@@ -13,6 +13,30 @@
     --ps-color5-light: rgba(255, 205, 58, 0.2);
 }
 
+.border-ps0 {
+    border-color: var(--ps-color0);
+}
+
+.border-ps1 {
+    border-color: var(--ps-color1);
+}
+
+.border-ps2 {
+    border-color: var(--ps-color2);
+}
+
+.border-ps3 {
+    border-color: var(--ps-color3);
+}
+
+.border-ps4 {
+    border-color: var(--ps-color4);
+}
+
+.border-ps5 {
+    border-color: var(--ps-color5);
+}
+
 .bg-ps0 {
     background-color: var(--ps-color0);
 }
