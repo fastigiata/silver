@@ -23,6 +23,7 @@
         "air-datepicker": "^3.4.0",
         "bst-typed": "^1.52.0",
         "chart.js": "^4.4.1",
+        "dayjs": "^1.11.10",
         "dexie": "^3.2.5",
         "jotai": "^2.6.2",
         "mac-scrollbar": "^0.13.6",
