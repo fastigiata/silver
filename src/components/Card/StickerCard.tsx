@@ -55,6 +55,7 @@ const StickerCard = ({ sticker, onModify, onDelete }: StickerCardProps) => {
                 <div className={
                     `bg-ps${themeId}-light text-ps${themeId} ` +
                     'w-full h-full px-2 flex items-center space-x-1'}>
+                    {/* TODO: ! tooltip for ctime/mtime */}
                     <IconEdit className={'as-button w-6 h-6'} onClick={onModify}/>
                     <IconDelete className={'as-button w-6 h-6'} onClick={onDelete}/>
                 </div>
