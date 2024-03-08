@@ -57,36 +57,15 @@ const StickerCreatePage = () => {
 
                 <div className={'w-full h-12 flex items-center justify-between'}>
                     <div className={'text-secondary font-secondary'}>Theme</div>
-                    <button className={
-                        'w-6 h-6 rounded-full bg-psbg0 flex items-center justify-center'
-                    } onClick={() => setTheme(0)}>
-                        {theme === 0 ? <IconCheck className={'text-ps0 text-[14px]'}/> : null}
-                    </button>
-                    <button className={
-                        'w-6 h-6 rounded-full bg-psbg1 flex items-center justify-center'
-                    } onClick={() => setTheme(1)}>
-                        {theme === 1 ? <IconCheck className={'text-ps1 text-[14px]'}/> : null}
-                    </button>
-                    <button className={
-                        'w-6 h-6 rounded-full bg-psbg2 flex items-center justify-center'
-                    } onClick={() => setTheme(2)}>
-                        {theme === 2 ? <IconCheck className={'text-ps2 text-[14px]'}/> : null}
-                    </button>
-                    <button className={
-                        'w-6 h-6 rounded-full bg-psbg3 flex items-center justify-center'
-                    } onClick={() => setTheme(3)}>
-                        {theme === 3 ? <IconCheck className={'text-ps3 text-[14px]'}/> : null}
-                    </button>
-                    <button className={
-                        'w-6 h-6 rounded-full bg-psbg4 flex items-center justify-center'
-                    } onClick={() => setTheme(4)}>
-                        {theme === 4 ? <IconCheck className={'text-ps4 text-[14px]'}/> : null}
-                    </button>
-                    <button className={
-                        'w-6 h-6 rounded-full bg-psbg5 flex items-center justify-center'
-                    } onClick={() => setTheme(5)}>
-                        {theme === 5 ? <IconCheck className={'text-ps5 text-[14px]'}/> : null}
-                    </button>
+                    {
+                        [ 0, 1, 2, 3, 4, 5 ].map(i => {
+                            return <button key={`theme-${i}`} className={
+                                `bg-ps${i}-light w-6 h-6 rounded-full flex items-center justify-center`
+                            } onClick={() => setTheme(i)}>
+                                {theme === i ? <IconCheck className={`text-ps${i} text-[14px]`}/> : null}
+                            </button>
+                        })
+                    }
                 </div>
 
                 <div className={'w-full h-9 flex items-center justify-between space-x-2'}>
