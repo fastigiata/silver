@@ -29,7 +29,8 @@ const StickerCard = ({ sticker, onModify, onDelete }: StickerCardProps) => {
 
     return (
         <div className={
-            'group relative w-44 h-56 rounded-[4px] bg-white shadow-card hover:shadow-card_hover overflow-hidden flex flex-col'
+            'sticker-card group relative rounded-[4px] bg-white ' +
+            'shadow-card hover:shadow-card_hover overflow-hidden flex flex-col'
         }>
             <div className={
                 `bg-ps${themeId} ` +

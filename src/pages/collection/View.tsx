@@ -9,6 +9,7 @@ import { ExceptionView } from '@/components/ExceptionView.tsx'
 import { ActionButton } from '@/components/Button.tsx'
 import { IconCreate, IconEdit } from '@/components/Icons.tsx'
 import { StickerCard } from '@/components/Card/StickerCard.tsx'
+import { AwesomeScrollbar } from '@/components/AwesomeScrollbar.tsx'
 
 type CollectionViewLoaderData = {
     task: Promise<[ ICollection | null, ISticker[] ]>
@@ -41,13 +42,15 @@ const ViewView = ({ collection, stickers }: {
                 <ActionButton className={'ml-2 text-primary'} Icon={IconCreate} onClick={() => handleNav('create')}/>
                 <ActionButton className={'ml-2 text-primary'} Icon={IconEdit} onClick={() => handleNav('modify')}/>
             </div>
-            <div className={'w-full flex-1 grid grid-cols-[repeat(auto-fill,176px)] gap-4'}>
-                {
-                    stickers.map(sticker => {
-                        return <StickerCard key={sticker.id} sticker={sticker}/>
-                    })
-                }
-            </div>
+            <AwesomeScrollbar className={'w-full flex-1 pb-4'}>
+                <div className={'sticker-card-wrapper w-full'}>
+                    {
+                        stickers.map(sticker => {
+                            return <StickerCard key={sticker.id} sticker={sticker}/>
+                        })
+                    }
+                </div>
+            </AwesomeScrollbar>
         </div>
     )
 }
