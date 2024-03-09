@@ -47,6 +47,7 @@ const routes: RouteObject[] = [
                         path: 'view',
                         handle: { showBack: true } satisfies RouteHandle,
                         loader: CollectionViewPage.loader,
+                        action: CollectionViewPage.action,
                         element: <CollectionViewPage/>
                     },
                     {

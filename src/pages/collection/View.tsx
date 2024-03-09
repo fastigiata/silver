@@ -1,5 +1,5 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from 'react-router-dom'
-import { useLoaderData, useNavigate, useParams } from 'react-router-dom'
+import { useLoaderData, useNavigate, useParams, useSubmit } from 'react-router-dom'
 import { CollectionDB } from '@/db/collection.ts'
 import { StickerDB } from '@/db/sticker.ts'
 import type { ISticker } from '@/_types/sticker.ts'
@@ -15,19 +15,27 @@ type CollectionViewLoaderData = {
     task: Promise<[ ICollection | null, ISticker[] ]>
 }
 
+type CollectionViewActionConfig = {
+    stickerId: string
+}
+
 const ViewView = ({ collection, stickers }: {
     collection: ICollection,
     stickers: ISticker[]
 }) => {
     const params = useParams()
     const navigate = useNavigate()
+    const submit = useSubmit()
 
     const handleCollectionNav = (to: 'create' | 'modify') => {
         navigate(`/collection/${params.collectionId}/${to}`)
     }
 
-    const handleDelete = (sticker: ISticker) => {
-        console.log('delete', sticker)
+    const handleDelete = (stickerId: string) => {
+        submit(
+            { stickerId } satisfies  CollectionViewActionConfig,
+            { method: 'DELETE', encType: 'application/json' }
+        )
     }
 
     return (
@@ -58,7 +66,7 @@ const ViewView = ({ collection, stickers }: {
                                 key={sticker.id}
                                 sticker={sticker}
                                 onModify={() => navigate(`/sticker/${sticker.id}/modify`)}
-                                onDelete={() => handleDelete(sticker)}/>
+                                onDelete={() => handleDelete(sticker.id)}/>
                         })
                     }
                 </div>
@@ -97,9 +105,11 @@ CollectionViewPage.loader = async ({ params }: LoaderFunctionArgs) => {
     return { task } satisfies CollectionViewLoaderData
 }
 
-CollectionViewPage.action = async ({ params }: ActionFunctionArgs) => {
-    // TODO: handle sticker delete
-    console.log(params)
+CollectionViewPage.action = async ({ params, request }: ActionFunctionArgs) => {
+    const collectionId = params.collectionId!
+    const { stickerId } = await request.json() as CollectionViewActionConfig
+
+    await StickerDB.remove(collectionId, stickerId)
     return null
 }
 
