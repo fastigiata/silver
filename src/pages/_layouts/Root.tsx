@@ -4,8 +4,8 @@ import { logImpl } from '@/platform_impl/log.ts'
 import { Spacer } from '@/components/Spacer.tsx'
 import { IconCross, IconMin } from '@/components/Icons.tsx'
 import { manageImpl } from '@/platform_impl/manage.ts'
-import { Picker } from '@/components/Picker/impl.tsx'
 import type { RouteHandle } from '@/_types/route.ts'
+import { Tooltip } from 'react-tooltip'
 
 const ConditionalBack = () => {
     const navigate = useNavigate()
@@ -25,7 +25,8 @@ const RootLayout = () => {
             'w-full h-full rounded-app bg-transparent border-app overflow-hidden flex flex-col items-center'
         }>
             {/* tooltips */}
-            <Picker/>
+            <Tooltip id={'sticker-meta'} className={'z-10'} style={{ fontSize: 12 }}/>
+            {/* <Picker/> */}
 
             {/* header */}
             <div className={
