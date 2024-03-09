@@ -2,6 +2,7 @@ import type { ICollection } from '@/_types/collection.ts'
 import { IconEdit } from '@/components/Icons.tsx'
 import { IconDelete } from '@/components/Icons.tsx'
 import { ActionButton } from '@/components/Button.tsx'
+import dayjs from 'dayjs'
 
 type CollectionCardProps = {
     collection: ICollection,
@@ -32,9 +33,9 @@ const CollectionCard = ({ collection, onClick, onModify, onDelete }: CollectionC
                 {desc}
             </div>
             <div className={'w-full text-tertiary text-[10px] font-tertiary font-JBMono leading-[16px]'}>
-                <span>Created {new Date(ctime).toLocaleString()}</span>
+                <span>Created {dayjs(ctime).format('YYYY-MM-DD HH:mm')}</span>
                 <span> • </span>
-                <span>Modified {new Date(mtime).toLocaleString()}</span>
+                <span>Modified {dayjs(mtime).format('YYYY-MM-DD HH:mm')}</span>
             </div>
 
             <div className={'collection-card-badge text-secondary text-[14px] font-secondary'}>
