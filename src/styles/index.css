@@ -71,14 +71,15 @@ textarea {
 
 .sticker-card {
     width: 176px;
-    height: 224px;
+    /*height: 224px;*/
+    max-height: 224px;
 }
 
 .sticker-card-wrapper {
     display: grid;
     gap: 16px;
     grid-template-columns: repeat(auto-fill, 176px);
-    grid-template-rows: repeat(auto-fill, 224px);
+    /*grid-template-rows: repeat(auto-fill, 224px);*/
 }
 
 /* third party */
