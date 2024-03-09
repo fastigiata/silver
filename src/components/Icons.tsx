@@ -10,10 +10,10 @@ type IconButtonProps = IconProps & { icon?: Omit<IconProps, 'onClick'> }
 type ExtendedIcon = ForwardRefExoticComponent<IconProps> & { Button: FC<IconButtonProps> }
 
 const buildIcon = (svg: ReactNode) => {
-    const icon = forwardRef<HTMLSpanElement, IconProps>(({ className, style, onClick }, ref) => {
+    const icon = forwardRef<HTMLSpanElement, IconProps>(({ className, style, onClick, ...props }, ref) => {
         return (
             <span
-                ref={ref} className={className}
+                ref={ref} className={className} {...props}
                 style={{ display: 'inline-flex', justifyContent: 'center', alignItems: 'center', ...style }}
                 onClick={onClick}>
                 {svg}
@@ -179,6 +179,14 @@ const IconTriDot = buildIcon(
     </svg>
 )
 
+const IconWarning = buildIcon(
+    <svg width="1em" height="1em" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M0.355591 16C0.355591 24.64 7.36003 31.6444 16 31.6444C24.64 31.6444 31.6445 24.64 31.6445 16C31.6445 7.35997 24.64 0.35553 16 0.35553C7.36003 0.35553 0.355591 7.35997 0.355591 16ZM28.8 16C28.8 19.3947 27.4515 22.6505 25.051 25.0509C22.6505 27.4514 19.3948 28.8 16 28.8C12.6053 28.8 9.34953 27.4514 6.94907 25.0509C4.5486 22.6505 3.20004 19.3947 3.20004 16C3.20004 12.6052 4.5486 9.34947 6.94907 6.94901C9.34953 4.54854 12.6053 3.19997 16 3.19997C19.3948 3.19997 22.6505 4.54854 25.051 6.94901C27.4515 9.34947 28.8 12.6052 28.8 16ZM14.5778 10.3111C14.5778 9.93389 14.7277 9.57214 14.9944 9.30542C15.2611 9.0387 15.6228 8.88886 16 8.88886C16.3772 8.88886 16.739 9.0387 17.0057 9.30542C17.2724 9.57214 17.4223 9.93389 17.4223 10.3111V17.4222C17.4223 17.7994 17.2724 18.1611 17.0057 18.4279C16.739 18.6946 16.3772 18.8444 16 18.8444C15.6228 18.8444 15.2611 18.6946 14.9944 18.4279C14.7277 18.1611 14.5778 17.7994 14.5778 17.4222V10.3111ZM16 20.2666C15.8132 20.2666 15.6283 20.3034 15.4557 20.3748C15.2831 20.4463 15.1263 20.5511 14.9942 20.6831C14.8621 20.8152 14.7574 20.972 14.6859 21.1446C14.6144 21.3171 14.5776 21.5021 14.5776 21.6889C14.5776 21.8756 14.6144 22.0606 14.6859 22.2332C14.7574 22.4057 14.8621 22.5625 14.9942 22.6946C15.1263 22.8267 15.2831 22.9314 15.4557 23.0029C15.6283 23.0743 15.8132 23.1111 16 23.1111C16.3772 23.111 16.7389 22.9612 17.0056 22.6944C17.2722 22.4277 17.422 22.066 17.422 21.6889C17.422 21.3117 17.2722 20.95 17.0056 20.6833C16.7389 20.4166 16.3772 20.2667 16 20.2666Z"
+            fill="currentColor"/>
+    </svg>
+)
+
 export type {
     IconProps,
     IconButtonProps,
@@ -198,4 +206,5 @@ export {
     IconSetting,
     IconStar,
     IconTriDot,
+    IconWarning,
 }
