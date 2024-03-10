@@ -1,5 +1,5 @@
 import type { LoaderFunctionArgs } from 'react-router-dom'
-import { useFetcher, useLoaderData, useNavigate } from 'react-router-dom'
+import { useLoaderData, useNavigate, useSubmit } from 'react-router-dom'
 import { CollectionDB } from '@/db/collection.ts'
 import type { ICollection } from '@/_types/collection.ts'
 import { InputMultiLine, InputSingleLine } from '@/components/Input.tsx'
@@ -18,15 +18,15 @@ type CollectionModifyActionConfig = {
 }
 
 const ModifyView = ({ collection }: { collection: ICollection }) => {
-    const fetcher = useFetcher()
+    const submit = useSubmit()
     const navigate = useNavigate()
 
     const [ name, setName ] = useState(collection.name)
     const [ desc, setDesc ] = useState(collection.desc)
 
     const handleSubmit = () => {
-        fetcher.submit(
-            { name, desc },
+        submit(
+            { name, desc } satisfies CollectionModifyActionConfig,
             { method: 'PUT', encType: 'application/json' }
         )
     }
@@ -56,7 +56,7 @@ const ModifyView = ({ collection }: { collection: ICollection }) => {
                     onClick={() => navigate(-1)}/>
                 <PrimaryButton
                     className={'flex-1'} text={'Confirm'}
-                    disabled={name.length === 0 || fetcher.state !== 'idle'}
+                    disabled={name.length === 0}
                     onClick={handleSubmit}/>
             </div>
         </div>
@@ -82,7 +82,7 @@ const CollectionModifyPage = () => {
     )
 }
 
-CollectionModifyPage.loader = async ({ params }: LoaderFunctionArgs) => {
+CollectionModifyPage.loader = ({ params }: LoaderFunctionArgs) => {
     return { collection: CollectionDB.get(params.collectionId!) }
 }
 

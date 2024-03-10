@@ -1,6 +1,6 @@
 import type { ActionFunctionArgs } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
-import { useAsyncValue, useFetcher, useLoaderData } from 'react-router-dom'
+import { useNavigate, useSubmit } from 'react-router-dom'
+import { useAsyncValue, useLoaderData } from 'react-router-dom'
 import { DeferView } from '@/components/Loading.tsx'
 import { CollectionDB } from '@/db/collection.ts'
 import type { ICollection } from '@/_types/collection.ts'
@@ -18,7 +18,7 @@ type DashboardActionConfig = {
 const CollectionList = () => {
     const collections = useAsyncValue() as ICollection[]
     const navigate = useNavigate()
-    const fetcher = useFetcher()
+    const submit = useSubmit()
 
     return collections.map(collection => {
         return <CollectionCard
@@ -27,7 +27,7 @@ const CollectionList = () => {
             onClick={() => navigate(`/collection/${collection.id}/view`)}
             onModify={() => navigate(`/collection/${collection.id}/modify`)}
             onDelete={() => {
-                fetcher.submit(
+                submit(
                     { id: collection.id } satisfies DashboardActionConfig,
                     { method: 'DELETE', encType: 'application/json' }
                 )
