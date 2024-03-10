@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid'
 import { dbImpl } from '@/db/base.ts'
 import type { ICollection } from '@/_types/collection.ts'
 
-type CollectionPatch = {
+export type CollectionPatch = {
     name?: string | null
     desc?: string | null
 }

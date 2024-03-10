@@ -2,8 +2,9 @@ import { nanoid } from 'nanoid'
 import { dbImpl } from '@/db/base.ts'
 import type { ISticker } from '@/_types/sticker.ts'
 
-type StickerPatch = {
-    cid?: string | null
+export type StickerPatch = {
+    // FIXME: separate the 'cid' field into single patch
+    // cid?: string | null
     title?: string | null
     content?: string | null
     alarm?: number | null
@@ -77,6 +78,8 @@ abstract class StickerDB {
 
     /**
      * update the sticker with the given id
+     *
+     * this does not change the 'cid' field, see {@link StickerDB.transfer} for that
      */
     static async update(id: string, tobe: StickerPatch): Promise<boolean> {
         // eslint-disable-next-line eqeqeq
@@ -84,39 +87,39 @@ abstract class StickerDB {
         // eslint-disable-next-line eqeqeq
         if (tobe.content == null) delete tobe.content
         // eslint-disable-next-line eqeqeq
-        if (tobe.cid == null) delete tobe.cid
-        // eslint-disable-next-line eqeqeq
         if (tobe.alarm == null) delete tobe.alarm
         // eslint-disable-next-line eqeqeq
         if (tobe.theme == null) delete tobe.theme
 
-        // if the 'cid' field is updated,
-        // we need to update the 'count' field of the collection as well
-        if (!!tobe.cid) {
-            return dbImpl.transaction(
-                'rw',
-                [ dbImpl.collections, dbImpl.stickers ],
-                async () => {
-                    const _old = await dbImpl.stickers.get(id)
-                    if (!_old) return false
+        const _re = await dbImpl.stickers.update(id, { ...tobe, mtime: Date.now() })
+        return _re === 1
+    }
 
-                    // 1. update the sticker
-                    const _re = await dbImpl.stickers.update(id, { ...tobe, mtime: Date.now() })
+    /**
+     * transfer the sticker with the given id
+     * from the collection now to the collection with the given id `to`
+     */
+    static async transfer(id: string, to: string): Promise<boolean> {
+        return dbImpl.transaction(
+            'rw',
+            [ dbImpl.collections, dbImpl.stickers ],
+            async () => {
+                const _old = await dbImpl.stickers.get(id)
+                if (!_old) return false
 
-                    // 2. update the count of the old collection and the new collection
-                    const _count1 = await dbImpl.stickers.where('cid').equals(_old.cid).count()
-                    await dbImpl.collections.update(_old.cid, { count: _count1 })
-                    const _count2 = await dbImpl.stickers.where('cid').equals(tobe.cid!).count()
-                    await dbImpl.collections.update(tobe.cid!, { count: _count2 })
+                // 1. update the sticker
+                const _re = await dbImpl.stickers.update(id, { cid: to, mtime: Date.now() })
 
-                    // return true if the update is successful
-                    return _re === 1
-                }
-            )
-        } else {
-            const _re = await dbImpl.stickers.update(id, { ...tobe, mtime: Date.now() })
-            return _re === 1
-        }
+                // 2. update the count of the old collection and the new collection
+                const _count1 = await dbImpl.stickers.where('cid').equals(_old.cid).count()
+                await dbImpl.collections.update(_old.cid, { count: _count1 })
+                const _count2 = await dbImpl.stickers.where('cid').equals(to).count()
+                await dbImpl.collections.update(to, { count: _count2 })
+
+                // return true if the update is successful
+                return _re === 1
+            }
+        )
     }
 
     /**
