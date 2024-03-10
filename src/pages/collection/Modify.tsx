@@ -1,5 +1,6 @@
 import type { LoaderFunctionArgs } from 'react-router-dom'
 import { useLoaderData, useNavigate, useSubmit } from 'react-router-dom'
+import type { CollectionPatch } from '@/db/collection.ts'
 import { CollectionDB } from '@/db/collection.ts'
 import type { ICollection } from '@/_types/collection.ts'
 import { InputMultiLine, InputSingleLine } from '@/components/Input.tsx'
@@ -12,11 +13,6 @@ type CollectionModifyLoaderData = {
     collection: Promise<ICollection | null>
 }
 
-type CollectionModifyActionConfig = {
-    name: string
-    desc: string
-}
-
 const ModifyView = ({ collection }: { collection: ICollection }) => {
     const submit = useSubmit()
     const navigate = useNavigate()
@@ -26,7 +22,7 @@ const ModifyView = ({ collection }: { collection: ICollection }) => {
 
     const handleSubmit = () => {
         submit(
-            { name, desc } satisfies CollectionModifyActionConfig,
+            { name, desc } satisfies CollectionPatch,
             { method: 'PUT', encType: 'application/json' }
         )
     }
@@ -87,8 +83,8 @@ CollectionModifyPage.loader = ({ params }: LoaderFunctionArgs) => {
 }
 
 CollectionModifyPage.action = async ({ request, params }: LoaderFunctionArgs) => {
-    const form = await request.json() as CollectionModifyActionConfig
-    const ok = await CollectionDB.update(params.collectionId!, form)
+    const patch = await request.json() as CollectionPatch
+    const ok = await CollectionDB.update(params.collectionId!, patch)
 
     // if success, go back to previous page
     if (ok) history.back()
