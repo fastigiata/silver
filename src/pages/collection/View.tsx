@@ -8,6 +8,7 @@ import type { ICollection } from '@/_types/collection.ts'
 import { ExceptionView } from '@/components/ExceptionView.tsx'
 import { ActionButton } from '@/components/Button.tsx'
 import { IconCreate, IconEdit } from '@/components/Icons.tsx'
+import type { StickerAction } from '@/components/Card/StickerCard.tsx'
 import { StickerCard } from '@/components/Card/StickerCard.tsx'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar.tsx'
 
@@ -31,12 +32,30 @@ const ViewView = ({ collection, stickers }: {
         navigate(`/collection/${params.collectionId}/${to}`)
     }
 
-    const handleDelete = (stickerId: string) => {
-        submit(
-            { stickerId } satisfies  CollectionViewActionConfig,
-            { method: 'DELETE', encType: 'application/json' }
-        )
+    const handleStickerAction = (stickerId: string, action: StickerAction) => {
+        switch (action) {
+            case 'transfer':
+            // TODO: navigate to transfer page
+                console.log('TODO: navigate to transfer page')
+                break
+            case 'view':
+            // TODO: open a new tab to view the sticker
+                console.log('TODO: open a new tab to view the sticker')
+                break
+            case 'modify':
+                navigate(`/sticker/${stickerId}/modify`)
+                break
+            case 'delete':
+                submit({ stickerId } satisfies  CollectionViewActionConfig, {
+                    method: 'DELETE',
+                    encType: 'application/json'
+                })
+                break
+            default:
+                break
+        }
     }
+
 
     return (
         <div className={'w-full h-full p-4 flex flex-col items-start justify-start'}>
@@ -63,10 +82,8 @@ const ViewView = ({ collection, stickers }: {
                     {
                         stickers.map(sticker => {
                             return <StickerCard
-                                key={sticker.id}
-                                sticker={sticker}
-                                onModify={() => navigate(`/sticker/${sticker.id}/modify`)}
-                                onDelete={() => handleDelete(sticker.id)}/>
+                                key={sticker.id} sticker={sticker}
+                                onAction={action => handleStickerAction(sticker.id, action)}/>
                         })
                     }
                 </div>

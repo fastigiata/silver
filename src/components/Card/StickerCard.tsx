@@ -1,12 +1,6 @@
 import type { ISticker } from '@/_types/sticker.ts'
-import { IconBell, IconDelete, IconEdit, IconTriDot } from '@/components/Icons.tsx'
+import { IconAbout, IconBell, IconDelete, IconEdit, IconMax, IconTransfer } from '@/components/Icons.tsx'
 import dayjs from 'dayjs'
-
-type StickerCardProps = {
-    sticker: ISticker,
-    onModify?: VoidFunction
-    onDelete?: VoidFunction
-}
 
 const AlarmBanner = ({ alarm }: { alarm?: number | null }) => {
     if (!alarm) return null
@@ -24,7 +18,14 @@ const AlarmBanner = ({ alarm }: { alarm?: number | null }) => {
     )
 }
 
-const StickerCard = ({ sticker, onModify, onDelete }: StickerCardProps) => {
+export type StickerAction = 'transfer' | 'view' | 'modify' | 'delete'
+
+type StickerCardProps = {
+    sticker: ISticker,
+    onAction: (action: StickerAction) => void
+}
+
+const StickerCard = ({ sticker, onAction }: StickerCardProps) => {
     const themeId = sticker.theme ?? 0
 
     return (
@@ -55,13 +56,31 @@ const StickerCard = ({ sticker, onModify, onDelete }: StickerCardProps) => {
                 <div className={
                     `bg-ps${themeId}-light text-ps${themeId} ` +
                     'w-full h-full px-2 flex items-center space-x-1'}>
-                    <IconTriDot
+                    <IconAbout
                         className={'as-button w-6 h-6'}
                         data-tooltip-id={'sticker-meta'}
-                        data-tooltip-html={`Created ${dayjs(sticker.ctime).format('YYYY-MM-DD HH:mm')}<br/>Modified ${dayjs(sticker.mtime).format('YYYY-MM-DD HH:mm')}`}
-                        onClick={onModify}/>
-                    <IconEdit className={'as-button w-6 h-6'} onClick={onModify}/>
-                    <IconDelete className={'as-button w-6 h-6'} onClick={onDelete}/>
+                        data-tooltip-html={`Created ${dayjs(sticker.ctime).format('YYYY-MM-DD HH:mm')}<br/>Modified ${dayjs(sticker.mtime).format('YYYY-MM-DD HH:mm')}`}/>
+                    <IconTransfer
+                        className={'as-button w-6 h-6'}
+                        data-tooltip-id={'sticker-meta'}
+                        data-tooltip-content={'Transfer'}
+                        onClick={() => onAction('transfer')}/>
+                    <IconMax
+                        className={'as-button w-6 h-6'}
+                        data-tooltip-id={'sticker-meta'}
+                        data-tooltip-content={'View'}
+                        onClick={() => onAction('view')}/>
+                    <IconEdit
+                        className={'as-button w-6 h-6'}
+                        data-tooltip-id={'sticker-meta'}
+                        data-tooltip-content={'Modify'}
+                        onClick={() => onAction('modify')}/>
+                    <i className="flex-1"/>
+                    <IconDelete
+                        className={'as-button w-6 h-6 text-red'}
+                        data-tooltip-id={'sticker-meta'}
+                        data-tooltip-content={'Delete'}
+                        onClick={() => onAction('delete')}/>
                 </div>
             </div>
         </div>
