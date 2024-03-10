@@ -118,6 +118,14 @@ abstract class StickerDB {
             return _re === 1
         }
     }
+
+    /**
+     * get the sticker with the given id
+     */
+    static async get(id: string): Promise<ISticker | null> {
+        const sticker = await dbImpl.stickers.get(id)
+        return sticker ?? null
+    }
 }
 
 export {
