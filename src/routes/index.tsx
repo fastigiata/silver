@@ -77,6 +77,8 @@ const routes: RouteObject[] = [
                     {
                         path: 'modify',
                         handle: { showBack: true } satisfies RouteHandle,
+                        loader: StickerModifyPage.loader,
+                        action: StickerModifyPage.action,
                         element: <StickerModifyPage/>
                     },
                 ]
