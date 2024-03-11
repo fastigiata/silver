@@ -53,6 +53,7 @@ const ModifyView = ({ sticker }: { sticker: ISticker }) => {
             <DateTimePicker
                 className={'w-full h-12 px-3 bg-[#f7f7f7] rounded-[4px] text-[14px]'}
                 placeholder={'Alarm (optional)'}
+                initialDate={alarm}
                 onSelected={setAlarm}/>
 
             <div className={'w-full h-12 flex items-center justify-between'}>

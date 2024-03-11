@@ -5,15 +5,17 @@ import AirDatepicker from 'air-datepicker'
 type DateTimePickerProps = {
     className?: string
     placeholder?: string
+    initialDate?: Date | null
     onSelected: (date: Date | null) => void
 }
-const DateTimePicker = ({ className, placeholder, onSelected }: DateTimePickerProps) => {
+const DateTimePicker = ({ className, placeholder, initialDate, onSelected }: DateTimePickerProps) => {
     const ref = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
         const dp = new AirDatepicker(ref.current!, {
             locale: enUS,
             // autoClose: true,
+            selectedDates: !!initialDate ? [ initialDate ] : undefined,
             isMobile: true,
             toggleSelected: false,
             timepicker: true,
