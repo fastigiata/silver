@@ -45,6 +45,7 @@ const StickerCard = ({ sticker, onAction }: StickerCardProps) => {
                 // `bg-ps${themeId}-light ` +
                 'w-full flex-1 my-2 px-2 text-secondary text-[14px] font-secondary leading-[22px] text-justify break-words whitespace-pre-wrap line-clamp-[8]'
             }>
+                {/* FIXME: consider use 'textarea' for display */}
                 {sticker.content}
             </AwesomeScrollbar>
 
