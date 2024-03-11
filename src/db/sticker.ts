@@ -3,8 +3,6 @@ import { dbImpl } from '@/db/base.ts'
 import type { ISticker } from '@/_types/sticker.ts'
 
 export type StickerPatch = {
-    // FIXME: separate the 'cid' field into single patch
-    // cid?: string | null
     title?: string | null
     content?: string | null
     alarm?: number | null

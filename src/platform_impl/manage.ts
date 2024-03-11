@@ -6,7 +6,6 @@ interface AppManager {
     min(): Promise<void>
 
     close(): Promise<void>
-
 }
 
 class WebManager implements AppManager {
@@ -17,13 +16,10 @@ class WebManager implements AppManager {
     async close(): Promise<void> {
         alert('Not Supported on Web')
     }
-
 }
 
 class EmbedManager {
     min() {
-        // TODO: Implement
-        console.debug('TODO')
         return getCurrent().minimize()
     }
 
