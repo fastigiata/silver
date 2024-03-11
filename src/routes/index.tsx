@@ -72,6 +72,7 @@ const routes: RouteObject[] = [
                     {
                         path: 'view',
                         handle: { showBack: true } satisfies RouteHandle,
+                        loader: StickerViewPage.loader,
                         element: <StickerViewPage/>
                     },
                     {

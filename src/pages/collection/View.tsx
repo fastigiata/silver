@@ -20,7 +20,7 @@ type CollectionViewActionConfig = {
     stickerId: string
 }
 
-const ViewView = ({ collection, stickers }: {
+const Inner = ({ collection, stickers }: {
     collection: ICollection,
     stickers: ISticker[]
 }) => {
@@ -35,12 +35,11 @@ const ViewView = ({ collection, stickers }: {
     const handleStickerAction = (stickerId: string, action: StickerAction) => {
         switch (action) {
             case 'transfer':
-            // TODO: navigate to transfer page
+                // TODO: navigate to transfer page
                 console.log('TODO: navigate to transfer page')
                 break
             case 'view':
-            // TODO: open a new tab to view the sticker
-                console.log('TODO: open a new tab to view the sticker')
+                navigate(`/sticker/${stickerId}/view`)
                 break
             case 'modify':
                 navigate(`/sticker/${stickerId}/modify`)
@@ -55,7 +54,6 @@ const ViewView = ({ collection, stickers }: {
                 break
         }
     }
-
 
     return (
         <div className={'w-full h-full p-4 flex flex-col items-start justify-start'}>
@@ -105,7 +103,7 @@ const CollectionViewPage = () => {
                             'Failed to load collection data, or it does not exist.'
                         }/>
                     }
-                    return <ViewView collection={collection} stickers={stickers}/>
+                    return <Inner collection={collection} stickers={stickers}/>
                 }}/>
         </div>
     )
