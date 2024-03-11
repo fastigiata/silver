@@ -12,7 +12,7 @@ const AwesomeScrollbar = ({ className, style, children }: AwesomeScrollbarProps)
         <MacScrollbar
             className={className} style={style}
             trackStyle={(horizontal) => ({ [horizontal ? 'height' : 'width']: 0 })}
-            thumbStyle={(horizontal) => ({ [horizontal ? 'height' : 'width']: 6 })}>
+            thumbStyle={(horizontal) => ({ [horizontal ? 'height' : 'width']: 4 })}>
             {children}
         </MacScrollbar>
     )
