@@ -6,6 +6,8 @@ import { IconCross, IconMin } from '@/components/Icons.tsx'
 import { manageImpl } from '@/platform_impl/manage.ts'
 import type { RouteHandle } from '@/_types/route.ts'
 import { Tooltip } from 'react-tooltip'
+import { Provider as NiceModalProvider } from '@ebay/nice-modal-react'
+import { ModalImpl } from '@/modal/modal_impl.ts'
 
 const ConditionalBack = () => {
     const navigate = useNavigate()
@@ -19,7 +21,7 @@ const ConditionalBack = () => {
     ) : null
 }
 
-const RootLayout = () => {
+const RootInner = () => {
     return (
         <div className={
             'w-full h-full rounded-app bg-transparent border-app overflow-hidden flex flex-col items-center'
@@ -51,6 +53,14 @@ const RootLayout = () => {
     )
 }
 
+const RootLayout = () => {
+    return (
+        <NiceModalProvider>
+            <RootInner/>
+        </NiceModalProvider>
+    )
+}
+
 let initialized = false
 /**
  * initialize all plugins and restore necessary data from storage,
@@ -60,17 +70,16 @@ RootLayout.loader = async () => {
     // Make sure this loader only runs once per app lifecycle
     if (initialized) return null
 
+    console.log('bootLoader start')
+
     // Initialize all plugins here
     await logImpl.initialize()
-
-    // FIXME: simulate a long boot time, remove this later
-    console.log('bootLoader start')
-    await new Promise(r => setTimeout(r, 300))
-    console.log('bootLoader done')
+    ModalImpl.prepare()
 
     // Mark this loader as initialized
     initialized = true
 
+    console.log('bootLoader done')
     return null
 }
 
