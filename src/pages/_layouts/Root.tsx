@@ -27,7 +27,7 @@ const RootInner = () => {
             'w-full h-full rounded-app bg-transparent border-app overflow-hidden flex flex-col items-center'
         }>
             {/* tooltips */}
-            <Tooltip id={'sticker-meta'} className={'z-10'} style={{ fontSize: 12 }}/>
+            <Tooltip id={'base-tooltip'} className={'z-20'} style={{ fontSize: 12 }}/>
             {/* <Picker/> */}
 
             {/* header */}

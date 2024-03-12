@@ -59,27 +59,27 @@ const StickerCard = ({ sticker, onAction }: StickerCardProps) => {
                     'w-full h-full px-2 flex items-center space-x-1'}>
                     <IconAbout
                         className={'as-button w-6 h-6'}
-                        data-tooltip-id={'sticker-meta'}
+                        data-tooltip-id={'base-tooltip'}
                         data-tooltip-html={`Created ${dayjs(sticker.ctime).format('YYYY-MM-DD HH:mm')}<br/>Modified ${dayjs(sticker.mtime).format('YYYY-MM-DD HH:mm')}`}/>
                     <IconTransfer
                         className={'as-button w-6 h-6'}
-                        data-tooltip-id={'sticker-meta'}
+                        data-tooltip-id={'base-tooltip'}
                         data-tooltip-content={'Transfer'}
                         onClick={() => onAction('transfer')}/>
                     <IconMax
                         className={'as-button w-6 h-6'}
-                        data-tooltip-id={'sticker-meta'}
+                        data-tooltip-id={'base-tooltip'}
                         data-tooltip-content={'View'}
                         onClick={() => onAction('view')}/>
                     <IconEdit
                         className={'as-button w-6 h-6'}
-                        data-tooltip-id={'sticker-meta'}
+                        data-tooltip-id={'base-tooltip'}
                         data-tooltip-content={'Modify'}
                         onClick={() => onAction('modify')}/>
                     <i className="flex-1"/>
                     <IconDelete
                         className={'as-button w-6 h-6 text-red'}
-                        data-tooltip-id={'sticker-meta'}
+                        data-tooltip-id={'base-tooltip'}
                         data-tooltip-content={'Delete'}
                         onClick={() => onAction('delete')}/>
                 </div>
