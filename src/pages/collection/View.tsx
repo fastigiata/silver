@@ -15,11 +15,18 @@ import { ModalImpl } from '@/modal/modal_impl.ts'
 import { formatToN } from '@/misc/helper.ts'
 
 type CollectionViewLoaderData = {
-    task: Promise<[ICollection | null, ISticker[]]>
+    task: Promise<[ ICollection | null, ISticker[] ]>
 }
 
 type CollectionViewActionConfig = {
+    /**
+     * The sticker id to delete.
+     */
     stickerId: string
+    /**
+     * The collection id to transfer to. this only used when method is 'PUT'.
+     */
+    to?: string
 }
 
 const Inner = ({ collection, stickers }: {
@@ -44,13 +51,22 @@ const Inner = ({ collection, stickers }: {
         })
     }
 
-    const handleStickerAction = (sticker: ISticker, action: StickerAction) => {
+    const handleTransfer = async (sticker: ISticker) => {
+        const to = await ModalImpl.transfer({ initial: sticker.cid })
+        if (!to || to === sticker.cid) return
+
+        submit({ stickerId: sticker.id, to } satisfies  CollectionViewActionConfig, {
+            method: 'put',
+            encType: 'application/json'
+        })
+    }
+
+    const handleStickerAction = async (sticker: ISticker, action: StickerAction) => {
         const stickerId = sticker.id
 
         switch (action) {
             case 'transfer':
-                // TODO: navigate to transfer page
-                console.log('TODO: navigate to transfer page')
+                await handleTransfer(sticker)
                 break
             case 'view':
                 navigate(`/sticker/${stickerId}/view`)
@@ -59,7 +75,7 @@ const Inner = ({ collection, stickers }: {
                 navigate(`/sticker/${stickerId}/modify`)
                 break
             case 'delete':
-                handleDelete(sticker)
+                await handleDelete(sticker)
                 break
             default:
                 break
@@ -132,10 +148,17 @@ CollectionViewPage.loader = async ({ params }: LoaderFunctionArgs) => {
 }
 
 CollectionViewPage.action = async ({ params, request }: ActionFunctionArgs) => {
+    const method = request.method
     const collectionId = params.collectionId!
-    const { stickerId } = await request.json() as CollectionViewActionConfig
 
-    await StickerDB.remove(collectionId, stickerId)
+    if (method === 'DELETE') {
+        const { stickerId } = await request.json() as CollectionViewActionConfig
+        await StickerDB.remove(collectionId, stickerId)
+    } else if (method === 'PUT') {
+        const { stickerId, to } = await request.json() as CollectionViewActionConfig
+        await StickerDB.transfer(stickerId, to!)
+    }
+
     return null
 }
 
