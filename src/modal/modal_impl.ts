@@ -13,7 +13,7 @@ abstract class ModalImpl {
      * - true: 确认
      * - false: 取消 或 关闭
      */
-    public static showConfirm(props: ConfirmModalProps): Promise<boolean> {
+    public static confirm(props: ConfirmModalProps): Promise<boolean> {
         return show<boolean>('confirm', props)
     }
 }

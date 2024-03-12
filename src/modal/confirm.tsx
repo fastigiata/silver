@@ -1,6 +1,7 @@
 import { ModalWrapper } from '@/modal/base.tsx'
 import { useModal, create } from '@ebay/nice-modal-react'
 import { PrimaryButton, SecondaryButton } from '@/components/Button.tsx'
+import { useEffect } from 'react'
 
 export type ConfirmModalProps = {
     content: string
@@ -13,6 +14,15 @@ const ConfirmModal = create(({ content }: ConfirmModalProps) => {
         resolve(re)
         remove()
     }
+
+    useEffect(() => {
+        const cb = (ev: KeyboardEvent) => {
+            if (ev.key === 'Escape') done(false)
+        }
+
+        window.addEventListener('keydown', cb)
+        return () => window.removeEventListener('keydown', cb)
+    }, [])
 
     return (
         <ModalWrapper>
