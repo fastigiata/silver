@@ -11,9 +11,11 @@ import { IconCreate, IconEdit } from '@/components/Icons.tsx'
 import type { StickerAction } from '@/components/Card/StickerCard.tsx'
 import { StickerCard } from '@/components/Card/StickerCard.tsx'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar.tsx'
+import { ModalImpl } from '@/modal/modal_impl.ts'
+import { formatToN } from '@/misc/helper.ts'
 
 type CollectionViewLoaderData = {
-    task: Promise<[ ICollection | null, ISticker[] ]>
+    task: Promise<[ICollection | null, ISticker[]]>
 }
 
 type CollectionViewActionConfig = {
@@ -32,7 +34,19 @@ const Inner = ({ collection, stickers }: {
         navigate(`/collection/${params.collectionId}/${to}`)
     }
 
-    const handleStickerAction = (stickerId: string, action: StickerAction) => {
+    const handleDelete = async (sticker: ISticker) => {
+        const ok = await ModalImpl.confirm({ content: `Are you sure to delete sticker "${formatToN(sticker.title, 10)}"?` })
+        if (!ok) return
+
+        submit({ stickerId: sticker.id } satisfies  CollectionViewActionConfig, {
+            method: 'DELETE',
+            encType: 'application/json'
+        })
+    }
+
+    const handleStickerAction = (sticker: ISticker, action: StickerAction) => {
+        const stickerId = sticker.id
+
         switch (action) {
             case 'transfer':
                 // TODO: navigate to transfer page
@@ -45,10 +59,7 @@ const Inner = ({ collection, stickers }: {
                 navigate(`/sticker/${stickerId}/modify`)
                 break
             case 'delete':
-                submit({ stickerId } satisfies  CollectionViewActionConfig, {
-                    method: 'DELETE',
-                    encType: 'application/json'
-                })
+                handleDelete(sticker)
                 break
             default:
                 break
@@ -81,7 +92,7 @@ const Inner = ({ collection, stickers }: {
                         stickers.map(sticker => {
                             return <StickerCard
                                 key={sticker.id} sticker={sticker}
-                                onAction={action => handleStickerAction(sticker.id, action)}/>
+                                onAction={action => handleStickerAction(sticker, action)}/>
                         })
                     }
                 </div>

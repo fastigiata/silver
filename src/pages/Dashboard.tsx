@@ -6,6 +6,8 @@ import { CollectionDB } from '@/db/collection.ts'
 import type { ICollection } from '@/_types/collection.ts'
 import { CollectionCard } from '@/components/Card/CollectionCard.tsx'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar.tsx'
+import { ModalImpl } from '@/modal/modal_impl.ts'
+import { formatToN } from '@/misc/helper.ts'
 
 type DashboardLoaderData = {
     collection: Promise<ICollection[]>
@@ -20,18 +22,23 @@ const CollectionList = () => {
     const navigate = useNavigate()
     const submit = useSubmit()
 
+    const handleDelete = async (collection: ICollection) => {
+        const ok = await ModalImpl.confirm({ content: `Are you sure to delete collection "${formatToN(collection.name, 10)}"?` })
+        if (!ok) return
+
+        submit(
+            { id: collection.id } satisfies DashboardActionConfig,
+            { method: 'DELETE', encType: 'application/json' }
+        )
+    }
+
     return collections.map(collection => {
         return <CollectionCard
             key={collection.id}
             collection={collection}
             onClick={() => navigate(`/collection/${collection.id}/view`)}
             onModify={() => navigate(`/collection/${collection.id}/modify`)}
-            onDelete={() => {
-                submit(
-                    { id: collection.id } satisfies DashboardActionConfig,
-                    { method: 'DELETE', encType: 'application/json' }
-                )
-            }}/>
+            onDelete={() => handleDelete(collection)}/>
     })
 }
 
