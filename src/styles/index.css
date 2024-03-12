@@ -21,6 +21,19 @@ input, textarea {
 
 textarea {
     resize: none;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #D9D9D9;
+        border-radius: 3px;
+    }
 }
 
 .as-button {
@@ -88,6 +101,7 @@ textarea {
     --ms-z-index: 9;
     width: 100%;
 }
+
 .ms-theme-light {
     --ms-thumb-color: #D9D9D9;
 }
