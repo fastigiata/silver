@@ -34,8 +34,6 @@ const RootInner = () => {
             <div className={
                 'z-20 w-full h-header px-4 bg-header text-header shadow-nav flex items-center'
             } data-tauri-drag-region="">
-                {/* TODO: add breadcrumb with 'handle'  */}
-                {/* <Link className={''} to={'/dashboard'}>Home</Link> */}
                 <ConditionalBack/>
 
                 <Spacer/>
