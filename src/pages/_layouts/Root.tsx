@@ -1,13 +1,13 @@
 import type { UIMatch } from 'react-router-dom'
 import { Outlet, useMatches, useNavigate } from 'react-router-dom'
-import { logImpl } from '@/platform_impl/log.ts'
 import { Spacer } from '@/components/Spacer.tsx'
 import { IconCross, IconMin } from '@/components/Icons.tsx'
 import { manageImpl } from '@/platform_impl/manage.ts'
 import type { RouteHandle } from '@/_types/route.ts'
 import { Tooltip } from 'react-tooltip'
 import { Provider as NiceModalProvider } from '@ebay/nice-modal-react'
-import { ModalImpl } from '@/modal/modal_impl.ts'
+import { ModalImpl } from '@/utils/modal.ts'
+import { LogImpl } from '@/utils/log.ts'
 
 const ConditionalBack = () => {
     const navigate = useNavigate()
@@ -68,16 +68,13 @@ RootLayout.loader = async () => {
     // Make sure this loader only runs once per app lifecycle
     if (initialized) return null
 
-    console.log('bootLoader start')
-
-    // Initialize all plugins here
-    await logImpl.initialize()
+    // Initialize all platform plugins here
+    await LogImpl.prepare()
     ModalImpl.prepare()
 
     // Mark this loader as initialized
     initialized = true
 
-    console.log('bootLoader done')
     return null
 }
 

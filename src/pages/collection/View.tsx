@@ -11,7 +11,7 @@ import { IconCreate, IconEdit } from '@/components/Icons.tsx'
 import type { StickerAction } from '@/components/Card/StickerCard.tsx'
 import { StickerCard } from '@/components/Card/StickerCard.tsx'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar.tsx'
-import { ModalImpl } from '@/modal/modal_impl.ts'
+import { ModalImpl } from '@/utils/modal.ts'
 import { formatToN } from '@/misc/helper.ts'
 
 type CollectionViewLoaderData = {

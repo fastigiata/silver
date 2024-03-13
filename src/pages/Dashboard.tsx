@@ -6,7 +6,7 @@ import { CollectionDB } from '@/db/collection.ts'
 import type { ICollection } from '@/_types/collection.ts'
 import { CollectionCard } from '@/components/Card/CollectionCard.tsx'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar.tsx'
-import { ModalImpl } from '@/modal/modal_impl.ts'
+import { ModalImpl } from '@/utils/modal.ts'
 import { formatToN } from '@/misc/helper.ts'
 
 type DashboardLoaderData = {
