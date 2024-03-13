@@ -5,7 +5,7 @@ import {
     warn,
     error,
 } from '@tauri-apps/plugin-log'
-import { isEmbed } from '@/utils/env.ts'
+import { runEmbed } from '@/utils/env.ts'
 
 interface Logger {
     initialize(): Promise<void>
@@ -88,7 +88,7 @@ class WebLogger implements Logger {
     }
 }
 
-const logImpl: Logger = isEmbed ? new EmbedLogger() : new WebLogger()
+const logImpl: Logger = runEmbed ? new EmbedLogger() : new WebLogger()
 
 export {
     logImpl

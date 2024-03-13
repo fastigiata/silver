@@ -1,5 +1,5 @@
 import { Store } from '@tauri-apps/plugin-store'
-import { isEmbed } from '@/utils/env.ts'
+import { runEmbed } from '@/utils/env.ts'
 
 /**
  * Marks a value as serializable.
@@ -79,7 +79,7 @@ class EmbedBox implements StorageBox {
     }
 }
 
-const storageImpl: StorageBox = isEmbed ? new EmbedBox() : new WebBox()
+const storageImpl: StorageBox = runEmbed ? new EmbedBox() : new WebBox()
 
 export {
     storageImpl

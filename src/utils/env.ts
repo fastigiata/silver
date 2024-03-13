@@ -1,5 +1,7 @@
-const isEmbed = ('__TAURI_INTERNALS__' in window)
+const runMode = ('__TAURI_INTERNALS__' in window) ? 'embed' : 'web'
+const runEmbed = ('__TAURI_INTERNALS__' in window)
 
 export {
-    isEmbed
+    runMode,
+    runEmbed,
 }

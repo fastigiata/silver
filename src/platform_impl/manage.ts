@@ -1,6 +1,6 @@
 import { exit } from '@tauri-apps/plugin-process'
 import { getCurrent } from '@tauri-apps/api/window'
-import { isEmbed } from '@/utils/env.ts'
+import { runEmbed } from '@/utils/env.ts'
 
 interface AppManager {
     min(): Promise<void>
@@ -28,7 +28,7 @@ class EmbedManager {
     }
 }
 
-const manageImpl: AppManager = isEmbed ? new EmbedManager() : new WebManager()
+const manageImpl: AppManager = runEmbed ? new EmbedManager() : new WebManager()
 
 export {
     manageImpl
