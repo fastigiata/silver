@@ -1,5 +1,5 @@
 import { runEmbed } from '@/utils/env.ts'
-import { debug, error, info, warn } from '@tauri-apps/plugin-log'
+import { attachConsole, debug, error, info, warn } from '@tauri-apps/plugin-log'
 
 interface LogExecutor {
     debug(s: string): void
@@ -14,6 +14,10 @@ interface LogExecutor {
 const executor: LogExecutor = runEmbed ? { debug, info, warn, error } : console
 
 abstract class LogImpl {
+    public static async prepare() {
+        if (runEmbed) await attachConsole()
+    }
+
     public static verbose(s: string) {
         executor.debug(s)
     }
