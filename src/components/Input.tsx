@@ -20,7 +20,6 @@ const InputSingleLine = ({ autoFocus, className = '', placeholder, value, onChan
 }
 
 const InputMultiLine = ({ autoFocus, className = '', placeholder, value, onChange }: InputProps) => {
-    // TODO: config scrollbar style for textarea
     return (
         <textarea
             autoFocus={autoFocus}
