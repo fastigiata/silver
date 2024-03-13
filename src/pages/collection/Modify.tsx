@@ -37,6 +37,7 @@ const ModifyView = ({ collection }: { collection: ICollection }) => {
             </p>
 
             <InputSingleLine
+                autoFocus={true}
                 className={'w-full h-12 px-3 bg-[#f7f7f7] rounded-[4px] focus:bg-[#f0f0f0] text-[14px]'}
                 placeholder={'Collection Name'}
                 value={name} onChange={setName}/>
