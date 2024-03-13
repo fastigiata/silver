@@ -283,6 +283,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@iarna/toml@npm:^2.2.5":
+  version: 2.2.5
+  resolution: "@iarna/toml@npm:2.2.5"
+  checksum: b63b2b2c4fd67969a6291543ada0303d45593801ee744b60f5390f183c03d9192bc67a217abb24be945158f1935f02840d9ffff40c0142aa171b5d3b6b6a3ea5
+  languageName: node
+  linkType: hard
+
 "@isaacs/cliui@npm:^8.0.2":
   version: 8.0.2
   resolution: "@isaacs/cliui@npm:8.0.2"
@@ -797,10 +804,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/iarna__toml@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@types/iarna__toml@npm:2.0.5"
+  dependencies:
+    "@types/node": "*"
+  checksum: 5611ce5624e7cbe040e7a06d0e4e8af9eb6a0eb473642192ebc1ea98cc2f70b3be42e02d395fc0d3bf1cb26e01dfc0f8eed3513fbb8094f4d04e2de7c399e8f1
+  languageName: node
+  linkType: hard
+
 "@types/json-schema@npm:^7.0.12":
   version: 7.0.15
   resolution: "@types/json-schema@npm:7.0.15"
   checksum: 97ed0cb44d4070aecea772b7b2e2ed971e10c81ec87dd4ecc160322ffa55ff330dace1793489540e3e318d90942064bb697cc0f8989391797792d919737b3b98
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:*":
+  version: 20.11.26
+  resolution: "@types/node@npm:20.11.26"
+  dependencies:
+    undici-types: ~5.26.4
+  checksum: 2cd5a373d2880b7f07ae65d4d23660cdcabddb12772ce631b6caad2f9283350b8a17c802590f67f0ccec5a9c7d43ae0ecd9637c5ad870b8f793328af8c61eae5
   languageName: node
   linkType: hard
 
@@ -3170,6 +3195,7 @@ __metadata:
   resolution: "sticker@workspace:."
   dependencies:
     "@ebay/nice-modal-react": ^1.2.13
+    "@iarna/toml": ^2.2.5
     "@tauri-apps/api": ^2.0.0-alpha.11
     "@tauri-apps/cli": ^2.0.0-alpha.17
     "@tauri-apps/plugin-log": ^2.0.0-alpha.5
@@ -3177,6 +3203,7 @@ __metadata:
     "@tauri-apps/plugin-process": ^2.0.0-alpha.5
     "@tauri-apps/plugin-shell": ^2.0.0-alpha.3
     "@tauri-apps/plugin-store": ^2.0.0-alpha.5
+    "@types/iarna__toml": ^2.0.5
     "@types/node": ^20.10.2
     "@types/react": ^18.2.15
     "@types/react-dom": ^18.2.7
@@ -3206,6 +3233,7 @@ __metadata:
     tailwindcss: ^3.3.5
     typescript: ^5.0.2
     vite: ^5.0.12
+    yaml: ^2.4.1
   languageName: unknown
   linkType: soft
 
@@ -3580,6 +3608,15 @@ __metadata:
   version: 2.3.4
   resolution: "yaml@npm:2.3.4"
   checksum: e6d1dae1c6383bcc8ba11796eef3b8c02d5082911c6723efeeb5ba50fc8e881df18d645e64de68e421b577296000bea9c75d6d9097c2f6699da3ae0406c030d8
+  languageName: node
+  linkType: hard
+
+"yaml@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "yaml@npm:2.4.1"
+  bin:
+    yaml: bin.mjs
+  checksum: 4c391d07a5d5e935e058babb71026c9cdc9a6fd889e35dd91b53cfb0a12691b67c6c5c740858e71345fef18cd9c13c554a6dda9196f59820d769d94041badb0b
   languageName: node
   linkType: hard
 
