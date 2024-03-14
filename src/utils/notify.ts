@@ -1,4 +1,4 @@
-import { runEmbed } from '@/utils/env.ts'
+import { runEmbed } from '@/_constants/env.ts'
 import { isPermissionGranted, requestPermission } from '@tauri-apps/plugin-notification'
 
 /**

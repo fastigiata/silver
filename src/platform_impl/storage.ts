@@ -1,5 +1,5 @@
 import { Store } from '@tauri-apps/plugin-store'
-import { runEmbed } from '@/utils/env.ts'
+import { runEmbed } from '@/_constants/env.ts'
 
 /**
  * Marks a value as serializable.

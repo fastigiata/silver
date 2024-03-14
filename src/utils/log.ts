@@ -1,4 +1,4 @@
-import { runEmbed } from '@/utils/env.ts'
+import { runEmbed } from '@/_constants/env.ts'
 import { attachConsole, debug, error, info, warn } from '@tauri-apps/plugin-log'
 
 interface LogExecutor {

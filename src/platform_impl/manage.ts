@@ -1,6 +1,6 @@
 import { exit } from '@tauri-apps/plugin-process'
 import { getCurrent } from '@tauri-apps/api/window'
-import { runEmbed } from '@/utils/env.ts'
+import { runEmbed } from '@/_constants/env.ts'
 
 interface AppManager {
     min(): Promise<void>
