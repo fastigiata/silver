@@ -8,6 +8,7 @@ import { Tooltip } from 'react-tooltip'
 import { Provider as NiceModalProvider } from '@ebay/nice-modal-react'
 import { ModalImpl } from '@/utils/modal.ts'
 import { LogImpl } from '@/utils/log.ts'
+import { NotifyImpl } from '@/utils/notify.ts'
 
 const ConditionalBack = () => {
     const navigate = useNavigate()
@@ -70,6 +71,7 @@ RootLayout.loader = async () => {
 
     // Initialize all platform plugins here
     await LogImpl.prepare()
+    await NotifyImpl.prepare()
     ModalImpl.prepare()
 
     // Mark this loader as initialized
