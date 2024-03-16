@@ -1,0 +1,15 @@
+@keyframes dialog-in {
+    0% {
+        transform: scale(0);
+    }
+    80% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.dialog-in {
+    animation: dialog-in 0.3s ease;
+}

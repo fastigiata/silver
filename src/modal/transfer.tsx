@@ -32,7 +32,7 @@ const Inner = ({ initial, collections }: { initial: string, collections: ICollec
 
     return (
         <div className={
-            'w-[400px] max-h-[400px] p-5 bg-white rounded-[4px] shadow-card ' +
+            'dialog-in w-[400px] max-h-[400px] p-5 bg-white rounded-[4px] shadow-card ' +
             'flex flex-col items-center space-y-4'
         }>
             <p className={'h-6 text-primary text-[18px] font-primary'}>
@@ -61,7 +61,7 @@ const Inner = ({ initial, collections }: { initial: string, collections: ICollec
                                     collection.id === initial
                                         ? <IconAbout
                                             data-tooltip-id={'base-tooltip'}
-                                            data-tooltip-content={'Current Collection'}/>
+                                            data-tooltip-content={'NOW'}/>
                                         : null
                                 }
                             </div>
