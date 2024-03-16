@@ -7,7 +7,7 @@ import { DeferView } from '@/components/Loading.tsx'
 import type { ICollection } from '@/_types/collection.ts'
 import { ExceptionView } from '@/components/ExceptionView.tsx'
 import { ActionButton } from '@/components/Button.tsx'
-import { IconCreate, IconEdit } from '@/components/Icons.tsx'
+import { IconAdd, IconEdit } from '@/components/Icons.tsx'
 import type { StickerAction } from '@/components/Card/StickerCard.tsx'
 import { StickerCard } from '@/components/Card/StickerCard.tsx'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar.tsx'
@@ -96,7 +96,7 @@ const Inner = ({ collection, stickers }: {
                     </div>
                 </div>
                 <ActionButton
-                    className={'ml-2 text-primary'} Icon={IconCreate}
+                    className={'ml-2 text-primary'} Icon={IconAdd}
                     onClick={() => handleCollectionNav('create')}/>
                 <ActionButton
                     className={'ml-2 text-primary'} Icon={IconEdit}
