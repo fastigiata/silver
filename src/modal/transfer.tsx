@@ -84,8 +84,13 @@ const Inner = ({ initial, collections }: { initial: string, collections: ICollec
 }
 
 const TransferModal = create(({ initial }: TransferModalProps) => {
+    const { remove, resolve } = useModal('transfer')
+
     return (
-        <ModalWrapper>
+        <ModalWrapper onBgClick={() => {
+            resolve(null)
+            remove()
+        }}>
             <DeferView
                 source={CollectionDB.list()}
                 builder={collections => <Inner initial={initial} collections={collections}/>}/>
