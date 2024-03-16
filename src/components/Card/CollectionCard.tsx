@@ -3,6 +3,7 @@ import { IconEdit } from '@/components/Icons.tsx'
 import { IconDelete } from '@/components/Icons.tsx'
 import { ActionButton } from '@/components/Button.tsx'
 import dayjs from 'dayjs'
+import { Placeholder } from '@/components/Placeholder.tsx'
 
 type CollectionCardProps = {
     collection: ICollection,
@@ -28,9 +29,9 @@ const CollectionCard = ({ collection, onClick, onModify, onDelete }: CollectionC
                 {name}
             </div>
             <div className={
-                'w-full text-secondary text-[16px] font-secondary leading-[20px] line-clamp-1'
+                'w-full text-secondary text-[14px] font-secondary leading-[18px] line-clamp-1'
             }>
-                {desc}
+                {desc || <Placeholder placeholder={'No Description'}/>}
             </div>
             <div className={'w-full text-tertiary text-[10px] font-tertiary font-JBMono leading-[16px]'}>
                 <span>Created {dayjs(ctime).format('YYYY-MM-DD HH:mm')}</span>

@@ -2,6 +2,7 @@ import type { ISticker } from '@/_types/sticker.ts'
 import { IconAbout, IconBell, IconDelete, IconEdit, IconMax, IconTransfer } from '@/components/Icons.tsx'
 import dayjs from 'dayjs'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar.tsx'
+import { Placeholder } from '@/components/Placeholder.tsx'
 
 const AlarmBanner = ({ alarm }: { alarm?: number | null }) => {
     if (!alarm) return null
@@ -44,7 +45,7 @@ const StickerCard = ({ sticker, onAction }: StickerCardProps) => {
             <AwesomeScrollbar className={
                 'w-full flex-1 my-2 px-2 text-secondary text-[14px] font-secondary leading-[22px] text-justify break-words whitespace-pre-wrap line-clamp-[8]'
             }>
-                {sticker.content}
+                {sticker.content || <Placeholder placeholder={'No Content'}/>}
             </AwesomeScrollbar>
 
             <AlarmBanner alarm={sticker.alarm}/>
