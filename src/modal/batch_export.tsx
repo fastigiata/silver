@@ -3,16 +3,21 @@ import { ModalWrapper } from '@/modal/base.tsx'
 import { DeferView } from '@/components/Loading.tsx'
 import { CollectionDB } from '@/db/collection.ts'
 import type { ICollection } from '@/_types/collection.ts'
-import { useReducer } from 'react'
+import { useReducer, useState } from 'react'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar.tsx'
 import { PrimaryButton, SecondaryButton } from '@/components/Button.tsx'
 
 const Inner = ({ collections }: { collections: ICollection[] }) => {
     const { remove, resolve } = useModal('batch_export')
     const [ selected, toggle ] = useReducer((prev: Set<string>, action: string) => {
-        prev.has(action) ? prev.delete(action) : prev.add(action)
+        if (prev.has(action)) {
+            prev.delete(action)
+        } else {
+            prev.add(action)
+        }
         return new Set(prev)
     }, new Set([]))
+    const [ type, setType ] = useState<'text' | 'json' | 'yaml'>('text')
 
     const done = (cancel: boolean) => {
         resolve(cancel ? null : [ ...selected ])
@@ -52,6 +57,10 @@ const Inner = ({ collections }: { collections: ICollection[] }) => {
                     })
                 }
             </AwesomeScrollbar>
+
+            <div className={'w-full h-9 flex items-center justify-between space-x-2'}>
+                {/* TODO: select export type */}
+            </div>
 
             <div className={'w-full h-9 flex items-center justify-between space-x-2'}>
                 <SecondaryButton
