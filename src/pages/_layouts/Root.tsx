@@ -9,6 +9,7 @@ import { Provider as NiceModalProvider } from '@ebay/nice-modal-react'
 import { ModalImpl } from '@/utils/modal.ts'
 import { LogImpl } from '@/utils/log.ts'
 import { NotifyImpl } from '@/utils/notify.ts'
+import { Toaster } from 'react-hot-toast'
 
 const ConditionalBack = () => {
     const navigate = useNavigate()
@@ -30,6 +31,9 @@ const RootInner = () => {
             {/* tooltips */}
             <Tooltip id={'base-tooltip'} className={'z-20'} style={{ fontSize: 12 }}/>
             {/* <Picker/> */}
+
+            {/* toaster */}
+            <Toaster/>
 
             {/* header */}
             <div className={
