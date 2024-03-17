@@ -1,12 +1,33 @@
 import type { ExtendedIcon } from '@/components/Icons.tsx'
 
-const ActionButton = ({ className = '', Icon, onClick }: {
-    className?: string,
-    Icon: ExtendedIcon,
+const IconTextButton = ({ className = '', Icon, text, onClick }: {
+    className?: string
+    Icon: ExtendedIcon
+    text: string
     onClick?: VoidFunction
 }) => {
     return (
-        <div className={
+        <button className={
+            `${className} ` +
+            'as-button hover-underline h-6 text-[14px] leading-[24px] flex items-center'
+        } onClick={!!onClick ? (ev) => {
+            ev.preventDefault()
+            ev.stopPropagation()
+            onClick()
+        } : undefined}>
+            <Icon className={'mr-1'}/>
+            <span>{text}</span>
+        </button>
+    )
+}
+
+const ActionButton = ({ className = '', Icon, onClick }: {
+    className?: string
+    Icon: ExtendedIcon
+    onClick?: VoidFunction
+}) => {
+    return (
+        <button className={
             `${className} ` +
             'as-button w-8 h-8 rounded-full bg-white ' +
             'shadow-card hover:shadow-card_hover ' +
@@ -17,7 +38,7 @@ const ActionButton = ({ className = '', Icon, onClick }: {
             onClick()
         } : undefined}>
             <Icon/>
-        </div>
+        </button>
     )
 }
 
@@ -52,6 +73,7 @@ const SecondaryButton = ({ disabled, className = '', text, onClick }: ButtonProp
 }
 
 export {
+    IconTextButton,
     ActionButton,
     PrimaryButton,
     SecondaryButton,

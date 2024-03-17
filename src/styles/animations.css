@@ -13,3 +13,23 @@
 .dialog-in {
     animation: dialog-in 0.3s ease;
 }
+
+.hover-underline {
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        height: 1px;
+        width: 0;
+        left: 50%;
+        background-color: currentColor;
+        transition: all 0.3s ease-in-out;
+    }
+
+    &:hover::after {
+        width: 100%;
+        left: 0;
+    }
+}
