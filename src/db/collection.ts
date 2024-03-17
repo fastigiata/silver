@@ -67,9 +67,16 @@ abstract class CollectionDB {
     /**
      * get the collection with the given id
      */
-    static async get(id: string): Promise<ICollection | null> {
+    static async getById(id: string): Promise<ICollection | null> {
         const collection = await dbImpl.collections.get(id)
         return collection ?? null
+    }
+
+    /**
+     * get the collections with the given ids
+     */
+    static async getByIds(ids: string[]): Promise<ICollection[]> {
+        return dbImpl.collections.where('id').anyOf(ids).toArray()
     }
 
     /**
