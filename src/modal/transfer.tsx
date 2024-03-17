@@ -92,7 +92,7 @@ const TransferModal = create(({ initial }: TransferModalProps) => {
             remove()
         }}>
             <DeferView
-                source={CollectionDB.list()}
+                source={CollectionDB.getAll()}
                 builder={collections => <Inner initial={initial} collections={collections}/>}/>
         </ModalWrapper>
     )

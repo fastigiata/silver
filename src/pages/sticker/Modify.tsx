@@ -102,7 +102,7 @@ const StickerModifyPage = () => {
 }
 
 StickerModifyPage.loader = ({ params }: LoaderFunctionArgs) => {
-    return { sticker: StickerDB.get(params.stickerId!) }
+    return { sticker: StickerDB.getById(params.stickerId!) }
 }
 
 StickerModifyPage.action = async ({ request, params }: LoaderFunctionArgs) => {

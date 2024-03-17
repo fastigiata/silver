@@ -80,7 +80,7 @@ const CollectionModifyPage = () => {
 }
 
 CollectionModifyPage.loader = ({ params }: LoaderFunctionArgs) => {
-    return { collection: CollectionDB.get(params.collectionId!) }
+    return { collection: CollectionDB.getById(params.collectionId!) }
 }
 
 CollectionModifyPage.action = async ({ request, params }: LoaderFunctionArgs) => {

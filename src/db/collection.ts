@@ -45,7 +45,7 @@ abstract class CollectionDB {
     /**
      * list all collections in the database
      */
-    static async list(): Promise<ICollection[]> {
+    static async getAll(): Promise<ICollection[]> {
         return dbImpl.collections
             .toArray(arr => arr.sort((a, b) => b.mtime - a.mtime))
     }

@@ -68,7 +68,7 @@ abstract class StickerDB {
     /**
      * list all stickers in the collection with the given id
      */
-    static async list(cid: string): Promise<ISticker[]> {
+    static async getByCid(cid: string): Promise<ISticker[]> {
         return dbImpl.stickers
             .where('cid').equals(cid)
             .toArray(arr => arr.sort((a, b) => b.mtime - a.mtime))
@@ -123,9 +123,23 @@ abstract class StickerDB {
     /**
      * get the sticker with the given id
      */
-    static async get(id: string): Promise<ISticker | null> {
+    static async getById(id: string): Promise<ISticker | null> {
         const sticker = await dbImpl.stickers.get(id)
         return sticker ?? null
+    }
+
+    /**
+     * get the stickers with the given ids
+     */
+    static async getByIds(ids: string[]): Promise<ISticker[]> {
+        return dbImpl.stickers.where('id').anyOf(ids).toArray()
+    }
+
+    /**
+     * get the stickers with the given cids
+     */
+    static async getByCids(cids: string[]): Promise<ISticker[]> {
+        return dbImpl.stickers.where('cid').anyOf(cids).toArray()
     }
 }
 

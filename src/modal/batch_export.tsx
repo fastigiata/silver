@@ -73,7 +73,7 @@ const BatchExport = () => {
             remove()
         }}>
             <DeferView
-                source={CollectionDB.list()}
+                source={CollectionDB.getAll()}
                 builder={collections => <Inner collections={collections}/>}/>
         </ModalWrapper>
     )

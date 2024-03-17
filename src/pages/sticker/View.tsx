@@ -39,7 +39,7 @@ const StickerViewPage = () => {
 }
 
 StickerViewPage.loader = ({ params }: LoaderFunctionArgs) => {
-    return { sticker: StickerDB.get(params.stickerId!) }
+    return { sticker: StickerDB.getById(params.stickerId!) }
 }
 
 export default StickerViewPage

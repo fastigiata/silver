@@ -140,8 +140,8 @@ CollectionViewPage.loader = async ({ params }: LoaderFunctionArgs) => {
     const collectionId = params.collectionId!
 
     const task = Promise.all([
-        CollectionDB.get(collectionId),
-        StickerDB.list(collectionId)
+        CollectionDB.getById(collectionId),
+        StickerDB.getByCid(collectionId)
     ])
 
     return { task } satisfies CollectionViewLoaderData
