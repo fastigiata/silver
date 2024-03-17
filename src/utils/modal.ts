@@ -3,16 +3,19 @@ import type { ConfirmModalProps } from '@/modal/confirm.tsx'
 import ConfirmModal from '@/modal/confirm.tsx'
 import type { TransferModalProps } from '@/modal/transfer.tsx'
 import TransferModal from '@/modal/transfer.tsx'
+import { BatchExport } from '@/modal/batch_export.tsx'
 
 abstract class ModalImpl {
     public static prepare() {
         register('confirm', ConfirmModal)
         register('transfer', TransferModal)
+        register('batch_export', BatchExport)
     }
 
     /**
      * 显示确认框
      *
+     * @return {Promise<boolean>} - 用户的选择
      * - true: 确认
      * - false: 取消 或 关闭
      */
@@ -23,10 +26,19 @@ abstract class ModalImpl {
     /**
      * 显示collection选择框
      *
-     * - 返回选中的collection id
+     * @return {Promise<string|null>} - 目标collectionId
      */
     public static transfer(props: TransferModalProps): Promise<string | null> {
         return show<string>('transfer', props)
+    }
+
+    /**
+     * 显示批量导出 collection 选择框
+     *
+     * @return {Promise<string[]|null>} - 选中的collectionId列表
+     */
+    public static batchExport(): Promise<string[] | null> {
+        return show<string[]>('batch_export')
     }
 }
 
