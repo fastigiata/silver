@@ -8,6 +8,10 @@ import { CollectionCard } from '@/components/Card/CollectionCard.tsx'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar.tsx'
 import { ModalImpl } from '@/utils/modal.ts'
 import { formatToN } from '@/misc/helper.ts'
+import { IconTextButton } from '@/components/Button.tsx'
+import { IconAdd, IconExport, IconImport } from '@/components/Icons.tsx'
+import toast from 'react-hot-toast'
+import { StickerDB } from '@/db/sticker.ts'
 
 type DashboardLoaderData = {
     collection: Promise<ICollection[]>
@@ -49,6 +53,23 @@ const DashboardPage = () => {
     const loader = useLoaderData() as DashboardLoaderData
     const navigate = useNavigate()
 
+    const handleImport = async () => {
+        // TODO
+    }
+
+    const handleExport = async () => {
+        const cids = await ModalImpl.batchExport()
+        if (!cids || cids.length === 0) {
+            toast.error('No collection selected')
+        } else {
+            const collections = await CollectionDB.getByIds(cids)
+            const stickers = await StickerDB.getByCids(cids)
+            console.log(collections)
+            console.log(stickers)
+            // TODO
+        }
+    }
+
     return (
         <AwesomeScrollbar className={'w-full h-full p-4 overflow-y-auto space-y-4 space-y-reverse'}>
             <DeferView
@@ -56,11 +77,20 @@ const DashboardPage = () => {
                 builder={<CollectionList/>}
                 slotBefore={
                     <div className={'w-full h-6 flex items-center'}>
-                        <button className={
-                            'as-button text-secondary text-[14px] font-secondary underline underline-offset-4'
-                        } onClick={() => navigate('/collection/create')}>
-                            New Collection
-                        </button>
+                        <IconTextButton
+                            className={'mr-3 text-secondary font-secondary'}
+                            Icon={IconAdd} text={'New Collection'}
+                            onClick={() => navigate('/collection/create')}/>
+
+                        <IconTextButton
+                            className={'mr-3 text-secondary font-secondary'}
+                            Icon={IconImport} text={'Import'}
+                            onClick={handleImport}/>
+
+                        <IconTextButton
+                            className={'text-secondary font-secondary'}
+                            Icon={IconExport} text={'Export'}
+                            onClick={handleExport}/>
                     </div>
                 }/>
         </AwesomeScrollbar>
@@ -68,7 +98,7 @@ const DashboardPage = () => {
 }
 
 DashboardPage.loader = async () => {
-    return { collection: CollectionDB.list() } satisfies DashboardLoaderData
+    return { collection: CollectionDB.getAll() } satisfies DashboardLoaderData
 }
 
 DashboardPage.action = async ({ request }: ActionFunctionArgs) => {
