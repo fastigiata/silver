@@ -6,6 +6,12 @@ import type { ICollection } from '@/_types/collection.ts'
 import { useReducer, useState } from 'react'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar.tsx'
 import { PrimaryButton, SecondaryButton } from '@/components/Button.tsx'
+import { FileType } from '@/utils/io.ts'
+
+type BatchExportResult = {
+    format: FileType
+    cids: string[]
+} | null
 
 const Inner = ({ collections }: { collections: ICollection[] }) => {
     const { remove, resolve } = useModal('batch_export')
@@ -17,10 +23,10 @@ const Inner = ({ collections }: { collections: ICollection[] }) => {
         }
         return new Set(prev)
     }, new Set([]))
-    const [ type, setType ] = useState<'text' | 'json' | 'yaml'>('text')
+    const [ format, setFormat ] = useState<FileType>(FileType.toml)
 
     const done = (cancel: boolean) => {
-        resolve(cancel ? null : [ ...selected ])
+        resolve(cancel ? null : { format, cids: [ ...selected ] } satisfies BatchExportResult)
         remove()
     }
 
@@ -58,8 +64,32 @@ const Inner = ({ collections }: { collections: ICollection[] }) => {
                 }
             </AwesomeScrollbar>
 
-            <div className={'w-full h-9 flex items-center justify-between space-x-2'}>
-                {/* TODO: select export type */}
+            <div className={'w-full h-5 text-[12px] flex items-center justify-start space-x-2'}>
+                <span>Format:</span>
+                <button className={'as-button'} onClick={() => setFormat(FileType.toml)}>
+                    <span>[</span>
+                    <span className={'w-3 inline-block'}>{format === FileType.toml ? '✔' : ''}</span>
+                    <span>]</span>
+                    <span className={`ml-1 ${format === FileType.toml ? 'underline' : ''} underline-offset-4`}>
+                        Toml
+                    </span>
+                </button>
+                <button className={'as-button'} onClick={() => setFormat(FileType.json)}>
+                    <span>[</span>
+                    <span className={'w-3 inline-block'}>{format === FileType.json ? '✔' : ''}</span>
+                    <span>]</span>
+                    <span className={`ml-1 ${format === FileType.json ? 'underline' : ''} underline-offset-4`}>
+                        Json
+                    </span>
+                </button>
+                <button className={'as-button'} onClick={() => setFormat(FileType.yaml)}>
+                    <span>[</span>
+                    <span className={'w-3 inline-block'}>{format === FileType.yaml ? '✔' : ''}</span>
+                    <span>]</span>
+                    <span className={`ml-1 ${format === FileType.yaml ? 'underline' : ''} underline-offset-4`}>
+                        Yaml
+                    </span>
+                </button>
             </div>
 
             <div className={'w-full h-9 flex items-center justify-between space-x-2'}>
@@ -88,6 +118,5 @@ const BatchExport = () => {
     )
 }
 
-export {
-    BatchExport
-}
+export type { BatchExportResult }
+export { BatchExport }
