@@ -3,6 +3,7 @@ import type { ConfirmModalProps } from '@/modal/confirm.tsx'
 import ConfirmModal from '@/modal/confirm.tsx'
 import type { TransferModalProps } from '@/modal/transfer.tsx'
 import TransferModal from '@/modal/transfer.tsx'
+import type { BatchExportResult } from '@/modal/batch_export.tsx'
 import { BatchExport } from '@/modal/batch_export.tsx'
 
 abstract class ModalImpl {
@@ -35,10 +36,10 @@ abstract class ModalImpl {
     /**
      * 显示批量导出 collection 选择框
      *
-     * @return {Promise<string[]|null>} - 选中的collectionId列表
+     * @return {Promise<BatchExportResult>} - 选中的collectionId列表
      */
-    public static batchExport(): Promise<string[] | null> {
-        return show<string[]>('batch_export')
+    public static batchExport(): Promise<BatchExportResult> {
+        return show<BatchExportResult>('batch_export')
     }
 }
 
