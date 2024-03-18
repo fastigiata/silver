@@ -12,6 +12,7 @@ import { IconTextButton } from '@/components/Button.tsx'
 import { IconAdd, IconExport, IconImport } from '@/components/Icons.tsx'
 import toast from 'react-hot-toast'
 import { StickerDB } from '@/db/sticker.ts'
+import { IOImpl } from '@/utils/io.ts'
 
 type DashboardLoaderData = {
     collection: Promise<ICollection[]>
@@ -58,15 +59,16 @@ const DashboardPage = () => {
     }
 
     const handleExport = async () => {
-        const cids = await ModalImpl.batchExport()
+        const result = await ModalImpl.batchExport()
+        if (!result) return
+
+        const { cids, format } = result
         if (!cids || cids.length === 0) {
             toast.error('No collection selected')
         } else {
             const collections = await CollectionDB.getByIds(cids)
             const stickers = await StickerDB.getByCids(cids)
-            console.log(collections)
-            console.log(stickers)
-            // TODO
+            IOImpl.batchExport(format, collections, stickers)
         }
     }
 
