@@ -15,7 +15,6 @@
     },
     "dependencies": {
         "@ebay/nice-modal-react": "^1.2.13",
-        "@iarna/toml": "^2.2.5",
         "@tauri-apps/api": "^2.0.0-alpha.11",
         "@tauri-apps/plugin-log": "^2.0.0-alpha.5",
         "@tauri-apps/plugin-notification": "^2.0.0-alpha.5",
@@ -25,8 +24,10 @@
         "air-datepicker": "^3.4.0",
         "bst-typed": "^1.52.0",
         "chart.js": "^4.4.1",
+        "crypto-js": "^4.2.0",
         "dayjs": "^1.11.10",
         "dexie": "^3.2.5",
+        "iarna-toml-esm": "^3.0.5",
         "jotai": "^2.6.2",
         "mac-scrollbar": "^0.13.6",
         "nanoid": "^5.0.5",
@@ -41,7 +42,7 @@
     },
     "devDependencies": {
         "@tauri-apps/cli": "^2.0.0-alpha.17",
-        "@types/iarna__toml": "^2.0.5",
+        "@types/crypto-js": "^4.2.2",
         "@types/node": "^20.10.2",
         "@types/react": "^18.2.15",
         "@types/react-dom": "^18.2.7",

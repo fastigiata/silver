@@ -283,13 +283,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@iarna/toml@npm:^2.2.5":
-  version: 2.2.5
-  resolution: "@iarna/toml@npm:2.2.5"
-  checksum: b63b2b2c4fd67969a6291543ada0303d45593801ee744b60f5390f183c03d9192bc67a217abb24be945158f1935f02840d9ffff40c0142aa171b5d3b6b6a3ea5
-  languageName: node
-  linkType: hard
-
 "@isaacs/cliui@npm:^8.0.2":
   version: 8.0.2
   resolution: "@isaacs/cliui@npm:8.0.2"
@@ -804,12 +797,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/iarna__toml@npm:^2.0.5":
-  version: 2.0.5
-  resolution: "@types/iarna__toml@npm:2.0.5"
-  dependencies:
-    "@types/node": "*"
-  checksum: 5611ce5624e7cbe040e7a06d0e4e8af9eb6a0eb473642192ebc1ea98cc2f70b3be42e02d395fc0d3bf1cb26e01dfc0f8eed3513fbb8094f4d04e2de7c399e8f1
+"@types/crypto-js@npm:^4.2.2":
+  version: 4.2.2
+  resolution: "@types/crypto-js@npm:4.2.2"
+  checksum: 727daa0d2db35f0abefbab865c23213b6ee6a270e27e177939bbe4b70d1e84c2202d9fac4ea84859c4b4d49a4ee50f948f601327a39b69ec013288018ba07ca5
   languageName: node
   linkType: hard
 
@@ -817,15 +808,6 @@ __metadata:
   version: 7.0.15
   resolution: "@types/json-schema@npm:7.0.15"
   checksum: 97ed0cb44d4070aecea772b7b2e2ed971e10c81ec87dd4ecc160322ffa55ff330dace1793489540e3e318d90942064bb697cc0f8989391797792d919737b3b98
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:*":
-  version: 20.11.26
-  resolution: "@types/node@npm:20.11.26"
-  dependencies:
-    undici-types: ~5.26.4
-  checksum: 2cd5a373d2880b7f07ae65d4d23660cdcabddb12772ce631b6caad2f9283350b8a17c802590f67f0ccec5a9c7d43ae0ecd9637c5ad870b8f793328af8c61eae5
   languageName: node
   linkType: hard
 
@@ -1381,6 +1363,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"crypto-js@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "crypto-js@npm:4.2.0"
+  checksum: f051666dbc077c8324777f44fbd3aaea2986f198fe85092535130d17026c7c2ccf2d23ee5b29b36f7a4a07312db2fae23c9094b644cc35f7858b1b4fcaf27774
+  languageName: node
+  linkType: hard
+
 "cssesc@npm:^3.0.0":
   version: 3.0.0
   resolution: "cssesc@npm:3.0.0"
@@ -1482,6 +1471,13 @@ __metadata:
   version: 1.4.601
   resolution: "electron-to-chromium@npm:1.4.601"
   checksum: 6c6d090afaab83f49fe413c2558a3294e7dfce6a9d8afda3496a80ba59377901279ea7903122558399d5f5dbbdcca8562e3e826b7b78e7ec0b561fcc02c45f73
+  languageName: node
+  linkType: hard
+
+"emitter-component@npm:^1.1.1":
+  version: 1.1.2
+  resolution: "emitter-component@npm:1.1.2"
+  checksum: caf43e59e8e3b03532553d5870433f771b75f88c9d3594dec7498f50b47e49c05ed9b308dea41251cc9349bb210094ddc9185a98fbc8db8264621a7d21cc0457
   languageName: node
   linkType: hard
 
@@ -2053,6 +2049,15 @@ __metadata:
     agent-base: ^7.0.2
     debug: 4
   checksum: 088969a0dd476ea7a0ed0a2cf1283013682b08f874c3bc6696c83fa061d2c157d29ef0ad3eb70a2046010bb7665573b2388d10fdcb3e410a66995e5248444292
+  languageName: node
+  linkType: hard
+
+"iarna-toml-esm@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "iarna-toml-esm@npm:3.0.5"
+  dependencies:
+    stream: ^0.0.2
+  checksum: 009f1c222a02d47af516a6d44f568f77c9a60cc580a8818595fccdd2c2c165fbdd411220ddc59fa0562ca5a94562ff0ec489848435df170c190d6da6aa7b576e
   languageName: node
   linkType: hard
 
@@ -3216,7 +3221,6 @@ __metadata:
   resolution: "sticker@workspace:."
   dependencies:
     "@ebay/nice-modal-react": ^1.2.13
-    "@iarna/toml": ^2.2.5
     "@tauri-apps/api": ^2.0.0-alpha.11
     "@tauri-apps/cli": ^2.0.0-alpha.17
     "@tauri-apps/plugin-log": ^2.0.0-alpha.5
@@ -3224,7 +3228,7 @@ __metadata:
     "@tauri-apps/plugin-process": ^2.0.0-alpha.5
     "@tauri-apps/plugin-shell": ^2.0.0-alpha.3
     "@tauri-apps/plugin-store": ^2.0.0-alpha.5
-    "@types/iarna__toml": ^2.0.5
+    "@types/crypto-js": ^4.2.2
     "@types/node": ^20.10.2
     "@types/react": ^18.2.15
     "@types/react-dom": ^18.2.7
@@ -3236,11 +3240,13 @@ __metadata:
     autoprefixer: ^10.4.16
     bst-typed: ^1.52.0
     chart.js: ^4.4.1
+    crypto-js: ^4.2.0
     dayjs: ^1.11.10
     dexie: ^3.2.5
     eslint: ^8.55.0
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-react-refresh: ^0.4.4
+    iarna-toml-esm: ^3.0.5
     jotai: ^2.6.2
     mac-scrollbar: ^0.13.6
     nanoid: ^5.0.5
@@ -3258,6 +3264,15 @@ __metadata:
     yaml: ^2.4.1
   languageName: unknown
   linkType: soft
+
+"stream@npm:^0.0.2":
+  version: 0.0.2
+  resolution: "stream@npm:0.0.2"
+  dependencies:
+    emitter-component: ^1.1.1
+  checksum: 43d89e176c282234d452754f9b55a82c74ea68345bf6176af32c4c213801f88df7984c83ec5a735457705dddf4668373edb9f0ec270a7491e1d881631a763978
+  languageName: node
+  linkType: hard
 
 "string-width-cjs@npm:string-width@^4.2.0, string-width@npm:^4.1.0":
   version: 4.2.3
