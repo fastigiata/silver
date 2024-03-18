@@ -1,53 +1,87 @@
 import type { ICollection } from '@/_types/collection.ts'
 import type { ISticker } from '@/_types/sticker.ts'
 import dayjs from 'dayjs'
+import { enc } from 'crypto-js'
+import SHA1 from 'crypto-js/sha1'
+import { stringify as stringifyYaml, parse as parseYaml } from 'yaml'
+import { stringify as stringifyToml, parse as parseToml } from 'iarna-toml-esm'
 
 enum FileType {
-    text = 'text/plain;charset=utf-8',
+    toml = 'application/toml;charset=utf-8',
     json = 'application/json;charset=utf-8',
     yaml = 'application/x-yaml;charset=utf-8',
 }
 
-const getFilename = (mime: FileType): string => {
-    const now = dayjs().format('YYYYMMDDHHmm')
-    switch (mime) {
-        case FileType.text:
-            return `${now}.txt`
-        case FileType.json:
-            return `${now}.json`
-        case FileType.yaml:
-            return `${now}.yaml`
-        default:
-            return now
-    }
-}
-
-const getFileHeader = (hash: string): string => {
-    return `# This file is exported from XxNote with self check.
-# Manual changes might be lost - proceed with caution!
+/**
+ * 自定义文件头
+ *
+ * - 106 字符 -- 固定说明 (105 + 1)
+ * - 16 字符 -- 格式说明 (11 + 4 + 1)
+ * - 56 字符 -- SHA1 哈希值 (15 + 40 + 1)
+ */
+const getFileHeader = (format: string, hash: string): string => {
+    return `# This file is exported from XxNote with self check. Manual changes might be lost - proceed with caution!
+# Format = ${format}
 # Check Code = ${hash}`
 }
 
+/**
+ * 下载文件为指定格式
+ */
+function download(filename: string, content: string, mime: FileType) {
+    const url = URL.createObjectURL(new Blob([ content ], { type: mime }))
+
+    const anchor = document.createElement('a')
+    anchor.download = filename
+    anchor.href = url
+    anchor.click()
+
+    URL.revokeObjectURL(url)
+}
+
+function gen_toml(collections: ICollection[], stickers: ISticker[]) {
+    const now = dayjs().format('YYYYMMDDHHmm')
+    const raw = stringifyToml({ collections, stickers })
+    const hash = enc.Hex.stringify(SHA1(raw))
+    const header = getFileHeader('toml', hash)
+    download(`XxNote_${now}.toml`, `${header}\n${raw}`, FileType.toml)
+}
+
+function gen_json(collections: ICollection[], stickers: ISticker[]) {
+    const now = dayjs().format('YYYYMMDDHHmm')
+    const raw = JSON.stringify({ collections, stickers }, null, 2)
+    const hash = enc.Hex.stringify(SHA1(raw))
+    const header = getFileHeader('json', hash)
+    download(`XxNote_${now}.json`, `${header}\n${raw}`, FileType.json)
+}
+
+function gen_yaml(collections: ICollection[], stickers: ISticker[]) {
+    const now = dayjs().format('YYYYMMDDHHmm')
+    const raw = stringifyYaml({ collections, stickers }, { indent: 2 })
+    const hash = enc.Hex.stringify(SHA1(raw))
+    const header = getFileHeader('yaml', hash)
+    download(`XxNote_${now}.yaml`, `${header}\n${raw}`, FileType.yaml)
+}
+
 abstract class IOImpl {
-    private static download(filename: string, content: string, mime: FileType) {
-        const url = URL.createObjectURL(new Blob([ content ], { type: mime }))
-
-        const anchor = document.createElement('a')
-        anchor.download = filename
-        anchor.href = url
-        anchor.click()
-
-        URL.revokeObjectURL(url)
-    }
-
     static batchExport(type: FileType, collections: ICollection[], stickers: ISticker[]) {
-        const filename = getFilename(type)
-        const pack = JSON.stringify({ collections, stickers }, null, 2)
-
-        // TODO: calculate the hash of the pack, then add it to the header
+        switch (type) {
+            case FileType.toml:
+                gen_toml(collections, stickers)
+                break
+            case FileType.json:
+                gen_json(collections, stickers)
+                break
+            case FileType.yaml:
+                gen_yaml(collections, stickers)
+                break
+            default:
+                return
+        }
     }
 }
 
 export {
-    IOImpl
+    FileType,
+    IOImpl,
 }
