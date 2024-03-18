@@ -5,11 +5,13 @@ import type { TransferModalProps } from '@/modal/transfer.tsx'
 import TransferModal from '@/modal/transfer.tsx'
 import type { BatchExportResult } from '@/modal/batch_export.tsx'
 import { BatchExport } from '@/modal/batch_export.tsx'
+import { BatchImport } from '@/modal/batch_import.tsx'
 
 abstract class ModalImpl {
     public static prepare() {
         register('confirm', ConfirmModal)
         register('transfer', TransferModal)
+        register('batch_import', BatchImport)
         register('batch_export', BatchExport)
     }
 
@@ -31,6 +33,13 @@ abstract class ModalImpl {
      */
     public static transfer(props: TransferModalProps): Promise<string | null> {
         return show<string>('transfer', props)
+    }
+
+    /**
+     * 显示批量导入 collection 选择框
+     */
+    public static batchImport(): Promise<void> {
+        return show<void>('batch_import')
     }
 
     /**
