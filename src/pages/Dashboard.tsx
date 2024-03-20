@@ -56,7 +56,9 @@ const DashboardPage = () => {
 
     const handleImport = async () => {
         // TODO
-        ModalImpl.batchImport()
+        const re = await ModalImpl.batchImport()
+
+        console.log('import:', re)
     }
 
     const handleExport = async () => {
