@@ -5,6 +5,7 @@ import type { TransferModalProps } from '@/modal/transfer.tsx'
 import TransferModal from '@/modal/transfer.tsx'
 import type { BatchExportResult } from '@/modal/batch_export.tsx'
 import { BatchExport } from '@/modal/batch_export.tsx'
+import type { BatchImportResult } from '@/modal/batch_import.tsx'
 import { BatchImport } from '@/modal/batch_import.tsx'
 
 abstract class ModalImpl {
@@ -37,9 +38,11 @@ abstract class ModalImpl {
 
     /**
      * 显示批量导入 collection 选择框
+     *
+     * @return {Promise<BatchImportResult>} - 解析后的导入数据
      */
-    public static batchImport(): Promise<void> {
-        return show<void>('batch_import')
+    public static batchImport(): Promise<BatchImportResult> {
+        return show<BatchImportResult>('batch_import')
     }
 
     /**
