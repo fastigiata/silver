@@ -14,7 +14,7 @@ enum FileType {
     yaml = 'application/x-yaml;charset=utf-8',
 }
 
-type FileParseResult = {
+export type FileParseResult = {
     /**
      * 文件是否有效 (长度足够且format有效)
      */
