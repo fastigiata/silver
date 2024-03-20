@@ -14,7 +14,7 @@ enum FileType {
     yaml = 'application/x-yaml;charset=utf-8',
 }
 
-export type FileParseResult = {
+type FileParseResult = {
     /**
      * 文件是否有效 (长度足够且format有效)
      */
@@ -44,7 +44,14 @@ export type FileParseResult = {
     parsed: {
         collections: ICollection[]
         stickers: ISticker[]
+        datetime: number
     } | null
+}
+
+type ExportPack = {
+    collections: ICollection[]
+    stickers: ISticker[]
+    datetime: number
 }
 
 /**
@@ -76,7 +83,7 @@ function download(filename: string, content: string, mime: FileType) {
 
 function gen_toml(collections: ICollection[], stickers: ISticker[]) {
     const now = dayjs().format('YYYYMMDDHHmm')
-    const raw = stringifyToml({ collections, stickers })
+    const raw = stringifyToml({ collections, stickers, datetime: Date.now() } satisfies ExportPack)
     const hash = enc.Hex.stringify(SHA1(raw))
     const header = buildFileHeader('toml', hash)
     download(`XxNote_${now}.toml`, `${header}\n${raw}`, FileType.toml)
@@ -84,7 +91,7 @@ function gen_toml(collections: ICollection[], stickers: ISticker[]) {
 
 function gen_json(collections: ICollection[], stickers: ISticker[]) {
     const now = dayjs().format('YYYYMMDDHHmm')
-    const raw = JSON.stringify({ collections, stickers }, null, 2)
+    const raw = JSON.stringify({ collections, stickers, datetime: Date.now() } satisfies ExportPack, null, 2)
     const hash = enc.Hex.stringify(SHA1(raw))
     const header = buildFileHeader('json', hash)
     download(`XxNote_${now}.json`, `${header}\n${raw}`, FileType.json)
@@ -92,7 +99,7 @@ function gen_json(collections: ICollection[], stickers: ISticker[]) {
 
 function gen_yaml(collections: ICollection[], stickers: ISticker[]) {
     const now = dayjs().format('YYYYMMDDHHmm')
-    const raw = stringifyYaml({ collections, stickers }, { indent: 2 })
+    const raw = stringifyYaml({ collections, stickers, datetime: Date.now() } satisfies ExportPack, { indent: 2 })
     const hash = enc.Hex.stringify(SHA1(raw))
     const header = buildFileHeader('yaml', hash)
     download(`XxNote_${now}.yaml`, `${header}\n${raw}`, FileType.yaml)
