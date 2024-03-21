@@ -106,7 +106,7 @@ const Inner = ({ collection, stickers }: {
                 stickers.length === 0
                     ? (
                         <div className={'w-full flex-1 flex flex-col items-center justify-center'}>
-                            <div className={'dialog-in w-[400px] p-5 bg-white rounded-[4px] shadow-card space-y-4'}>
+                            <div className={'scale-in w-[400px] p-5 bg-white rounded-[4px] shadow-card space-y-4'}>
                                 <p className={'h-6 text-primary text-[18px] leading-[24px] font-primary'}>
                                     No Sticker Found!
                                 </p>

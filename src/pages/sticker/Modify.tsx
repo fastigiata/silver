@@ -32,7 +32,7 @@ const ModifyView = ({ sticker }: { sticker: ISticker }) => {
 
     return (
         <div className={
-            'dialog-in w-[400px] h-[400px] p-5 bg-white rounded-[4px] shadow-card ' +
+            'scale-in w-[400px] h-[400px] p-5 bg-white rounded-[4px] shadow-card ' +
             'flex flex-col items-center space-y-4'
         }>
             <p className={'h-6 text-primary text-[18px] font-primary'}>

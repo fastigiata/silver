@@ -82,7 +82,7 @@ const DashboardPage = () => {
                     if (collections.length === 0) {
                         return (
                             <div className={'w-full h-[calc(100%-56px)] flex flex-col items-center justify-center'}>
-                                <div className={'dialog-in w-[400px] p-5 bg-white rounded-[4px] shadow-card space-y-4'}>
+                                <div className={'scale-in w-[400px] p-5 bg-white rounded-[4px] shadow-card space-y-4'}>
                                     <p className={'h-6 text-primary text-[18px] leading-[24px] font-primary'}>
                                         No Collection Found!
                                     </p>

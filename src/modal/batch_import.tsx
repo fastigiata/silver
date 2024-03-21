@@ -75,7 +75,7 @@ const BatchImport = () => {
         <ModalWrapper onBgClick={() => done(false)}>
             <div
                 className={
-                    'dialog-in w-[400px] h-[300px] p-5 bg-white rounded-[4px] shadow-card ' +
+                    'scale-in w-[400px] h-[300px] p-5 bg-white rounded-[4px] shadow-card ' +
                     'flex flex-col items-center space-y-4'
                 }>
                 {

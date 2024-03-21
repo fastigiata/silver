@@ -32,7 +32,7 @@ const StickerCard = ({ sticker, onAction }: StickerCardProps) => {
 
     return (
         <div className={
-            'sticker-card group relative rounded-[4px] bg-white ' +
+            'sticker-card card-in group relative rounded-[4px] bg-white ' +
             'shadow-card hover:shadow-card_hover overflow-hidden flex flex-col'
         }>
             <div className={

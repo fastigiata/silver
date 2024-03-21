@@ -26,7 +26,7 @@ const ConfirmModal = create(({ content }: ConfirmModalProps) => {
 
     return (
         <ModalWrapper onBgClick={() => done(false)}>
-            <div className={'dialog-in w-[400px] p-5 bg-white rounded-[4px] shadow-card space-y-4'}>
+            <div className={'scale-in w-[400px] p-5 bg-white rounded-[4px] shadow-card space-y-4'}>
                 <p className={'text-secondary text-[16px] leading-[24px] font-secondary'}>
                     {content}
                 </p>
