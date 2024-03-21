@@ -106,14 +106,35 @@ const Inner = ({ collections }: { collections: ICollection[] }) => {
 
 const BatchExport = () => {
     const { remove, resolve } = useModal('batch_export')
+    const close = () => {
+        resolve(null)
+        remove()
+    }
+
     return (
-        <ModalWrapper onBgClick={() => {
-            resolve(null)
-            remove()
-        }}>
+        <ModalWrapper onBgClick={close}>
             <DeferView
                 source={CollectionDB.getAll()}
-                builder={collections => <Inner collections={collections}/>}/>
+                builder={collections => {
+                    if (collections.length === 0) {
+                        return (
+                            <div className={'dialog-in w-[400px] p-5 bg-white rounded-[4px] shadow-card space-y-4'}>
+                                <p className={'h-6 text-primary text-[18px] leading-[24px] font-primary'}>
+                                    No Collection Found!
+                                </p>
+
+                                <p className={'h-12 text-secondary text-[16px] leading-[24px] font-secondary line-clamp-2'}>
+                                    There is no collection found in the database, please create one first.
+                                </p>
+
+                                <div className={'w-full h-9'}>
+                                    <PrimaryButton className={'w-full'} text={'Got it!'} onClick={close}/>
+                                </div>
+                            </div>
+                        )
+                    }
+                    return <Inner collections={collections}/>
+                }}/>
         </ModalWrapper>
     )
 }
