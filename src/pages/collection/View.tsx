@@ -6,7 +6,7 @@ import type { ISticker } from '@/_types/sticker.ts'
 import { DeferView } from '@/components/Loading.tsx'
 import type { ICollection } from '@/_types/collection.ts'
 import { ExceptionView } from '@/components/ExceptionView.tsx'
-import { ActionButton } from '@/components/Button.tsx'
+import { ActionButton, PrimaryButton } from '@/components/Button.tsx'
 import { IconAdd, IconEdit } from '@/components/Icons.tsx'
 import type { StickerAction } from '@/components/Card/StickerCard.tsx'
 import { StickerCard } from '@/components/Card/StickerCard.tsx'
@@ -102,17 +102,41 @@ const Inner = ({ collection, stickers }: {
                     className={'ml-2 text-primary'} Icon={IconEdit}
                     onClick={() => handleCollectionNav('modify')}/>
             </div>
-            <AwesomeScrollbar className={'w-full flex-1 pb-4'}>
-                <div className={'sticker-card-wrapper w-full'}>
-                    {
-                        stickers.map(sticker => {
-                            return <StickerCard
-                                key={sticker.id} sticker={sticker}
-                                onAction={action => handleStickerAction(sticker, action)}/>
-                        })
-                    }
-                </div>
-            </AwesomeScrollbar>
+            {
+                stickers.length === 0
+                    ? (
+                        <div className={'w-full flex-1 flex flex-col items-center justify-center'}>
+                            <div className={'dialog-in w-[400px] p-5 bg-white rounded-[4px] shadow-card space-y-4'}>
+                                <p className={'h-6 text-primary text-[18px] leading-[24px] font-primary'}>
+                                    No Sticker Found!
+                                </p>
+
+                                <p className={'text-secondary text-[16px] leading-[24px] font-secondary'}>
+                                    There is no sticker found, you can create a new sticker now.
+                                </p>
+
+                                <div className={'w-full h-9'}>
+                                    <PrimaryButton
+                                        className={'w-full'} text={'Create Now'}
+                                        onClick={() => handleCollectionNav('create')}/>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                    : (
+                        <AwesomeScrollbar className={'w-full flex-1 pb-4'}>
+                            <div className={'sticker-card-wrapper w-full'}>
+                                {
+                                    stickers.map(sticker => {
+                                        return <StickerCard
+                                            key={sticker.id} sticker={sticker}
+                                            onAction={action => handleStickerAction(sticker, action)}/>
+                                    })
+                                }
+                            </div>
+                        </AwesomeScrollbar>
+                    )
+            }
         </div>
     )
 }
