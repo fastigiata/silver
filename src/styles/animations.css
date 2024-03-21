@@ -13,3 +13,66 @@
 .scale-in {
     animation: scale-in 0.3s ease;
 }
+
+@keyframes flip-in {
+    0% {
+        transform: rotateX(90deg);
+        opacity: 0;
+    }
+    100% {
+        transform: rotateX(0);
+        opacity: 1;
+    }
+}
+
+.flip-in {
+    transform-origin: center 20%;
+    animation: flip-in 0.3s ease;
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.slide-in {
+    animation: slide-in 0.3s ease-in-out;
+}
+
+@keyframes slide-in-left {
+    0% {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-right {
+    0% {
+        transform: translateX(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slide-in-evenodd {
+    &:nth-child(odd) {
+        animation: slide-in-left 0.3s ease-in-out;
+    }
+
+    &:nth-child(even) {
+        animation: slide-in-right 0.3s ease-in-out;
+    }
+}

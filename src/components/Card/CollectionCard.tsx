@@ -18,7 +18,7 @@ const CollectionCard = ({ collection, onClick, onModify, onDelete }: CollectionC
         <div
             data-id={id}
             className={
-                'card-in group relative w-full h-20 px-4 rounded-[4px] bg-white ' +
+                'slide-in-evenodd group relative w-full h-20 px-4 rounded-[4px] bg-white ' +
                 'shadow-card hover:shadow-card_hover select-none ' +
                 'flex flex-col items-start justify-center'
             }
