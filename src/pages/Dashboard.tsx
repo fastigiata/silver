@@ -1,6 +1,6 @@
 import type { ActionFunctionArgs } from 'react-router-dom'
 import { useNavigate, useSubmit } from 'react-router-dom'
-import { useAsyncValue, useLoaderData } from 'react-router-dom'
+import { useLoaderData } from 'react-router-dom'
 import { DeferView } from '@/components/Loading.tsx'
 import { CollectionDB } from '@/db/collection.ts'
 import type { ICollection } from '@/_types/collection.ts'
@@ -8,7 +8,7 @@ import { CollectionCard } from '@/components/Card/CollectionCard.tsx'
 import { AwesomeScrollbar } from '@/components/AwesomeScrollbar.tsx'
 import { ModalImpl } from '@/utils/modal.ts'
 import { formatToN } from '@/misc/helper.ts'
-import { IconTextButton } from '@/components/Button.tsx'
+import { IconTextButton, PrimaryButton, SecondaryButton } from '@/components/Button.tsx'
 import { IconAdd, IconExport, IconImport } from '@/components/Icons.tsx'
 import toast from 'react-hot-toast'
 import { StickerDB } from '@/db/sticker.ts'
@@ -22,8 +22,7 @@ type DashboardActionConfig = {
     id: string
 }
 
-const CollectionList = () => {
-    const collections = useAsyncValue() as ICollection[]
+const CollectionList = ({ collections }: { collections: ICollection[] }) => {
     const navigate = useNavigate()
     const submit = useSubmit()
 
@@ -79,7 +78,33 @@ const DashboardPage = () => {
         <AwesomeScrollbar className={'w-full h-full p-4 overflow-y-auto space-y-4 space-y-reverse'}>
             <DeferView
                 source={loader.collection}
-                builder={<CollectionList/>}
+                builder={collections => {
+                    if (collections.length === 0) {
+                        return (
+                            <div className={'w-full h-[calc(100%-56px)] flex flex-col items-center justify-center'}>
+                                <div className={'dialog-in w-[400px] p-5 bg-white rounded-[4px] shadow-card space-y-4'}>
+                                    <p className={'h-6 text-primary text-[18px] leading-[24px] font-primary'}>
+                                        No Collection Found!
+                                    </p>
+
+                                    <p className={'text-secondary text-[16px] leading-[24px] font-secondary'}>
+                                        There is no collection found, you can create a new collection or import from file.
+                                    </p>
+
+                                    <div className={'w-full h-9 flex items-center justify-between space-x-2'}>
+                                        <SecondaryButton
+                                            className={'flex-1'} text={'Batch Import'}
+                                            onClick={handleImport}/>
+                                        <PrimaryButton
+                                            className={'flex-1'} text={'Create Now'}
+                                            onClick={() => navigate('/collection/create')}/>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    }
+                    return <CollectionList collections={collections}/>
+                }}
                 slotBefore={
                     <div className={'w-full h-6 flex items-center'}>
                         <IconTextButton
