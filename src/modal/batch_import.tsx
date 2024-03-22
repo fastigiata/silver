@@ -1,7 +1,7 @@
 import { ModalWrapper } from '@/modal/base.tsx'
 import type { DragEvent } from 'react'
 import { IOImpl } from '@/utils/io.ts'
-import { IconImport } from '@/components/Icons.tsx'
+import { IconAbout, IconImport } from '@/components/Icons.tsx'
 import { useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useModal } from '@ebay/nice-modal-react'
@@ -21,6 +21,10 @@ type ResultSummary = {
 }
 
 type BatchImportResult = {
+    /**
+     * skip exist collection, or update it
+     */
+    skipExist: boolean
     collections: ICollection[]
     stickers: ISticker[]
 } | null
@@ -30,6 +34,11 @@ const BatchImport = () => {
     const [ active, setActive ] = useState(false)
     const result = useRef<BatchImportResult>(null)
     const [ summary, setSummary ] = useState<null | ResultSummary>(null)
+    const [ skipExist, _setSkipExist ] = useState(true)
+    const setSkipExist = (v: boolean) => {
+        result.current!.skipExist = v
+        _setSkipExist(v)
+    }
 
     const done = (re: boolean) => {
         resolve(re ? result.current : null)
@@ -53,7 +62,7 @@ const BatchImport = () => {
             return
         }
 
-        result.current = { collections: parsed!.collections, stickers: parsed!.stickers }
+        result.current = { skipExist, collections: parsed!.collections, stickers: parsed!.stickers }
         setSummary({
             format: format,
             datetime: dayjs(parsed!.datetime).format('YYYY-MM-DD HH:mm:ss'),
@@ -114,7 +123,7 @@ const BatchImport = () => {
                             </div>
                         )
                         : (
-                            <div className={'w-full flex-1 flex flex-col space-y-4'}>
+                            <div className={'w-full flex-1 flex flex-col justify-between'}>
                                 <p className={'w-full h-6 text-primary text-[18px] font-primary text-center'}>
                                     Batch Import
                                 </p>
@@ -134,6 +143,39 @@ const BatchImport = () => {
                                 <div>
                                     <span className={'text-secondary font-secondary'}>Export At:&nbsp;</span>
                                     <span className={'text-tertiary font-tertiary'}>{summary.datetime}</span>
+                                </div>
+                                <div>
+                                    <IconAbout
+                                        className={'mr-1 text-secondary text-[13px]'}
+                                        data-tooltip-id={'base-tooltip'}
+                                        data-tooltip-content={'Action to take when the imported entry\'s primary key already exists'}/>
+                                    <span className={'text-secondary font-secondary'}>Strategy:&nbsp;</span>
+                                    <button
+                                        className={'as-button text-tertiary font-tertiary'}
+                                        data-tooltip-id={'base-tooltip'}
+                                        data-tooltip-html={'<u>Skip</u> the entry to be imported if its primary key already exists'}
+                                        onClick={() => setSkipExist(true)}>
+                                        <span>[</span>
+                                        <span className={'w-3 inline-block'}>{skipExist ? '✔' : ''}</span>
+                                        <span>]</span>
+                                        <span
+                                            className={`ml-1 ${skipExist ? 'underline' : ''} underline-offset-4`}>
+                                            Skip
+                                        </span>
+                                    </button>
+                                    <button
+                                        className={'as-button ml-2 text-tertiary font-tertiary'}
+                                        data-tooltip-id={'base-tooltip'}
+                                        data-tooltip-html={'<u>Overwrite</u> the entry to be imported if its primary key already exists'}
+                                        onClick={() => setSkipExist(false)}>
+                                        <span>[</span>
+                                        <span className={'w-3 inline-block'}>{!skipExist ? '✔' : ''}</span>
+                                        <span>]</span>
+                                        <span
+                                            className={`ml-1 ${!skipExist ? 'underline' : ''} underline-offset-4`}>
+                                            Overwrite
+                                        </span>
+                                    </button>
                                 </div>
                             </div>
                         )
