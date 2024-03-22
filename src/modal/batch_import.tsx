@@ -9,6 +9,7 @@ import { PrimaryButton, SecondaryButton } from '@/components/Button.tsx'
 import dayjs from 'dayjs'
 import type { ICollection } from '@/_types/collection.ts'
 import type { ISticker } from '@/_types/sticker.ts'
+import { getArchiveFile } from '@/misc/helper.ts'
 
 const SUPPORT_SUFFIX = new Set<string>([ 'json', 'yaml', 'toml' ])
 
@@ -35,17 +36,7 @@ const BatchImport = () => {
         remove()
     }
 
-    const handleFileDrop = async (ev: DragEvent<HTMLDivElement>) => {
-        ev.stopPropagation()
-        ev.preventDefault()
-        setActive(false)
-
-        const file = ev.dataTransfer.files.item(0)
-        if (!file) {
-            toast.error('Not File')
-            return
-        }
-
+    const resolveFile = async (file: File) => {
         const suffix = file.name.split('.')[1]
         if (!SUPPORT_SUFFIX.has(suffix)) {
             toast.error('Not Support File Type')
@@ -71,6 +62,28 @@ const BatchImport = () => {
         })
     }
 
+    const handleFilePick = async () => {
+        const file = await getArchiveFile()
+        if (!file) {
+            toast.error('Cancelled')
+            return
+        }
+        await resolveFile(file)
+    }
+
+    const handleFileDrop = async (ev: DragEvent<HTMLDivElement>) => {
+        ev.stopPropagation()
+        ev.preventDefault()
+        setActive(false)
+
+        const file = ev.dataTransfer.files.item(0)
+        if (!file) {
+            toast.error('Not File')
+            return
+        }
+        await resolveFile(file)
+    }
+
     return (
         <ModalWrapper onBgClick={() => done(false)}>
             <div
@@ -85,12 +98,13 @@ const BatchImport = () => {
                                 className={
                                     'w-full flex-1 rounded-[4px] outline-dashed outline-1 ' +
                                     `${active ? 'outline-[#AAA]' : 'outline-[#CCC]'} ` +
-                                    'flex flex-col items-center justify-center'
+                                    'cursor-pointer flex flex-col items-center justify-center'
                                 }
                                 onDragEnter={() => setActive(true)}
                                 onDragLeave={() => setActive(false)}
                                 onDragOver={ev => ev.preventDefault()}
-                                onDrop={handleFileDrop}>
+                                onDrop={handleFileDrop}
+                                onClick={handleFilePick}>
                                 <IconImport className={
                                     `text-[72px] ${active ? 'text-[#AAA]' : 'text-[#CCC]'} pointer-events-none`
                                 }/>
