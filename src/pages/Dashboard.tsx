@@ -1,5 +1,5 @@
 import type { ActionFunctionArgs } from 'react-router-dom'
-import { useNavigate, useSubmit } from 'react-router-dom'
+import { useNavigate, useRevalidator, useSubmit } from 'react-router-dom'
 import { useLoaderData } from 'react-router-dom'
 import { DeferView } from '@/components/Loading.tsx'
 import { CollectionDB } from '@/db/collection.ts'
@@ -52,12 +52,25 @@ const CollectionList = ({ collections }: { collections: ICollection[] }) => {
 const DashboardPage = () => {
     const loader = useLoaderData() as DashboardLoaderData
     const navigate = useNavigate()
+    const { revalidate } = useRevalidator()
 
     const handleImport = async () => {
-        // TODO
         const re = await ModalImpl.batchImport()
+        if (!re) return
 
-        console.log('import:', re)
+        const { skipExist, collections, stickers } = re
+
+        const [ success1, fail1 ] = await CollectionDB.load(collections, skipExist)
+        const [ success2, fail2 ] = await StickerDB.load(stickers, skipExist)
+
+        // TODO: dialog result
+        console.log('success1', success1, 'success2', success2)
+        console.log('fail1', fail1, 'fail2', fail2)
+
+        // TODO: update the count of the collections
+
+        // 更新列表
+        revalidate()
     }
 
     const handleExport = async () => {
@@ -88,7 +101,8 @@ const DashboardPage = () => {
                                     </p>
 
                                     <p className={'text-secondary text-[16px] leading-[24px] font-secondary'}>
-                                        There is no collection found, you can create a new collection or import from file.
+                                        There is no collection found, you can create a new collection or import from
+                                        file.
                                     </p>
 
                                     <div className={'w-full h-9 flex items-center justify-between space-x-2'}>
