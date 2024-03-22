@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import { enc } from 'crypto-js'
 import SHA1 from 'crypto-js/sha1'
 import { stringify as stringifyYaml, parse as parseYaml } from 'yaml'
+// @ts-expect-error ...
 import { stringify as stringifyToml, parse as parseToml } from 'iarna-toml-esm'
 
 const SUPPORTED_FORMATS = new Set<string>([ 'toml', 'json', 'yaml' ])
