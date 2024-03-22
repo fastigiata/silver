@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid'
 import { dbImpl } from '@/db/base.ts'
 import type { ICollection } from '@/_types/collection.ts'
+import type { BulkError } from 'dexie'
 
 export type CollectionPatch = {
     name?: string | null
@@ -8,6 +9,32 @@ export type CollectionPatch = {
 }
 
 abstract class CollectionDB {
+    /**
+     * load the collections into the database
+     *
+     * - if skipExist is true, the function will skip the items that already exist in the database,
+     * - otherwise, the function will overwrite the items that already exist in the database (even mtime will be overwritten)
+     */
+    static async load(items: ICollection[], skipExist = false): Promise<[ success: number, fail: number ]> {
+        return dbImpl.transaction(
+            'rw',
+            [ dbImpl.collections ],
+            async () => {
+                try {
+                    if (skipExist) {
+                        await dbImpl.collections.bulkAdd(items)
+                    } else {
+                        await dbImpl.collections.bulkPut(items)
+                    }
+                    return [ items.length, 0 ]
+                } catch (e) {
+                    const fail = (e as BulkError).failures.length
+                    return [ items.length - fail, fail ]
+                }
+            }
+        )
+    }
+
     /**
      * create a new collection, return the id of the new collection
      * @param name name of the collection (required)
