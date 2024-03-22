@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid'
 import { dbImpl } from '@/db/base.ts'
 import type { ISticker } from '@/_types/sticker.ts'
+import type { BulkError } from 'dexie'
 
 export type StickerPatch = {
     title?: string | null
@@ -10,6 +11,33 @@ export type StickerPatch = {
 }
 
 abstract class StickerDB {
+    /**
+     * load the stickers into the database
+     *
+     * - if skipExist is true, the function will skip the items that already exist in the database,
+     * - otherwise, the function will overwrite the items that already exist in the database (even mtime will be overwritten)
+     */
+    static async load(items: ISticker[], skipExist = false): Promise<[ success: number, fail: number ]> {
+        return dbImpl.transaction(
+            'rw',
+            [ dbImpl.stickers ],
+            async () => {
+                try {
+                    if (skipExist) {
+                        await dbImpl.stickers.bulkAdd(items)
+                    } else {
+                        await dbImpl.stickers.bulkPut(items)
+                    }
+
+                    return [ items.length, 0 ]
+                } catch (e) {
+                    const fail = (e as BulkError).failures.length
+                    return [ items.length - fail, fail ]
+                }
+            }
+        )
+    }
+
     /**
      * create a new sticker, return the id of the new sticker
      */
