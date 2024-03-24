@@ -169,6 +169,20 @@ abstract class StickerDB {
     static async getByCids(cids: string[]): Promise<ISticker[]> {
         return dbImpl.stickers.where('cid').anyOf(cids).toArray()
     }
+
+    /**
+     * check and find the stickers that lost their collection
+     */
+    static async check(): Promise<ISticker[]> {
+        return dbImpl.transaction(
+            'r',
+            [ dbImpl.collections, dbImpl.stickers ],
+            async () => {
+                const cids = await dbImpl.collections.toCollection().primaryKeys()
+                return dbImpl.stickers.where('cid').noneOf(cids).toArray()
+            }
+        )
+    }
 }
 
 export {
