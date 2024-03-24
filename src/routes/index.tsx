@@ -15,6 +15,7 @@ import StickerViewPage from '@/pages/sticker/View.tsx'
 import StickerModifyPage from '@/pages/sticker/Modify.tsx'
 // import AppearancePage from '@/pages/Appearance/Appearance.tsx'
 import MiscPage from '@/pages/Misc'
+import { SettingPage } from '@/pages/Setting.tsx'
 
 const routes: RouteObject[] = [
     {
@@ -84,10 +85,11 @@ const routes: RouteObject[] = [
                     },
                 ]
             },
-            // {
-            //     path: '/appearance',
-            //     element: <AppearancePage/>
-            // },
+            {
+                path: '/setting',
+                handle: { showBack: true } satisfies RouteHandle,
+                element: <SettingPage/>
+            },
             {
                 path: '/misc',
                 element: <MiscPage/>

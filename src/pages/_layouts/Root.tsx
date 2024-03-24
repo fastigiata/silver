@@ -1,7 +1,7 @@
 import type { UIMatch } from 'react-router-dom'
 import { Outlet, useMatches, useNavigate } from 'react-router-dom'
 import { Spacer } from '@/components/Spacer.tsx'
-import { IconCross, IconMin } from '@/components/Icons.tsx'
+import { IconCross, IconMin, IconSetting } from '@/components/Icons.tsx'
 import { manageImpl } from '@/platform_impl/manage.ts'
 import type { RouteHandle } from '@/_types/route.ts'
 import { Tooltip } from 'react-tooltip'
@@ -24,6 +24,8 @@ const ConditionalBack = () => {
 }
 
 const RootInner = () => {
+    const navigate = useNavigate()
+
     return (
         <div className={
             'w-full h-full rounded-app bg-transparent border-app overflow-hidden flex flex-col items-center'
@@ -45,6 +47,7 @@ const RootInner = () => {
 
                 {/* operators */}
                 <IconMin.Button className={'ml-4 as-button text-[18px]'} onClick={manageImpl.min}/>
+                <IconSetting.Button className={'ml-4 as-button text-[18px]'} onClick={() => navigate('/setting')}/>
                 <IconCross.Button className={'ml-4 as-button text-[18px]'} onClick={manageImpl.close}/>
             </div>
 
