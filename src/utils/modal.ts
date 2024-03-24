@@ -7,6 +7,8 @@ import type { BatchExportResult } from '@/modal/batch_export.tsx'
 import { BatchExport } from '@/modal/batch_export.tsx'
 import type { BatchImportResult } from '@/modal/batch_import.tsx'
 import { BatchImport } from '@/modal/batch_import.tsx'
+import type { ImportResultProps } from '@/modal/import_result.tsx'
+import { ImportResult } from '@/modal/import_result.tsx'
 
 abstract class ModalImpl {
     public static prepare() {
@@ -14,6 +16,7 @@ abstract class ModalImpl {
         register('transfer', TransferModal)
         register('batch_import', BatchImport)
         register('batch_export', BatchExport)
+        register('import_result', ImportResult)
     }
 
     /**
@@ -52,6 +55,13 @@ abstract class ModalImpl {
      */
     public static batchExport(): Promise<BatchExportResult> {
         return show<BatchExportResult>('batch_export')
+    }
+
+    /**
+     * 显示导入结果
+     */
+    public static importResult(props: ImportResultProps): Promise<void> {
+        return show('import_result', props)
     }
 }
 
