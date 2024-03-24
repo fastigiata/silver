@@ -60,14 +60,12 @@ const DashboardPage = () => {
 
         const { skipExist, collections, stickers } = re
 
-        const [ success1, fail1 ] = await CollectionDB.load(collections, skipExist)
-        const [ success2, fail2 ] = await StickerDB.load(stickers, skipExist)
+        const re_c = await CollectionDB.load(collections, skipExist)
+        const re_s = await StickerDB.load(stickers, skipExist)
 
-        // TODO: dialog result
-        console.log('success1', success1, 'success2', success2)
-        console.log('fail1', fail1, 'fail2', fail2)
+        await ModalImpl.importResult({ collection: re_c, sticker: re_s })
 
-        // TODO: update the count of the collections
+        // TODO: update the count of the collections -- by recounting all collections
 
         // 更新列表
         revalidate()
