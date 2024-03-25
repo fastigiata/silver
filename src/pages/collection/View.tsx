@@ -38,7 +38,7 @@ const Inner = ({ collection, stickers }: {
     const submit = useSubmit()
 
     const handleCollectionNav = (to: 'create' | 'modify') => {
-        navigate(`/collection/${params.collectionId}/${to}`)
+        navigate(`/collection/${params.collectionId}/${to}?from=view`)
     }
 
     const handleDelete = async (sticker: ISticker) => {

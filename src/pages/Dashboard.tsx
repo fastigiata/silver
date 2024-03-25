@@ -41,7 +41,7 @@ const CollectionList = ({ collections }: { collections: ICollection[] }) => {
             key={collection.id}
             collection={collection}
             onClick={() => navigate(`/collection/${collection.id}/view`)}
-            onModify={() => navigate(`/collection/${collection.id}/modify`)}
+            onModify={() => navigate(`/collection/${collection.id}/modify?from=dashboard`)}
             onDelete={() => handleDelete(collection)}/>
     })
 }

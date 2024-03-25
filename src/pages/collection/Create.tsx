@@ -1,5 +1,5 @@
 import type { ActionFunctionArgs } from 'react-router-dom'
-import { useNavigate, useSubmit } from 'react-router-dom'
+import { redirect, useNavigate, useSubmit } from 'react-router-dom'
 import { InputMultiLine, InputSingleLine } from '@/components/Input.tsx'
 import { useState } from 'react'
 import { PrimaryButton, SecondaryButton } from '@/components/Button.tsx'
@@ -47,7 +47,7 @@ const CollectionCreatePage = () => {
                 <div className={'w-full h-9 flex items-center justify-between space-x-2'}>
                     <SecondaryButton
                         className={'flex-1'} text={'Cancel'}
-                        onClick={() => navigate(-1)}/>
+                        onClick={() => navigate('/dashboard')}/>
                     <PrimaryButton
                         className={'flex-1'} text={'Confirm'}
                         disabled={name.length === 0}
@@ -63,11 +63,8 @@ CollectionCreatePage.action = async ({ request }: ActionFunctionArgs) => {
 
     await CollectionDB.add(form.name, form.desc)
 
-    // since we can't use `navigate(-1)` here, we have to use `history.back()` to go back
-    history.back()
-
-    // anyway, we have to return something even it makes no sense
-    return null
+    // the '/dashboard' is the only back path
+    return redirect('/dashboard')
 }
 
 export default CollectionCreatePage
