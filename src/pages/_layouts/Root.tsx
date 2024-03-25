@@ -1,5 +1,5 @@
 import type { UIMatch } from 'react-router-dom'
-import { Outlet, useMatches, useNavigate } from 'react-router-dom'
+import { Outlet, redirect, useLocation, useMatches, useNavigate } from 'react-router-dom'
 import { Spacer } from '@/components/Spacer.tsx'
 import { IconCross, IconMin, IconSetting } from '@/components/Icons.tsx'
 import { manageImpl } from '@/platform_impl/manage.ts'
@@ -10,6 +10,8 @@ import { ModalImpl } from '@/utils/modal.ts'
 import { LogImpl } from '@/utils/log.ts'
 import { NotifyImpl } from '@/utils/notify.ts'
 import { Toaster } from 'react-hot-toast'
+import { useEffect } from 'react'
+import { WebStorageKeys } from '@/_constants/web_storage.ts'
 
 const ConditionalBack = () => {
     const navigate = useNavigate()
@@ -60,6 +62,15 @@ const RootInner = () => {
 }
 
 const RootLayout = () => {
+    const lo = useLocation()
+
+    useEffect(() => {
+        LogImpl.verbose(`[RootLayout] update last view to [${lo.pathname}]`)
+        window.onbeforeunload = () => {
+            localStorage.setItem(WebStorageKeys.LastView, lo.pathname)
+        }
+    }, [ lo ])
+
     return (
         <NiceModalProvider>
             <RootInner/>
@@ -84,7 +95,15 @@ RootLayout.loader = async () => {
     // Mark this loader as initialized
     initialized = true
 
-    return null
+    // Restore last view
+    const lastView = localStorage.getItem(WebStorageKeys.LastView)
+    if (!!lastView) {
+        LogImpl.verbose(`[RootLayout] restore last view [${lastView}]`)
+        return redirect(lastView)
+    }
+
+    // Redirect to the dashboard (default) view
+    return redirect('/dashboard')
 }
 
 export default RootLayout

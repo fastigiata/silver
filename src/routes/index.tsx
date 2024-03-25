@@ -1,5 +1,5 @@
 import type { RouteObject } from 'react-router-dom'
-import { createHashRouter, redirect } from 'react-router-dom'
+import { createHashRouter } from 'react-router-dom'
 import type { RouteHandle } from '@/_types/route.ts'
 
 import RootLayout from '@/pages/_layouts/Root.tsx'
@@ -16,6 +16,7 @@ import StickerModifyPage from '@/pages/sticker/Modify.tsx'
 // import AppearancePage from '@/pages/Appearance/Appearance.tsx'
 import MiscPage from '@/pages/Misc'
 import { SettingPage } from '@/pages/Setting.tsx'
+import { Loading } from '@/components/Loading.tsx'
 
 const routes: RouteObject[] = [
     {
@@ -24,8 +25,8 @@ const routes: RouteObject[] = [
         element: <RootLayout/>,
         children: [
             {
-                path: '/',
-                loader: () => redirect('/dashboard'),
+                path:'/',
+                element: <Loading/>
             },
             {
                 id: 'dashboard',
