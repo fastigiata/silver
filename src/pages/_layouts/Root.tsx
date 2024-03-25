@@ -1,5 +1,5 @@
 import type { UIMatch } from 'react-router-dom'
-import { Outlet, redirect, useLocation, useMatches, useNavigate } from 'react-router-dom'
+import { Outlet, redirect, useLocation, useMatches, useNavigate, useSearchParams } from 'react-router-dom'
 import { Spacer } from '@/components/Spacer.tsx'
 import { IconCross, IconMin, IconSetting } from '@/components/Icons.tsx'
 import { manageImpl } from '@/platform_impl/manage.ts'
@@ -14,15 +14,21 @@ import { useEffect } from 'react'
 import { WebStorageKeys } from '@/_constants/web_storage.ts'
 
 const ConditionalBack = () => {
+    const [ query ] = useSearchParams()
     const navigate = useNavigate()
     const matches = useMatches() as UIMatch<unknown, RouteHandle>[]
     const match = matches.at(-1)!
     const backBuilder = match.handle?.backBuilder
 
+    // FIXME: test log, remove later
+    useEffect(() => {
+        console.log(match)
+    }, [ match ])
+
     return !!backBuilder ? (
         <button
             className={'as-button'}
-            onClick={() => navigate(backBuilder(match), { replace: true })}>
+            onClick={() => navigate(backBuilder(match, query), { replace: true })}>
             Back
         </button>
     ) : null
@@ -94,6 +100,7 @@ RootLayout.loader = async () => {
     await LogImpl.prepare()
     await NotifyImpl.prepare()
     ModalImpl.prepare()
+    LogImpl.verbose('[RootLayout] initialized')
 
     // Mark this loader as initialized
     initialized = true
