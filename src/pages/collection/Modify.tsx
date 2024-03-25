@@ -1,5 +1,5 @@
-import type { LoaderFunctionArgs } from 'react-router-dom'
-import { useLoaderData, useNavigate, useSubmit } from 'react-router-dom'
+import type { ActionFunctionArgs, LoaderFunctionArgs } from 'react-router-dom'
+import { useLoaderData, useNavigate, useSearchParams, useSubmit } from 'react-router-dom'
 import type { CollectionPatch } from '@/db/collection.ts'
 import { CollectionDB } from '@/db/collection.ts'
 import type { ICollection } from '@/_types/collection.ts'
@@ -15,10 +15,21 @@ type CollectionModifyLoaderData = {
 
 const ModifyView = ({ collection }: { collection: ICollection }) => {
     const submit = useSubmit()
+    const [ query ] = useSearchParams()
     const navigate = useNavigate()
 
     const [ name, setName ] = useState(collection.name)
     const [ desc, setDesc ] = useState(collection.desc)
+
+    const handleBack = () => {
+        const from = query.get('from') ?? 'dashboard'
+        const back = new Set([ 'dashboard', 'view' ]).has(from) ? from : 'dashboard'
+        if (back === 'dashboard') {
+            navigate('/dashboard')
+        } else {
+            navigate(`/collection/${collection.id}/view`)
+        }
+    }
 
     const handleSubmit = () => {
         submit(
@@ -50,7 +61,7 @@ const ModifyView = ({ collection }: { collection: ICollection }) => {
             <div className={'w-full h-9 flex items-center justify-between space-x-2'}>
                 <SecondaryButton
                     className={'flex-1'} text={'Cancel'}
-                    onClick={() => navigate(-1)}/>
+                    onClick={handleBack}/>
                 <PrimaryButton
                     className={'flex-1'} text={'Confirm'}
                     disabled={name.length === 0}
@@ -83,9 +94,11 @@ CollectionModifyPage.loader = ({ params }: LoaderFunctionArgs) => {
     return { collection: CollectionDB.getById(params.collectionId!) }
 }
 
-CollectionModifyPage.action = async ({ request, params }: LoaderFunctionArgs) => {
+CollectionModifyPage.action = async ({ request, params }: ActionFunctionArgs) => {
     const patch = await request.json() as CollectionPatch
     const ok = await CollectionDB.update(params.collectionId!, patch)
+
+    // TODO: navigate back to right page
 
     // if success, go back to previous page
     if (ok) history.back()
