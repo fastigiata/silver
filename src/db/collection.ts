@@ -15,7 +15,7 @@ abstract class CollectionDB {
      * - if skipExist is true, the function will skip the items that already exist in the database,
      * - otherwise, the function will overwrite the items that already exist in the database (even mtime will be overwritten)
      */
-    static async load(items: ICollection[], skipExist = false): Promise<[ success: number, fail: number ]> {
+    static async load(items: ICollection[], skipExist = false): Promise<[success: number, fail: number]> {
         return dbImpl.transaction(
             'rw',
             [ dbImpl.collections ],
@@ -118,6 +118,34 @@ abstract class CollectionDB {
                 const _count = await dbImpl.stickers.where('cid').equals(id).count()
                 await dbImpl.collections.update(id, { count: _count, mtime: Date.now() })
                 return _count
+            }
+        )
+    }
+
+    /**
+     * recount the number of stickers in all collections
+     */
+    static async recountAll(): Promise<void> {
+        return dbImpl.transaction(
+            'rw',
+            [ dbImpl.stickers, dbImpl.collections ],
+            async () => {
+                const _stickers = await dbImpl.stickers.toArray()
+                const _cid2count = _stickers.reduce((state, curr) => {
+                    state[curr.cid] = (state[curr.cid] ?? 0) + 1
+
+                    return state
+                }, {} as Record<string, number>)
+
+                for (const cid of Object.keys(_cid2count)) {
+                    await dbImpl.collections.update(cid, { count: _cid2count[cid] })
+                }
+
+                // const _collections = await dbImpl.collections.toArray()
+                // for (const collection of _collections) {
+                //     const _count = await dbImpl.stickers.where('cid').equals(collection.id).count()
+                //     await dbImpl.collections.update(collection.id, {count: _count, mtime: Date.now()})
+                // }
             }
         )
     }
