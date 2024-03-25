@@ -65,7 +65,7 @@ const DashboardPage = () => {
 
         await ModalImpl.importResult({ collection: re_c, sticker: re_s })
 
-        // TODO: update the count of the collections -- by recounting all collections
+        await CollectionDB.recountAll()
 
         // 更新列表
         revalidate()
