@@ -16,10 +16,13 @@ import { WebStorageKeys } from '@/_constants/web_storage.ts'
 const ConditionalBack = () => {
     const navigate = useNavigate()
     const matches = useMatches() as UIMatch<unknown, RouteHandle>[]
-    const showBack = matches.at(-1)!.handle?.showBack === true
+    const match = matches.at(-1)!
+    const backBuilder = match.handle?.backBuilder
 
-    return showBack ? (
-        <button className={'as-button'} onClick={() => navigate(-1)}>
+    return !!backBuilder ? (
+        <button
+            className={'as-button'}
+            onClick={() => navigate(backBuilder(match), { replace: true })}>
             Back
         </button>
     ) : null
